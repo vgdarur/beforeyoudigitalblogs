@@ -1,0 +1,17 @@
+{
+  "/(public)/categories/page": "/categories",
+  "/(public)/deals/[slug]/page": "/deals/[slug]",
+  "/(public)/deals/page": "/deals",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/admin/dashboard/page": "/admin/dashboard",
+  "/admin/deals/new/page": "/admin/deals/new",
+  "/admin/import/page": "/admin/import",
+  "/admin/networks/page": "/admin/networks",
+  "/api/admin/deals/create/route": "/api/admin/deals/create",
+  "/api/admin/import/route": "/api/admin/import",
+  "/api/admin/stats/route": "/api/admin/stats",
+  "/api/deals/route": "/api/deals",
+  "/api/go/[slug]/route": "/api/go/[slug]",
+  "/page": "/"
+}
