@@ -1,4 +1,4 @@
-import styles from '../deals/new/page.module.css';
+import styles from '../../deals/new/page.module.css';
 
 export default function NewUserPage() {
     return (
