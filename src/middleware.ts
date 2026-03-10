@@ -1,6 +1,9 @@
 import { withAuth } from "next-auth/middleware";
 
 export default withAuth({
+    pages: {
+        signIn: '/admin/login',
+    },
     callbacks: {
         authorized({ req, token }) {
             // Only allow admins to access /admin routes

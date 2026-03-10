@@ -4,6 +4,8 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Providers from '@/components/Providers';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
     title: 'Dealsagent - Discover the Best Discounts & Offers',
     description: 'Aggregating the best tech, fashion and general deals from across the web. Save more with curated discounts.',

@@ -5,15 +5,15 @@ import { authOptions } from '@/lib/auth';
 
 export async function POST(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const session = await getServerSession(authOptions);
         if (!session || (session.user as any).role !== 'ADMIN') {
-            return NextResponse.redirect(new URL('/login', request.url));
+            return NextResponse.redirect(new URL('/login', `${request.headers.get('x-forwarded-proto') || (process.env.NODE_ENV === 'production' ? 'https' : 'http')}://${request.headers.get('x-forwarded-host') || request.headers.get('host') || 'localhost:3000'}`));
         }
 
-        const dealId = params.id;
+        const dealId = (await params).id;
         const formData = await request.formData();
 
         // Extract required fields
@@ -87,7 +87,7 @@ export async function POST(
         });
 
         // Redirect back to dashboard on success
-        return NextResponse.redirect(new URL('/admin/deals', request.url), 303);
+        return NextResponse.redirect(new URL('/admin/deals', `${request.headers.get('x-forwarded-proto') || (process.env.NODE_ENV === 'production' ? 'https' : 'http')}://${request.headers.get('x-forwarded-host') || request.headers.get('host') || 'localhost:3000'}`), 303);
 
     } catch (error) {
         console.error('Error updating deal:', error);

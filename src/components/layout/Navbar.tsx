@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import styles from './Navbar.module.css';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 
 export default function Navbar() {
     const { data: session } = useSession();
@@ -52,22 +52,6 @@ export default function Navbar() {
                                 Sign Out
                             </button>
                         </div>
-                    ) : (
-                        <button
-                            onClick={() => signIn()}
-                            style={{
-                                background: 'var(--primary)',
-                                color: 'white',
-                                padding: '0.5rem 1rem',
-                                border: 'none',
-                                borderRadius: 'var(--radius-sm)',
-                                fontWeight: '600',
-                                cursor: 'pointer',
-                                fontSize: '0.9rem'
-                            }}
-                        >
-                            Sign In
-                        </button>
                     )}
                 </nav>
             </div>

@@ -47,7 +47,11 @@ export default async function AdminDealsPage() {
                                         <td className={styles.truncate} title={deal.title}>{deal.title}</td>
                                         <td>{deal.merchant.name}</td>
                                         <td>
-                                            <span className={styles.tag}>{deal.network.name}</span>
+                                            {deal.network ? (
+                                                <span className={styles.tag}>{deal.network.name}</span>
+                                            ) : (
+                                                <span className={styles.tag}>Manual</span>
+                                            )}
                                         </td>
                                         <td>{deal.category.name}</td>
                                         <td>{deal.price ? `$${deal.price}` : '-'}</td>

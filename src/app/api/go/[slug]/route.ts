@@ -59,6 +59,6 @@ export async function GET(
     } catch (error) {
         console.error('Error in click tracker:', error);
         // On error, fallback to homepage rather than showing an ugly error page
-        return NextResponse.redirect(new URL('/', request.url), 302);
+        return NextResponse.redirect(new URL('/', `${request.headers.get('x-forwarded-proto') || (process.env.NODE_ENV === 'production' ? 'https' : 'http')}://${request.headers.get('x-forwarded-host') || request.headers.get('host') || 'localhost:3000'}`), 302);
     }
 }

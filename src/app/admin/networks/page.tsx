@@ -1,6 +1,5 @@
 import { prisma } from '@/lib/prisma';
 import styles from './page.module.css';
-import { upsertNetwork, deleteNetwork } from './actions';
 import Link from 'next/link';
 
 export default async function NetworksAdminPage({
@@ -10,6 +9,7 @@ export default async function NetworksAdminPage({
 }) {
     const sp = await searchParams;
     const editId = sp.edit as string | undefined;
+    const errorMsg = sp.error as string | undefined;
 
     const networks = await prisma.network.findMany({
         orderBy: { name: 'asc' },
@@ -30,6 +30,16 @@ export default async function NetworksAdminPage({
                 </div>
             </div>
 
+            {errorMsg && (
+                <div style={{ padding: '1rem', backgroundColor: '#fee2e2', color: '#dc2626', borderRadius: '8px', marginBottom: '2rem', border: '1px solid #fca5a5' }}>
+                    <strong>Error: </strong>
+                    {errorMsg === 'FailedToSave' && 'Failed to save network. The name or slug might already exist.'}
+                    {errorMsg === 'CannotDeleteInUse' && 'Cannot delete network because it is linked to existing deals.'}
+                    {errorMsg === 'NameRequired' && 'Network Name is required.'}
+                    {!['FailedToSave', 'CannotDeleteInUse', 'NameRequired'].includes(errorMsg) && errorMsg}
+                </div>
+            )}
+
             <div className={styles.layout}>
                 {/* Left Side: List of Networks */}
                 <div>
@@ -45,7 +55,7 @@ export default async function NetworksAdminPage({
                                         <Link href={`/admin/networks?edit=${network.id}`} className={styles.editBtn}>
                                             Edit
                                         </Link>
-                                        <form action={deleteNetwork}>
+                                        <form action="/api/admin/networks/delete" method="POST">
                                             <input type="hidden" name="id" value={network.id} />
                                             <button type="submit" className={styles.deleteBtn}>
                                                 Delete
@@ -79,7 +89,7 @@ export default async function NetworksAdminPage({
                             {editNetwork ? `Edit ${editNetwork.name}` : 'Add New Network'}
                         </h2>
 
-                        <form action={upsertNetwork}>
+                        <form action="/api/admin/networks" method="POST">
                             {editNetwork && <input type="hidden" name="id" value={editNetwork.id} />}
 
                             <div className={styles.formGroup}>

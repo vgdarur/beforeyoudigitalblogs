@@ -150,9 +150,11 @@ export default async function DealDetailPage({ params }: { params: Promise<{ slu
                             <li>
                                 <strong>Category:</strong> {deal.category.name}
                             </li>
-                            <li>
-                                <strong>Network:</strong> {deal.network.name}
-                            </li>
+                            {deal.network && (
+                                <li>
+                                    <strong>Network:</strong> {deal.network.name}
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </div>

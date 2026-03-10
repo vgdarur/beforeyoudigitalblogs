@@ -5,17 +5,17 @@ import { authOptions } from '@/lib/auth';
 
 export async function POST(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const session = await getServerSession(authOptions);
 
         // Ensure admin authorization
         if (!session || (session.user as any).role !== 'ADMIN') {
-            return NextResponse.redirect(new URL('/login', request.url));
+            return NextResponse.redirect(new URL('/login', `${request.headers.get('x-forwarded-proto') || (process.env.NODE_ENV === 'production' ? 'https' : 'http')}://${request.headers.get('x-forwarded-host') || request.headers.get('host') || 'localhost:3000'}`));
         }
 
-        const userId = params.id;
+        const userId = (await params).id;
 
         if (!userId) {
             return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
@@ -30,7 +30,7 @@ export async function POST(
             where: { id: userId }
         });
 
-        return NextResponse.redirect(new URL('/admin/users', request.url), 303);
+        return NextResponse.redirect(new URL('/admin/users', `${request.headers.get('x-forwarded-proto') || (process.env.NODE_ENV === 'production' ? 'https' : 'http')}://${request.headers.get('x-forwarded-host') || request.headers.get('host') || 'localhost:3000'}`), 303);
     } catch (error) {
         console.error('Failed to delete user:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

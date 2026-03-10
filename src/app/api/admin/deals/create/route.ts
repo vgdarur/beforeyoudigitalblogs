@@ -10,13 +10,13 @@ export async function POST(request: Request) {
         const affiliateUrl = formData.get('affiliateUrl') as string;
         const merchantName = formData.get('merchantName') as string;
         const categoryId = formData.get('categoryId') as string;
-        const networkId = formData.get('networkId') as string;
 
-        if (!title || !affiliateUrl || !merchantName || !categoryId || !networkId) {
+        if (!title || !affiliateUrl || !merchantName || !categoryId) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
 
         // Extract optional fields
+        const networkId = (formData.get('networkId') as string) || null;
         const description = (formData.get('description') as string) || '';
         const rawPrice = formData.get('price') as string;
         const rawOriginalPrice = formData.get('originalPrice') as string;
@@ -74,7 +74,7 @@ export async function POST(request: Request) {
                 couponCode: couponCode,
                 affiliateUrl: affiliateUrl,
                 merchantId: merchant.id,
-                networkId: networkId,
+                networkId: networkId || undefined,
                 categoryId: categoryId,
                 expirationDate: expirationDate,
                 isActive: true,
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
         });
 
         // Redirect back to dashboard on success
-        return NextResponse.redirect(new URL('/admin/dashboard', request.url), 302);
+        return NextResponse.redirect(new URL('/admin/dashboard', `${request.headers.get('x-forwarded-proto') || (process.env.NODE_ENV === 'production' ? 'https' : 'http')}://${request.headers.get('x-forwarded-host') || request.headers.get('host') || 'localhost:3000'}`), 302);
 
     } catch (error) {
         console.error('Error creating manual deal:', error);

@@ -80,8 +80,8 @@ export default async function NewDealPage() {
                     </div>
 
                     <div className={styles.formGroup}>
-                        <label className={styles.label}>Affiliate Network *</label>
-                        <select name="networkId" required className={styles.select}>
+                        <label className={styles.label}>Affiliate Network (Optional)</label>
+                        <select name="networkId" className={styles.select}>
                             <option value="">Select Network...</option>
                             {networks.map(net => (
                                 <option key={net.id} value={net.id}>{net.name}</option>

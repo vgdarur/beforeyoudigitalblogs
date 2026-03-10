@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     try {
         const session = await getServerSession(authOptions);
         if (!session || (session.user as any).role !== 'ADMIN') {
-            return NextResponse.redirect(new URL('/login', request.url));
+            return NextResponse.redirect(new URL('/login', `${request.headers.get('x-forwarded-proto') || (process.env.NODE_ENV === 'production' ? 'https' : 'http')}://${request.headers.get('x-forwarded-host') || request.headers.get('host') || 'localhost:3000'}`));
         }
 
         const formData = await request.formData();
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
             }
         });
 
-        return NextResponse.redirect(new URL('/admin/users', request.url), 303);
+        return NextResponse.redirect(new URL('/admin/users', `${request.headers.get('x-forwarded-proto') || (process.env.NODE_ENV === 'production' ? 'https' : 'http')}://${request.headers.get('x-forwarded-host') || request.headers.get('host') || 'localhost:3000'}`), 303);
     } catch (error) {
         console.error('Failed to create user:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

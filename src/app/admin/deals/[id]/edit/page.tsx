@@ -2,8 +2,8 @@ import { prisma } from '@/lib/prisma';
 import styles from '../../new/page.module.css';
 import { notFound } from 'next/navigation';
 
-export default async function EditDealPage({ params }: { params: { id: string } }) {
-    const dealId = params.id;
+export default async function EditDealPage({ params }: { params: Promise<{ id: string }> }) {
+    const dealId = (await params).id;
 
     const deal = await prisma.deal.findUnique({
         where: { id: dealId },
@@ -92,8 +92,8 @@ export default async function EditDealPage({ params }: { params: { id: string } 
                     </div>
 
                     <div className={styles.formGroup}>
-                        <label className={styles.label}>Affiliate Network *</label>
-                        <select name="networkId" defaultValue={deal.networkId} required className={styles.select}>
+                        <label className={styles.label}>Affiliate Network (Optional)</label>
+                        <select name="networkId" defaultValue={deal.networkId || ''} className={styles.select}>
                             <option value="">Select Network...</option>
                             {networks.map(net => (
                                 <option key={net.id} value={net.id}>{net.name}</option>

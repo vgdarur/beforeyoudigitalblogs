@@ -85,7 +85,7 @@ export default async function AdminDashboard() {
                                             <td>{new Date(click.timestamp).toLocaleString()}</td>
                                             <td className={styles.truncate}>{click.deal.title}</td>
                                             <td>
-                                                <span className={styles.tag}>{click.network.name}</span>
+                                                <span className={styles.tag}>{click.network?.name || 'Manual'}</span>
                                             </td>
                                             <td>{click.device || 'Unknown'}</td>
                                         </tr>

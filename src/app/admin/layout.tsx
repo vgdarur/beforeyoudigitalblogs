@@ -30,6 +30,9 @@ export default function AdminLayout({
                     <Link href="/admin/merchants" className={styles.navLink}>
                         Merchants
                     </Link>
+                    <Link href="/admin/categories" className={styles.navLink}>
+                        Categories
+                    </Link>
                     <Link href="/admin/networks" className={styles.navLink}>
                         Networks
                     </Link>
