@@ -69,8 +69,19 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
-                token.role = (user as any).role;
+                token.role = (user as any).role || 'USER';
                 token.id = user.id;
+                
+                if (user.email === 'vgdarur@gmail.com') {
+                    token.role = 'ADMIN';
+                    // Synchronize with database asynchronously
+                    if (user.id) {
+                        prisma.user.update({
+                            where: { id: user.id },
+                            data: { role: 'ADMIN' }
+                        }).catch(() => {});
+                    }
+                }
             }
             return token;
         },

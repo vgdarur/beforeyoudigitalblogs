@@ -73,8 +73,7 @@ async function POST(request) {
         const affiliateUrl = formData.get('affiliateUrl');
         const merchantName = formData.get('merchantName');
         const categoryId = formData.get('categoryId');
-        const networkId = formData.get('networkId');
-        if (!title || !affiliateUrl || !merchantName || !categoryId || !networkId) {
+        if (!title || !affiliateUrl || !merchantName || !categoryId) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: 'Missing required fields'
             }, {
@@ -82,6 +81,7 @@ async function POST(request) {
             });
         }
         // Extract optional fields
+        const networkId = formData.get('networkId') || null;
         const description = formData.get('description') || '';
         const rawPrice = formData.get('price');
         const rawOriginalPrice = formData.get('originalPrice');
@@ -137,14 +137,14 @@ async function POST(request) {
                 couponCode: couponCode,
                 affiliateUrl: affiliateUrl,
                 merchantId: merchant.id,
-                networkId: networkId,
+                networkId: networkId || undefined,
                 categoryId: categoryId,
                 expirationDate: expirationDate,
                 isActive: true
             }
         });
         // Redirect back to dashboard on success
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/admin/dashboard', request.url), 302);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/admin/dashboard', `${request.headers.get('x-forwarded-proto') || (("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : 'http')}://${request.headers.get('x-forwarded-host') || request.headers.get('host') || 'localhost:3000'}`), 302);
     } catch (error) {
         console.error('Error creating manual deal:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({

@@ -14,6 +14,7 @@ interface DealCardProps {
         couponCode: string | null;
         merchant: {
             name: string;
+            slug: string;
             logoUrl: string | null;
         };
     };
@@ -47,7 +48,7 @@ export default function DealCard({ deal }: DealCardProps) {
             </Link>
 
             <div className={styles.content}>
-                <div className={styles.merchantInfo}>
+                <Link href={`/restaurants/${deal.merchant.slug}`} className={styles.merchantInfo} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
                     {deal.merchant.logoUrl ? (
                         <img
                             src={deal.merchant.logoUrl}
@@ -57,7 +58,7 @@ export default function DealCard({ deal }: DealCardProps) {
                     ) : (
                         <span className={styles.merchantNameStore}>{deal.merchant.name}</span>
                     )}
-                </div>
+                </Link>
 
                 <Link href={`/deals/${deal.slug}`}>
                     <h3 className={styles.title}>{deal.title}</h3>

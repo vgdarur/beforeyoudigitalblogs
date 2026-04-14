@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///Users/venugopal/amdeals/src/app/page.tsx"],"sourcesContent":["import { redirect } from 'next/navigation';\n\nexport const revalidate = 3600;\n\nexport default function Home() {\n    redirect('/deals');\n}\n"],"names":[],"mappings":";;;;;;AAAA;AAAA;;AAEO,MAAM,aAAa;AAEX,SAAS;IACpB,IAAA,iMAAQ,EAAC;AACb"}}]
+}

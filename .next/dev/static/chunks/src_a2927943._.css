@@ -209,6 +209,34 @@ h3 {
   .Navbar-module__cRh5nW__searchBar, .Navbar-module__cRh5nW__navLinks {
     display: none;
   }
+
+  .Navbar-module__cRh5nW__burgerBtn {
+    color: var(--primary);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    display: block;
+  }
+}
+
+.Navbar-module__cRh5nW__burgerBtn {
+  display: none;
+}
+
+.Navbar-module__cRh5nW__mobileMenu {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  z-index: 40;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  position: absolute;
+  top: 4.5rem;
+  left: 0;
+  box-shadow: 0 4px 6px -1px #0000001a;
 }
 
 /* [project]/src/components/layout/Footer.module.css [app-client] (css) */

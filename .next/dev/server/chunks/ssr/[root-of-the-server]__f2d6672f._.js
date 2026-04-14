@@ -245,13 +245,20 @@ async function AdminDealsPage() {
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    children: deal.network ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$dashboard$2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].tag,
                                                         children: deal.network.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/admin/deals/page.tsx",
-                                                        lineNumber: 50,
-                                                        columnNumber: 45
+                                                        lineNumber: 51,
+                                                        columnNumber: 49
+                                                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$dashboard$2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].tag,
+                                                        children: "Manual"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/admin/deals/page.tsx",
+                                                        lineNumber: 53,
+                                                        columnNumber: 49
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/admin/deals/page.tsx",
@@ -262,14 +269,14 @@ async function AdminDealsPage() {
                                                     children: deal.category.name
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/admin/deals/page.tsx",
-                                                    lineNumber: 52,
+                                                    lineNumber: 56,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                     children: deal.price ? `$${deal.price}` : '-'
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/admin/deals/page.tsx",
-                                                    lineNumber: 53,
+                                                    lineNumber: 57,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -281,19 +288,19 @@ async function AdminDealsPage() {
                                                         children: deal.isActive ? 'Active' : 'Inactive'
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/admin/deals/page.tsx",
-                                                        lineNumber: 55,
+                                                        lineNumber: 59,
                                                         columnNumber: 45
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/admin/deals/page.tsx",
-                                                    lineNumber: 54,
+                                                    lineNumber: 58,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                     children: new Date(deal.createdAt).toLocaleDateString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/admin/deals/page.tsx",
-                                                    lineNumber: 62,
+                                                    lineNumber: 66,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -317,7 +324,7 @@ async function AdminDealsPage() {
                                                                 children: "Edit"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/admin/deals/page.tsx",
-                                                                lineNumber: 65,
+                                                                lineNumber: 69,
                                                                 columnNumber: 49
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -337,23 +344,23 @@ async function AdminDealsPage() {
                                                                     children: "Delete"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/admin/deals/page.tsx",
-                                                                    lineNumber: 77,
+                                                                    lineNumber: 81,
                                                                     columnNumber: 53
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/admin/deals/page.tsx",
-                                                                lineNumber: 76,
+                                                                lineNumber: 80,
                                                                 columnNumber: 49
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/admin/deals/page.tsx",
-                                                        lineNumber: 64,
+                                                        lineNumber: 68,
                                                         columnNumber: 45
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/admin/deals/page.tsx",
-                                                    lineNumber: 63,
+                                                    lineNumber: 67,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
@@ -368,12 +375,12 @@ async function AdminDealsPage() {
                                             children: "No deals found. Check the Import tab to add some!"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/admin/deals/page.tsx",
-                                            lineNumber: 95,
+                                            lineNumber: 99,
                                             columnNumber: 37
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/admin/deals/page.tsx",
-                                        lineNumber: 94,
+                                        lineNumber: 98,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {

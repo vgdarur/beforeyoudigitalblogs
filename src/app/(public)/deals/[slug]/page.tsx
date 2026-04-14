@@ -100,13 +100,13 @@ export default async function DealDetailPage({ params }: { params: Promise<{ slu
 
                 {/* Deal Info Area */}
                 <div className={styles.infoSection}>
-                    <div className={styles.merchantHeader}>
+                    <Link href={`/restaurants/${deal.merchant.slug}`} className={styles.merchantHeader} style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
                         {deal.merchant.logoUrl ? (
                             <img src={deal.merchant.logoUrl} alt={deal.merchant.name} className={styles.merchantLogo} />
                         ) : (
                             <span className={styles.merchantText}>{deal.merchant.name}</span>
                         )}
-                    </div>
+                    </Link>
 
                     <h1 className={styles.title}>{deal.title}</h1>
 

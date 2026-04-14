@@ -1,35 +1,4 @@
 {
-  "node": {
-    "408181b338c322118e85e7193280514cffa0ef9650": {
-      "workers": {
-        "app/admin/networks/page": {
-          "moduleId": "[project]/.next-internal/server/app/admin/networks/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/networks/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "upsertNetwork",
-          "filename": "src/app/admin/networks/actions.ts"
-        }
-      },
-      "layer": {
-        "app/admin/networks/page": "rsc"
-      },
-      "exportedName": "upsertNetwork",
-      "filename": "src/app/admin/networks/actions.ts"
-    },
-    "40c9d7a33a17c3951050f58fb61ce1bc57a4492ad1": {
-      "workers": {
-        "app/admin/networks/page": {
-          "moduleId": "[project]/.next-internal/server/app/admin/networks/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/networks/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "deleteNetwork",
-          "filename": "src/app/admin/networks/actions.ts"
-        }
-      },
-      "layer": {
-        "app/admin/networks/page": "rsc"
-      },
-      "exportedName": "deleteNetwork",
-      "filename": "src/app/admin/networks/actions.ts"
-    }
-  },
+  "node": {},
   "edge": {}
 }

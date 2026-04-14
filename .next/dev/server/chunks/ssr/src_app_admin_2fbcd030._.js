@@ -127,11 +127,20 @@ function AdminLayout({ children }) {
                                 lineNumber: 26,
                                 columnNumber: 21
                             }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                href: "/admin/requirements",
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].navLink,
+                                children: "Requirements"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/admin/layout.tsx",
+                                lineNumber: 29,
+                                columnNumber: 21
+                            }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].divider
                             }, void 0, false, {
                                 fileName: "[project]/src/app/admin/layout.tsx",
-                                lineNumber: 29,
+                                lineNumber: 32,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -140,7 +149,7 @@ function AdminLayout({ children }) {
                                 children: "Merchants"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/admin/layout.tsx",
-                                lineNumber: 30,
+                                lineNumber: 33,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -149,7 +158,7 @@ function AdminLayout({ children }) {
                                 children: "Categories"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/admin/layout.tsx",
-                                lineNumber: 33,
+                                lineNumber: 36,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -158,7 +167,7 @@ function AdminLayout({ children }) {
                                 children: "Networks"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/admin/layout.tsx",
-                                lineNumber: 36,
+                                lineNumber: 39,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -167,7 +176,7 @@ function AdminLayout({ children }) {
                                 children: "Users & Roles"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/admin/layout.tsx",
-                                lineNumber: 39,
+                                lineNumber: 42,
                                 columnNumber: 21
                             }, this)
                         ]
@@ -187,7 +196,7 @@ function AdminLayout({ children }) {
                                         children: "A"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/admin/layout.tsx",
-                                        lineNumber: 46,
+                                        lineNumber: 49,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -198,7 +207,7 @@ function AdminLayout({ children }) {
                                                 children: "Admin User"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/layout.tsx",
-                                                lineNumber: 48,
+                                                lineNumber: 51,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -206,30 +215,30 @@ function AdminLayout({ children }) {
                                                 children: "Superadmin"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/layout.tsx",
-                                                lineNumber: 49,
+                                                lineNumber: 52,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/admin/layout.tsx",
-                                        lineNumber: 47,
+                                        lineNumber: 50,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/admin/layout.tsx",
-                                lineNumber: 45,
+                                lineNumber: 48,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$LogoutButton$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["LogoutButton"], {}, void 0, false, {
                                 fileName: "[project]/src/app/admin/layout.tsx",
-                                lineNumber: 52,
+                                lineNumber: 55,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/admin/layout.tsx",
-                        lineNumber: 44,
+                        lineNumber: 47,
                         columnNumber: 17
                     }, this)
                 ]
@@ -249,7 +258,7 @@ function AdminLayout({ children }) {
                                 children: "Administration Portal"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/admin/layout.tsx",
-                                lineNumber: 58,
+                                lineNumber: 61,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -261,18 +270,18 @@ function AdminLayout({ children }) {
                                     children: "View Live Site ↗"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/admin/layout.tsx",
-                                    lineNumber: 60,
+                                    lineNumber: 63,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/admin/layout.tsx",
-                                lineNumber: 59,
+                                lineNumber: 62,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/admin/layout.tsx",
-                        lineNumber: 57,
+                        lineNumber: 60,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -280,13 +289,13 @@ function AdminLayout({ children }) {
                         children: children
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/layout.tsx",
-                        lineNumber: 66,
+                        lineNumber: 69,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/layout.tsx",
-                lineNumber: 56,
+                lineNumber: 59,
                 columnNumber: 13
             }, this)
         ]

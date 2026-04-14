@@ -121,7 +121,15 @@ export default async function AdminDashboard() {
                             </div>
                         </Link>
 
-                        <Link href="/admin/networks/new" className={styles.actionItem}>
+                        <Link href="/admin/merchants?action=new" className={styles.actionItem}>
+                            <div className={styles.actionIcon}>🏪</div>
+                            <div className={styles.actionText}>
+                                <h4>Add Merchant</h4>
+                                <p>Register a new store or restaurant</p>
+                            </div>
+                        </Link>
+
+                        <Link href="/admin/networks" className={styles.actionItem}>
                             <div className={styles.actionIcon}>🔗</div>
                             <div className={styles.actionText}>
                                 <h4>Add Affiliate Network</h4>

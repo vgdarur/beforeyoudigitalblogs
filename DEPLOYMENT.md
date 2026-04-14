@@ -111,3 +111,32 @@ sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 ```
 
 Your site is now securely deployed on Google Cloud for free!
+
+---
+
+# Google Cloud Run (Serverless) Deployment Guide
+
+If you prefer to deploy this project as a serverless container instead of using a VM, you can use Google Cloud Run. This is often faster to deploy and manages scaling automatically.
+
+## 1. Prerequisites
+- Install the [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) on your local machine.
+- Authenticate by running `gcloud auth login`.
+- Ensure your project ID is set (e.g. `gcloud config set project restaurant-491117`).
+
+## 2. Deploying
+Open your terminal in the root directory of this project and run the following command:
+
+```bash
+gcloud run deploy dealsagent --source . --port 3000 --timeout 300s --region us-central1 --allow-unauthenticated
+```
+
+### Important Flags Explained:
+- `--source .` : Automatically builds a container image from your Next.js source code using Google Cloud Buildpacks.
+- `--port 3000` : **Critical.** Next.js strictly listens on Port 3000 by default. If this flag is omitted, Cloud Run might timeout expecting port 8080.
+- `--timeout 300s` : Gives the Next.js standalone container plenty of time to fully boot up before Cloud Run marks it as a failed deployment.
+- `--allow-unauthenticated` : Makes the container publicly accessible on the web.
+
+## 3. Post-Deployment Updates
+Deploying to GitHub **does not automatically update Cloud Run** unless you have configured a Cloud Build Trigger. 
+
+To publish new code changes (like a modified UI or schema), simply re-run the exact `gcloud run deploy` command above from your local terminal.

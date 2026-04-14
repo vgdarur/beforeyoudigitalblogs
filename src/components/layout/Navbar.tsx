@@ -69,7 +69,6 @@ export default function Navbar() {
                 <nav className={styles.navLinks}>
                     <Link href="/deals" className={styles.link}>All Deals</Link>
                     <Link href="/categories" className={styles.link}>Categories</Link>
-                    <Link href="/stores" className={styles.link}>Stores</Link>
 
                     <div style={{ width: '1px', height: '20px', backgroundColor: 'var(--border)', margin: '0 0.5rem' }}></div>
 
@@ -113,7 +112,7 @@ export default function Navbar() {
                     />
                     <Link href="/deals" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>All Deals</Link>
                     <Link href="/categories" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Categories</Link>
-                    <Link href="/stores" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Stores</Link>
+                    <Link href="/merchants" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Popular Merchants</Link>
 
                     {session ? (
                         <>

@@ -173,9 +173,32 @@
     transform: translateX(-100%);
   }
 
+  .page-module__OmXfwq__sidebar.page-module__OmXfwq__sidebarOpen {
+    transform: translateX(0);
+    box-shadow: 4px 0 15px #0000001a;
+  }
+
   .page-module__OmXfwq__mainContent {
     margin-left: 0;
   }
+
+  .page-module__OmXfwq__adminBurger {
+    width: 40px;
+    height: 40px;
+    color: var(--primary);
+    cursor: pointer;
+    background: none;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    display: flex;
+  }
+}
+
+.page-module__OmXfwq__adminBurger {
+  display: none;
 }
 
 /*# sourceMappingURL=src_app_admin_page_module_9af7cb6f.css.map*/

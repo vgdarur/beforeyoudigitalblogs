@@ -112,4 +112,32 @@
     .navLinks {
         display: none;
     }
+    
+    .burgerBtn {
+        display: block;
+        background: transparent;
+        border: none;
+        color: var(--primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}
+
+.burgerBtn {
+    display: none;
+}
+
+.mobileMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    position: absolute;
+    top: 4.5rem;
+    left: 0;
+    width: 100%;
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 40;
 }
