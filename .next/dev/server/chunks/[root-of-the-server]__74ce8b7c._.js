@@ -125,7 +125,7 @@ async function GET(request, { params }) {
     } catch (error) {
         console.error('Error in click tracker:', error);
         // On error, fallback to homepage rather than showing an ugly error page
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/', request.url), 302);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/', `${request.headers.get('x-forwarded-proto') || (("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : 'http')}://${request.headers.get('x-forwarded-host') || request.headers.get('host') || 'localhost:3000'}`), 302);
     }
 }
 }),

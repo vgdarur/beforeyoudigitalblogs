@@ -42,6 +42,9 @@ export default function AdminLayout({
                     <Link href="/admin/requirements" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Requirements
                     </Link>
+                    <Link href="/admin/feeds" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Automated Feeds
+                    </Link>
                     <div className={styles.divider}></div>
                     <Link href="/admin/merchants" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Merchants

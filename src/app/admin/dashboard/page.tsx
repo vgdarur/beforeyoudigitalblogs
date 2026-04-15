@@ -55,10 +55,10 @@ export default async function AdminDashboard() {
                 </div>
 
                 <div className={styles.statCard}>
-                    <div className={styles.statTitle}>Imports Pending</div>
-                    <div className={styles.statValue}>0</div>
-                    <Link href="/admin/import" className={styles.statLink}>
-                        Run Bulk Import →
+                    <div className={styles.statTitle}>Active Feed Sources</div>
+                    <div className={styles.statValue}>1+</div>
+                    <Link href="/admin/feeds" className={styles.statLink}>
+                        Manage Automations →
                     </Link>
                 </div>
             </div>
@@ -113,11 +113,11 @@ export default async function AdminDashboard() {
                             </div>
                         </Link>
 
-                        <Link href="/admin/import" className={styles.actionItem}>
-                            <div className={styles.actionIcon}>📄</div>
+                        <Link href="/admin/feeds" className={styles.actionItem}>
+                            <div className={styles.actionIcon}>🤖</div>
                             <div className={styles.actionText}>
-                                <h4>Import CSV Feed</h4>
-                                <p>Bulk upload deals from CJ or Rakuten</p>
+                                <h4>Data Feeds Automation</h4>
+                                <p>Manage active affiliate feed URLs</p>
                             </div>
                         </Link>
 

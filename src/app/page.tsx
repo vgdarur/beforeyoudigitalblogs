@@ -31,7 +31,7 @@ async function getFeaturedDeals() {
                 category: true,
             },
             orderBy: {
-                priorityScore: 'desc',
+                createdAt: 'desc',
             },
             take: 8,
         });

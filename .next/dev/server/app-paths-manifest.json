@@ -1,1 +1,9 @@
-{}
+{
+  "/(public)/deals/[slug]/page": "app/(public)/deals/[slug]/page.js",
+  "/(public)/deals/page": "app/(public)/deals/page.js",
+  "/admin/dashboard/page": "app/admin/dashboard/page.js",
+  "/admin/networks/page": "app/admin/networks/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/api/go/[slug]/route": "app/api/go/[slug]/route.js",
+  "/page": "app/page.js"
+}
