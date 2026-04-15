@@ -62,6 +62,7 @@ export default async function AdminMerchantsPage({
                                 <div className={styles.networkHeader}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                         {merchant.logoUrl ? (
+                                            /* eslint-disable-next-line @next/next/no-img-element */
                                             <img 
                                                 src={merchant.logoUrl} 
                                                 alt={merchant.name} 

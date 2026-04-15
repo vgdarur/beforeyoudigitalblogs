@@ -34,6 +34,13 @@ export async function GET(request: Request) {
 
         const results = [];
 
+        // Ensure default category exists
+        const defaultCategory = await prisma.category.upsert({
+            where: { slug: 'general' },
+            update: {},
+            create: { name: 'General', slug: ' general' }
+        });
+
         // Note: For massive scale, these should be queued (Google Cloud Tasks). 
         // We'll run them sequentially for V1.
         for (const feed of activeFeeds) {
@@ -117,14 +124,7 @@ export async function GET(request: Request) {
                                 couponCode: row['coupon'] || row['code'] || null,
                                 affiliateUrl: url,
                                 merchantId: merchant.id,
-                                // Assuming a default category since automated, ID will be '1' or null natively in Prisma if not enforced.
-                                // We'll look for a generic "Uncategorized" category or the first one.
-                                category: {
-                                    connectOrCreate: {
-                                        where: { slug: 'general' },
-                                        create: { name: 'General', slug: 'general' }
-                                    }
-                                }
+                                categoryId: defaultCategory.id
                             }
                         });
 
