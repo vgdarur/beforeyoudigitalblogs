@@ -42,6 +42,9 @@ export default function AdminLayout({
                     <Link href="/admin/requirements" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Requirements
                     </Link>
+                    <Link href="/admin/playbook" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Growth Playbook
+                    </Link>
                     <Link href="/admin/feeds" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Automated Feeds
                     </Link>
