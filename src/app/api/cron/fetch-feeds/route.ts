@@ -83,7 +83,7 @@ export async function GET(request: Request) {
                         const title = row['title'] || row['name'] || row['product name'] || row['productname'];
                         const description = row['description'] || row['desc'] || row['product description'] || row['short product description'] || title;
                         const url = row['url'] || row['link'] || row['affiliate link'] || row['tracking url'] || row['buyurl'] || row['linkurl'] || row['product url'];
-                        const merchantName = row['merchant'] || row['advertiser'] || row['store'] || feed.name;
+                        const merchantName = row['merchant'] || row['advertiser'] || row['store'] || row['program names'] || row['program name'] || row['manufacturer name'] || feed.name;
 
                         if (!title || !url) continue;
 
