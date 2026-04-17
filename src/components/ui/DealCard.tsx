@@ -42,7 +42,11 @@ export default function DealCard({ deal }: DealCardProps) {
                             loading="lazy"
                         />
                     ) : (
-                        <span className={styles.noImage}>No Image</span>
+                        <div className={styles.gradientFallback}>
+                            <span className={styles.gradientText}>
+                                {discountPercent ? `${discountPercent}% OFF` : 'EXCLUSIVE OFFER'}
+                            </span>
+                        </div>
                     )}
                 </div>
             </Link>

@@ -80,14 +80,15 @@ model Network {
 }
 
 model Merchant {
-  id        String   @id @default(cuid())
-  name      String   @unique
-  slug      String   @unique
-  logoUrl   String?
-  deals     Deal[]
-  clicks    Click[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String   @id @default(cuid())
+  name         String   @unique
+  slug         String   @unique
+  logoUrl      String?
+  affiliateUrl String?
+  deals        Deal[]
+  clicks       Click[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("dl_Merchant")
 }

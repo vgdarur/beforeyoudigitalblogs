@@ -47,10 +47,29 @@
     transform: scale(1.05);
 }
 
-.noImage {
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    font-weight: 500;
+.gradientFallback {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+}
+
+.card:hover .gradientFallback {
+    background: linear-gradient(135deg, #4338ca 0%, #db2777 100%);
+}
+
+.gradientText {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 .badge {
