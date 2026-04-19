@@ -6,6 +6,7 @@ import styles from './page.module.css';
 export default function ImportPage() {
     const [isDragging, setIsDragging] = useState(false);
     const [file, setFile] = useState<File | null>(null);
+    const [importMode, setImportMode] = useState<'DEALS' | 'CAMPAIGNS'>('DEALS');
     const [networkId, setNetworkId] = useState('');
     const [categoryId, setCategoryId] = useState('');
     const [isUploading, setIsUploading] = useState(false);
@@ -42,8 +43,14 @@ export default function ImportPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!file || !networkId || !categoryId) {
-            alert('Please fill out all fields and select a CSV file.');
+        
+        if (!file) {
+            alert('Please select a CSV file.');
+            return;
+        }
+
+        if (importMode === 'DEALS' && (!networkId || !categoryId)) {
+            alert('Please select Network and Category fields for Deal Imports.');
             return;
         }
 
@@ -52,11 +59,15 @@ export default function ImportPage() {
 
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('networkId', networkId);
-        formData.append('categoryId', categoryId);
+        if (importMode === 'DEALS') {
+            formData.append('networkId', networkId);
+            formData.append('categoryId', categoryId);
+        }
+
+        const endpoint = importMode === 'DEALS' ? '/api/admin/import' : '/api/admin/import-campaigns';
 
         try {
-            const res = await fetch('/api/admin/import', {
+            const res = await fetch(endpoint, {
                 method: 'POST',
                 body: formData,
             });
@@ -92,33 +103,49 @@ export default function ImportPage() {
                 <form onSubmit={handleSubmit} className={styles.importForm}>
 
                     <div className={styles.formGroup}>
-                        <label className={styles.label}>Select Network Source</label>
+                        <label className={styles.label}>Import Mode</label>
                         <select
                             className={styles.select}
-                            value={networkId}
-                            onChange={(e) => setNetworkId(e.target.value)}
-                            required
+                            value={importMode}
+                            onChange={(e) => setImportMode(e.target.value as 'DEALS' | 'CAMPAIGNS')}
                         >
-                            <option value="">-- Choose Network --</option>
-                            <option value="fake-uuid-for-demo">Global Affiliates Network</option>
-                            {/* Note: User must seed database and reload real UUIDs representing Networks */}
+                            <option value="DEALS">Standard Deal Feed (Products & Prices)</option>
+                            <option value="CAMPAIGNS">Brand Campaigns (Merchants & Tracking Links)</option>
                         </select>
-                        <p className={styles.helpText}>Used to attribute analytics clicks.</p>
+                        <p className={styles.helpText}>Choose which type of Impact API file you are uploading.</p>
                     </div>
 
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>Default Category Fallback</label>
-                        <select
-                            className={styles.select}
-                            value={categoryId}
-                            onChange={(e) => setCategoryId(e.target.value)}
-                            required
-                        >
-                            <option value="">-- Choose Default Category --</option>
-                            <option value="fake-cat-uuid-for-demo">General Default</option>
-                        </select>
-                        <p className={styles.helpText}>Applied if the CSV parser cannot intelligently categorize the item.</p>
-                    </div>
+                    {importMode === 'DEALS' && (
+                        <>
+                            <div className={styles.formGroup}>
+                                <label className={styles.label}>Select Network Source</label>
+                                <select
+                                    className={styles.select}
+                                    value={networkId}
+                                    onChange={(e) => setNetworkId(e.target.value)}
+                                    required
+                                >
+                                    <option value="">-- Choose Network --</option>
+                                    <option value="fake-uuid-for-demo">Global Affiliates Network</option>
+                                </select>
+                                <p className={styles.helpText}>Used to attribute analytics clicks.</p>
+                            </div>
+
+                            <div className={styles.formGroup}>
+                                <label className={styles.label}>Default Category Fallback</label>
+                                <select
+                                    className={styles.select}
+                                    value={categoryId}
+                                    onChange={(e) => setCategoryId(e.target.value)}
+                                    required
+                                >
+                                    <option value="">-- Choose Default Category --</option>
+                                    <option value="fake-cat-uuid-for-demo">General Default</option>
+                                </select>
+                                <p className={styles.helpText}>Applied if the CSV parser cannot intelligently categorize the item.</p>
+                            </div>
+                        </>
+                    )}
 
                     <div className={styles.formGroup}>
                         <label className={styles.label}>CSV Feed File</label>
@@ -161,7 +188,7 @@ export default function ImportPage() {
                     <button
                         type="submit"
                         className={styles.submitBtn}
-                        disabled={!file || !networkId || !categoryId || isUploading}
+                        disabled={!file || (importMode === 'DEALS' && (!networkId || !categoryId)) || isUploading}
                     >
                         {isUploading ? 'Processing Import...' : 'Start Bulk Import'}
                     </button>
