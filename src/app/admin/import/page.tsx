@@ -27,10 +27,11 @@ export default function ImportPage() {
 
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
             const droppedFile = e.dataTransfer.files[0];
-            if (droppedFile.type === 'text/csv' || droppedFile.name.endsWith('.csv')) {
+            const name = droppedFile.name.toLowerCase();
+            if (droppedFile.type === 'text/csv' || name.endsWith('.csv') || name.endsWith('.txt') || name.endsWith('.tsv')) {
                 setFile(droppedFile);
             } else {
-                alert('Please upload a valid CSV file');
+                alert('Please upload a valid CSV, TSV, or TXT feed file.');
             }
         }
     };
@@ -168,13 +169,13 @@ export default function ImportPage() {
                                     </div>
                                 ) : (
                                     <>
-                                        <p className={styles.dropText}>Drag & drop your CSV file here</p>
+                                        <p className={styles.dropText}>Drag & drop your feed file here</p>
                                         <span className={styles.dropSecondary}>or</span>
                                         <label className={styles.browseBtn}>
                                             Browse Files
                                             <input
                                                 type="file"
-                                                accept=".csv"
+                                                accept=".csv,.txt,.tsv"
                                                 className={styles.fileInput}
                                                 onChange={handleFileChange}
                                             />
