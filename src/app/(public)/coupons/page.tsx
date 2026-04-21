@@ -13,9 +13,11 @@ async function getCoupons() {
         const coupons = await prisma.deal.findMany({
             where: {
                 isActive: true,
-                couponCode: {
-                    not: null, // Basic Prisma check for not null
-                }
+                OR: [
+                    { couponCode: { not: null } },
+                    { imageUrl: null },
+                    { imageUrl: '' }
+                ]
             },
             include: {
                 merchant: true,
@@ -26,8 +28,8 @@ async function getCoupons() {
             take: 100,
         });
 
-        // Strict filter
-        return coupons.filter(c => c.couponCode && c.couponCode.trim() !== '');
+        // Strict filter: Must have either a valid code OR explicitly no image
+        return coupons.filter(c => (c.couponCode && c.couponCode.trim() !== '') || !c.imageUrl || c.imageUrl.trim() === '');
     } catch (err) {
         console.error("Failed fetching coupons", err);
         return [];
@@ -56,7 +58,15 @@ export default async function CouponsPage() {
                                 >
                                     {coupon.title} ({coupon.merchant.name})
                                 </Link>
-                                {' '} - [Use Code: <strong style={{color: '#0f172a'}}>{coupon.couponCode}</strong>]
+                                {coupon.couponCode && coupon.couponCode.trim() !== '' ? (
+                                    <>
+                                        {' '} - [Use Code: <strong style={{color: '#0f172a'}}>{coupon.couponCode}</strong>]
+                                    </>
+                                ) : (
+                                    <>
+                                        {' '} - [Shop Deal]
+                                    </>
+                                )}
                             </li>
                         ))}
                     </ul>
