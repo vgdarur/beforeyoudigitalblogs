@@ -73,9 +73,7 @@
 }
 
 .navLinks {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
+    display: none; /* Hidden universally in favor of Burger Menu */
 }
 
 .link {
@@ -109,22 +107,18 @@
         display: none;
     }
 
-    .navLinks {
-        display: none;
-    }
+    /* navLinks hidden universally above */
     
-    .burgerBtn {
-        display: block;
-        background: transparent;
-        border: none;
-        color: var(--primary);
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
+    /* burgerBtn universally displayed above */
 }
 
 .burgerBtn {
-    display: none;
+    display: block;
+    background: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .mobileMenu {

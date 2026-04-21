@@ -1,6 +1,5 @@
-import CouponCard from '@/components/ui/CouponCard';
 import { prisma } from '@/lib/prisma';
-import styles from '../deals/page.module.css'; // Reuse container layout from Deals page
+import Link from 'next/link';
 
 export const revalidate = 3600;
 
@@ -20,17 +19,14 @@ async function getCoupons() {
             },
             include: {
                 merchant: true,
-                network: true,
-                category: true,
             },
             orderBy: {
                 createdAt: 'desc',
             },
-            take: 50,
+            take: 100,
         });
 
-        // Prisma sometimes allows empty strings even if it's not null.
-        // We will formally filter them out in JS to ensure strict text coupons.
+        // Strict filter
         return coupons.filter(c => c.couponCode && c.couponCode.trim() !== '');
     } catch (err) {
         console.error("Failed fetching coupons", err);
@@ -42,48 +38,32 @@ export default async function CouponsPage() {
     const coupons = await getCoupons();
 
     return (
-        <div style={{ minHeight: '100vh', paddingBottom: '4rem', background: '#f8fafc' }}>
-            {/* Header Padding */}
-            <div style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem', background: '#ffffff', borderBottom: '1px solid #e2e8f0', marginBottom: '2rem' }}>
-                <div className="container">
-                    <h1 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem' }}>
-                        Verified Promo Codes
-                    </h1>
-                    <p style={{ color: '#64748b', fontSize: '1.125rem' }}>
-                        Copy active codes instantly and save big on your favorite brands.
-                    </p>
-                </div>
+        <div style={{ minHeight: '100vh', padding: '2rem' }}>
+            <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                <h1 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#0f172a', marginBottom: '1rem' }}>
+                    Verified Promo Codes
+                </h1>
+                
+                {coupons.length > 0 ? (
+                    <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        {coupons.map(coupon => (
+                            <li key={coupon.id} style={{ fontSize: '1.125rem', color: '#334155' }}>
+                                <Link 
+                                    href={`/api/go/${coupon.merchant.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ color: '#4f46e5', textDecoration: 'none', fontWeight: 500 }}
+                                >
+                                    {coupon.title} ({coupon.merchant.name})
+                                </Link>
+                                {' '} - [Use Code: <strong style={{color: '#0f172a'}}>{coupon.couponCode}</strong>]
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p style={{ color: '#64748b' }}>No promo codes available right now.</p>
+                )}
             </div>
-
-            <section>
-                <div className="container">
-                    {coupons.length > 0 ? (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '800px', margin: '0 auto' }}>
-                            {coupons.map(coupon => (
-                                <CouponCard 
-                                    key={coupon.id} 
-                                    deal={{
-                                        title: coupon.title,
-                                        description: coupon.description,
-                                        couponCode: coupon.couponCode,
-                                        affiliateUrl: coupon.affiliateUrl,
-                                        merchant: {
-                                            name: coupon.merchant.name,
-                                            logoUrl: coupon.merchant.logoUrl
-                                        }
-                                    }} 
-                                />
-                            ))}
-                        </div>
-                    ) : (
-                        <div style={{ textAlign: 'center', padding: '4rem 1rem', background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-                            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎟️</div>
-                            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#0f172a' }}>No promo codes available</h3>
-                            <p style={{ color: '#64748b', marginTop: '0.5rem' }}>Check back later for new exclusive discount codes.</p>
-                        </div>
-                    )}
-                </div>
-            </section>
         </div>
     );
 }

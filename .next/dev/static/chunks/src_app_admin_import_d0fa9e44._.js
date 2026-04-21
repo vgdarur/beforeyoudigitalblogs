@@ -64,6 +64,7 @@ function ImportPage() {
     _s();
     const [isDragging, setIsDragging] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [file, setFile] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [importMode, setImportMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('DEALS');
     const [networkId, setNetworkId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
     const [categoryId, setCategoryId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
     const [isUploading, setIsUploading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
@@ -80,10 +81,11 @@ function ImportPage() {
         setIsDragging(false);
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
             const droppedFile = e.dataTransfer.files[0];
-            if (droppedFile.type === 'text/csv' || droppedFile.name.endsWith('.csv')) {
+            const name = droppedFile.name.toLowerCase();
+            if (droppedFile.type === 'text/csv' || name.endsWith('.csv') || name.endsWith('.txt') || name.endsWith('.tsv')) {
                 setFile(droppedFile);
             } else {
-                alert('Please upload a valid CSV file');
+                alert('Please upload a valid CSV, TSV, or TXT feed file.');
             }
         }
     };
@@ -94,18 +96,25 @@ function ImportPage() {
     };
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        if (!file || !networkId || !categoryId) {
-            alert('Please fill out all fields and select a CSV file.');
+        if (!file) {
+            alert('Please select a CSV file.');
+            return;
+        }
+        if (importMode === 'DEALS' && (!networkId || !categoryId)) {
+            alert('Please select Network and Category fields for Deal Imports.');
             return;
         }
         setIsUploading(true);
         setResult(null);
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('networkId', networkId);
-        formData.append('categoryId', categoryId);
+        if (importMode === 'DEALS') {
+            formData.append('networkId', networkId);
+            formData.append('categoryId', categoryId);
+        }
+        const endpoint = importMode === 'DEALS' ? '/api/admin/import' : '/api/admin/import-campaigns';
         try {
-            const res = await fetch('/api/admin/import', {
+            const res = await fetch(endpoint, {
                 method: 'POST',
                 body: formData
             });
@@ -144,7 +153,7 @@ function ImportPage() {
                         children: "Bulk Deal Import"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/import/page.tsx",
-                        lineNumber: 85,
+                        lineNumber: 97,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -152,13 +161,13 @@ function ImportPage() {
                         children: "Upload a CSV feed from Rakuten, CJ Affiliate, or Amazon Associates to automatically parse and load deals."
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/import/page.tsx",
-                        lineNumber: 86,
+                        lineNumber: 98,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/import/page.tsx",
-                lineNumber: 84,
+                lineNumber: 96,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -173,107 +182,163 @@ function ImportPage() {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].label,
-                                        children: "Select Network Source"
+                                        children: "Import Mode"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 95,
+                                        lineNumber: 107,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].select,
-                                        value: networkId,
-                                        onChange: (e)=>setNetworkId(e.target.value),
-                                        required: true,
+                                        value: importMode,
+                                        onChange: (e)=>setImportMode(e.target.value),
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                value: "",
-                                                children: "-- Choose Network --"
+                                                value: "DEALS",
+                                                children: "Standard Deal Feed (Products & Prices)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 102,
+                                                lineNumber: 113,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                value: "fake-uuid-for-demo",
-                                                children: "Global Affiliates Network"
+                                                value: "CAMPAIGNS",
+                                                children: "Brand Campaigns (Merchants & Tracking Links)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 103,
+                                                lineNumber: 114,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 96,
+                                        lineNumber: 108,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].helpText,
-                                        children: "Used to attribute analytics clicks."
+                                        children: "Choose which type of Impact API file you are uploading."
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 106,
+                                        lineNumber: 116,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                lineNumber: 94,
+                                lineNumber: 106,
                                 columnNumber: 21
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].formGroup,
+                            importMode === 'DEALS' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].label,
-                                        children: "Default Category Fallback"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 110,
-                                        columnNumber: 25
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].select,
-                                        value: categoryId,
-                                        onChange: (e)=>setCategoryId(e.target.value),
-                                        required: true,
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].formGroup,
                                         children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                value: "",
-                                                children: "-- Choose Default Category --"
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].label,
+                                                children: "Select Network Source"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 117,
-                                                columnNumber: 29
+                                                lineNumber: 122,
+                                                columnNumber: 33
                                             }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                value: "fake-cat-uuid-for-demo",
-                                                children: "General Default"
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].select,
+                                                value: networkId,
+                                                onChange: (e)=>setNetworkId(e.target.value),
+                                                required: true,
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        value: "",
+                                                        children: "-- Choose Network --"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/admin/import/page.tsx",
+                                                        lineNumber: 129,
+                                                        columnNumber: 37
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        value: "fake-uuid-for-demo",
+                                                        children: "Global Affiliates Network"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/admin/import/page.tsx",
+                                                        lineNumber: 130,
+                                                        columnNumber: 37
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/admin/import/page.tsx",
+                                                lineNumber: 123,
+                                                columnNumber: 33
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].helpText,
+                                                children: "Used to attribute analytics clicks."
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 118,
-                                                columnNumber: 29
+                                                lineNumber: 132,
+                                                columnNumber: 33
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 111,
-                                        columnNumber: 25
+                                        lineNumber: 121,
+                                        columnNumber: 29
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].helpText,
-                                        children: "Applied if the CSV parser cannot intelligently categorize the item."
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].formGroup,
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].label,
+                                                children: "Default Category Fallback"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/admin/import/page.tsx",
+                                                lineNumber: 136,
+                                                columnNumber: 33
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].select,
+                                                value: categoryId,
+                                                onChange: (e)=>setCategoryId(e.target.value),
+                                                required: true,
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        value: "",
+                                                        children: "-- Choose Default Category --"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/admin/import/page.tsx",
+                                                        lineNumber: 143,
+                                                        columnNumber: 37
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        value: "fake-cat-uuid-for-demo",
+                                                        children: "General Default"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/admin/import/page.tsx",
+                                                        lineNumber: 144,
+                                                        columnNumber: 37
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/admin/import/page.tsx",
+                                                lineNumber: 137,
+                                                columnNumber: 33
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].helpText,
+                                                children: "Applied if the CSV parser cannot intelligently categorize the item."
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/admin/import/page.tsx",
+                                                lineNumber: 146,
+                                                columnNumber: 33
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 120,
-                                        columnNumber: 25
+                                        lineNumber: 135,
+                                        columnNumber: 29
                                     }, this)
                                 ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/app/admin/import/page.tsx",
-                                lineNumber: 109,
-                                columnNumber: 21
-                            }, this),
+                            }, void 0, true),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].formGroup,
                                 children: [
@@ -282,7 +347,7 @@ function ImportPage() {
                                         children: "CSV Feed File"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 124,
+                                        lineNumber: 152,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -298,7 +363,7 @@ function ImportPage() {
                                                     children: "📄"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/admin/import/page.tsx",
-                                                    lineNumber: 133,
+                                                    lineNumber: 161,
                                                     columnNumber: 33
                                                 }, this),
                                                 file ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -309,7 +374,7 @@ function ImportPage() {
                                                             children: file.name
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/admin/import/page.tsx",
-                                                            lineNumber: 136,
+                                                            lineNumber: 164,
                                                             columnNumber: 41
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -320,7 +385,7 @@ function ImportPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/admin/import/page.tsx",
-                                                            lineNumber: 137,
+                                                            lineNumber: 165,
                                                             columnNumber: 41
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -330,22 +395,22 @@ function ImportPage() {
                                                             children: "Remove"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/admin/import/page.tsx",
-                                                            lineNumber: 138,
+                                                            lineNumber: 166,
                                                             columnNumber: 41
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/admin/import/page.tsx",
-                                                    lineNumber: 135,
+                                                    lineNumber: 163,
                                                     columnNumber: 37
                                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                             className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].dropText,
-                                                            children: "Drag & drop your CSV file here"
+                                                            children: "Drag & drop your feed file here"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/admin/import/page.tsx",
-                                                            lineNumber: 144,
+                                                            lineNumber: 172,
                                                             columnNumber: 41
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -353,7 +418,7 @@ function ImportPage() {
                                                             children: "or"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/admin/import/page.tsx",
-                                                            lineNumber: 145,
+                                                            lineNumber: 173,
                                                             columnNumber: 41
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -362,18 +427,18 @@ function ImportPage() {
                                                                 "Browse Files",
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                                     type: "file",
-                                                                    accept: ".csv",
+                                                                    accept: ".csv,.txt,.tsv",
                                                                     className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].fileInput,
                                                                     onChange: handleFileChange
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/admin/import/page.tsx",
-                                                                    lineNumber: 148,
+                                                                    lineNumber: 176,
                                                                     columnNumber: 45
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/admin/import/page.tsx",
-                                                            lineNumber: 146,
+                                                            lineNumber: 174,
                                                             columnNumber: 41
                                                         }, this)
                                                     ]
@@ -381,34 +446,34 @@ function ImportPage() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/admin/import/page.tsx",
-                                            lineNumber: 132,
+                                            lineNumber: 160,
                                             columnNumber: 29
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 126,
+                                        lineNumber: 154,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                lineNumber: 123,
+                                lineNumber: 151,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 type: "submit",
                                 className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].submitBtn,
-                                disabled: !file || !networkId || !categoryId || isUploading,
+                                disabled: !file || importMode === 'DEALS' && (!networkId || !categoryId) || isUploading,
                                 children: isUploading ? 'Processing Import...' : 'Start Bulk Import'
                             }, void 0, false, {
                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                lineNumber: 161,
+                                lineNumber: 189,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/admin/import/page.tsx",
-                        lineNumber: 92,
+                        lineNumber: 104,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -420,12 +485,12 @@ function ImportPage() {
                                     children: "Import Status"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/admin/import/page.tsx",
-                                    lineNumber: 173,
+                                    lineNumber: 201,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                lineNumber: 172,
+                                lineNumber: 200,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -436,7 +501,7 @@ function ImportPage() {
                                         children: "Upload a file to see processing results."
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 177,
+                                        lineNumber: 205,
                                         columnNumber: 29
                                     }, this),
                                     isUploading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -446,27 +511,27 @@ function ImportPage() {
                                                 className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$import$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].spinner
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 184,
+                                                lineNumber: 212,
                                                 columnNumber: 33
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 children: "Processing CSV and importing to database..."
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 185,
+                                                lineNumber: 213,
                                                 columnNumber: 33
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("small", {
                                                 children: "This may take a minute for large files."
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 186,
+                                                lineNumber: 214,
                                                 columnNumber: 33
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 183,
+                                        lineNumber: 211,
                                         columnNumber: 29
                                     }, this),
                                     result && result.status === 200 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -477,14 +542,14 @@ function ImportPage() {
                                                 children: "✓"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 192,
+                                                lineNumber: 220,
                                                 columnNumber: 33
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
                                                 children: "Import Complete"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 193,
+                                                lineNumber: 221,
                                                 columnNumber: 33
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -498,7 +563,7 @@ function ImportPage() {
                                                                 children: "Found"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                                lineNumber: 196,
+                                                                lineNumber: 224,
                                                                 columnNumber: 41
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -506,13 +571,13 @@ function ImportPage() {
                                                                 children: result.data.itemsFound
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                                lineNumber: 197,
+                                                                lineNumber: 225,
                                                                 columnNumber: 41
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                                        lineNumber: 195,
+                                                        lineNumber: 223,
                                                         columnNumber: 37
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -523,7 +588,7 @@ function ImportPage() {
                                                                 children: "Imported"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                                lineNumber: 200,
+                                                                lineNumber: 228,
                                                                 columnNumber: 41
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -531,19 +596,19 @@ function ImportPage() {
                                                                 children: result.data.itemsImported
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                                lineNumber: 201,
+                                                                lineNumber: 229,
                                                                 columnNumber: 41
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                                        lineNumber: 199,
+                                                        lineNumber: 227,
                                                         columnNumber: 37
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 194,
+                                                lineNumber: 222,
                                                 columnNumber: 33
                                             }, this),
                                             result.data.errors && result.data.errors.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -553,7 +618,7 @@ function ImportPage() {
                                                         children: "Warnings / Skipped Rows:"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                                        lineNumber: 209,
+                                                        lineNumber: 237,
                                                         columnNumber: 41
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -561,24 +626,24 @@ function ImportPage() {
                                                                 children: err
                                                             }, i, false, {
                                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                                lineNumber: 212,
+                                                                lineNumber: 240,
                                                                 columnNumber: 49
                                                             }, this))
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                                        lineNumber: 210,
+                                                        lineNumber: 238,
                                                         columnNumber: 41
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 208,
+                                                lineNumber: 236,
                                                 columnNumber: 37
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 191,
+                                        lineNumber: 219,
                                         columnNumber: 29
                                     }, this),
                                     result && result.status !== 200 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -589,55 +654,55 @@ function ImportPage() {
                                                 children: "!"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 222,
+                                                lineNumber: 250,
                                                 columnNumber: 33
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
                                                 children: "Import Failed"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 223,
+                                                lineNumber: 251,
                                                 columnNumber: 33
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 children: result.data.error || 'Server error occurred'
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                                lineNumber: 224,
+                                                lineNumber: 252,
                                                 columnNumber: 33
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/admin/import/page.tsx",
-                                        lineNumber: 221,
+                                        lineNumber: 249,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/admin/import/page.tsx",
-                                lineNumber: 175,
+                                lineNumber: 203,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/admin/import/page.tsx",
-                        lineNumber: 171,
+                        lineNumber: 199,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/import/page.tsx",
-                lineNumber: 91,
+                lineNumber: 103,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/admin/import/page.tsx",
-        lineNumber: 83,
+        lineNumber: 95,
         columnNumber: 9
     }, this);
 }
-_s(ImportPage, "jRG8sodo6rTCyNCr/96/qkui4lM=");
+_s(ImportPage, "fITm5ix+h9V6zd9Kcy4ROEOPvRc=");
 _c = ImportPage;
 var _c;
 __turbopack_context__.k.register(_c, "ImportPage");

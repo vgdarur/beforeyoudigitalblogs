@@ -1,0 +1,3 @@
+{
+  "/api/go-store/[slug]/route": "app/api/go-store/[slug]/route.js"
+}

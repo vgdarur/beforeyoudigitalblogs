@@ -1,0 +1,7 @@
+const fs = require('fs');
+const Papa = require('papaparse');
+const text = fs.readFileSync('/Users/venugopal/Downloads/Assets.csv', 'utf8');
+const parsed = Papa.parse(text, { header: true, skipEmptyLines: true });
+if (parsed.data.length > 0) {
+    console.log(parsed.data[0]);
+}

@@ -47,10 +47,29 @@
   transform: scale(1.05);
 }
 
-.DealCard-module__bhrZia__noImage {
-  color: var(--text-muted);
-  font-size: .85rem;
-  font-weight: 500;
+.DealCard-module__bhrZia__gradientFallback {
+  text-align: center;
+  background: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+}
+
+.DealCard-module__bhrZia__card:hover .DealCard-module__bhrZia__gradientFallback {
+  background: linear-gradient(135deg, #4338ca 0%, #db2777 100%);
+}
+
+.DealCard-module__bhrZia__gradientText {
+  color: #fff;
+  text-shadow: 0 2px 4px #0003;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1.2;
 }
 
 .DealCard-module__bhrZia__badge {

@@ -22,13 +22,14 @@ __turbopack_context__.v({
   "couponLabel": "DealCard-module__bhrZia__couponLabel",
   "currentPrice": "DealCard-module__bhrZia__currentPrice",
   "goBtn": "DealCard-module__bhrZia__goBtn",
+  "gradientFallback": "DealCard-module__bhrZia__gradientFallback",
+  "gradientText": "DealCard-module__bhrZia__gradientText",
   "image": "DealCard-module__bhrZia__image",
   "imageContainer": "DealCard-module__bhrZia__imageContainer",
   "imagePlaceholder": "DealCard-module__bhrZia__imagePlaceholder",
   "merchantInfo": "DealCard-module__bhrZia__merchantInfo",
   "merchantLogo": "DealCard-module__bhrZia__merchantLogo",
   "merchantNameStore": "DealCard-module__bhrZia__merchantNameStore",
-  "noImage": "DealCard-module__bhrZia__noImage",
   "originalPrice": "DealCard-module__bhrZia__originalPrice",
   "pricing": "DealCard-module__bhrZia__pricing",
   "title": "DealCard-module__bhrZia__title",
@@ -78,9 +79,16 @@ function DealCard({ deal }) {
                             fileName: "[project]/src/components/ui/DealCard.tsx",
                             lineNumber: 38,
                             columnNumber: 25
-                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$DealCard$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].noImage,
-                            children: "No Image"
+                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$DealCard$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].gradientFallback,
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$DealCard$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].gradientText,
+                                children: discountPercent ? `${discountPercent}% OFF` : 'EXCLUSIVE OFFER'
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ui/DealCard.tsx",
+                                lineNumber: 46,
+                                columnNumber: 29
+                            }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/ui/DealCard.tsx",
                             lineNumber: 45,
@@ -115,19 +123,19 @@ function DealCard({ deal }) {
                             className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$DealCard$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].merchantLogo
                         }, void 0, false, {
                             fileName: "[project]/src/components/ui/DealCard.tsx",
-                            lineNumber: 53,
+                            lineNumber: 57,
                             columnNumber: 25
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$DealCard$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].merchantNameStore,
                             children: deal.merchant.name
                         }, void 0, false, {
                             fileName: "[project]/src/components/ui/DealCard.tsx",
-                            lineNumber: 59,
+                            lineNumber: 63,
                             columnNumber: 25
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/ui/DealCard.tsx",
-                        lineNumber: 51,
+                        lineNumber: 55,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -137,12 +145,12 @@ function DealCard({ deal }) {
                             children: deal.title
                         }, void 0, false, {
                             fileName: "[project]/src/components/ui/DealCard.tsx",
-                            lineNumber: 64,
+                            lineNumber: 68,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/ui/DealCard.tsx",
-                        lineNumber: 63,
+                        lineNumber: 67,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -156,7 +164,7 @@ function DealCard({ deal }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/ui/DealCard.tsx",
-                                lineNumber: 69,
+                                lineNumber: 73,
                                 columnNumber: 25
                             }, this) : null,
                             deal.originalPrice ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -167,13 +175,13 @@ function DealCard({ deal }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/ui/DealCard.tsx",
-                                lineNumber: 72,
+                                lineNumber: 76,
                                 columnNumber: 25
                             }, this) : null
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/ui/DealCard.tsx",
-                        lineNumber: 67,
+                        lineNumber: 71,
                         columnNumber: 17
                     }, this),
                     deal.couponCode && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -184,7 +192,7 @@ function DealCard({ deal }) {
                                 children: "Code:"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ui/DealCard.tsx",
-                                lineNumber: 78,
+                                lineNumber: 82,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -192,13 +200,13 @@ function DealCard({ deal }) {
                                 children: deal.couponCode
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ui/DealCard.tsx",
-                                lineNumber: 79,
+                                lineNumber: 83,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/ui/DealCard.tsx",
-                        lineNumber: 77,
+                        lineNumber: 81,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -229,37 +237,37 @@ function DealCard({ deal }) {
                                             y2: "12"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ui/DealCard.tsx",
-                                            lineNumber: 87,
+                                            lineNumber: 91,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("polyline", {
                                             points: "12 5 19 12 12 19"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ui/DealCard.tsx",
-                                            lineNumber: 88,
+                                            lineNumber: 92,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/ui/DealCard.tsx",
-                                    lineNumber: 86,
+                                    lineNumber: 90,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/ui/DealCard.tsx",
-                            lineNumber: 84,
+                            lineNumber: 88,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/ui/DealCard.tsx",
-                        lineNumber: 83,
+                        lineNumber: 87,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/ui/DealCard.tsx",
-                lineNumber: 50,
+                lineNumber: 54,
                 columnNumber: 13
             }, this)
         ]
@@ -345,7 +353,7 @@ async function getFeaturedDeals() {
                 category: true
             },
             orderBy: {
-                priorityScore: 'desc'
+                createdAt: 'desc'
             },
             take: 8
         });
