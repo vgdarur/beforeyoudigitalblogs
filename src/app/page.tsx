@@ -24,6 +24,7 @@ async function getFeaturedDeals() {
         const deals = await prisma.deal.findMany({
             where: {
                 isActive: true,
+                imageUrl: { contains: 'http' }
             },
             include: {
                 merchant: true,

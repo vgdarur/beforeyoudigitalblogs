@@ -17,6 +17,7 @@ async function getDeals(searchParams: { [key: string]: string | string[] | undef
 
     const where: Prisma.DealWhereInput = {
         isActive: true,
+        imageUrl: { contains: 'http' },
         OR: [
             { expirationDate: null },
             { expirationDate: { gt: new Date() } }

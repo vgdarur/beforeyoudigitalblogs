@@ -192,12 +192,21 @@ function Navbar() {
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                href: "/coupons",
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$Navbar$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].link,
+                                children: "Coupons"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/layout/Navbar.tsx",
+                                lineNumber: 71,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                 href: "/categories",
                                 className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$Navbar$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].link,
                                 children: "Categories"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/Navbar.tsx",
-                                lineNumber: 71,
+                                lineNumber: 72,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -209,7 +218,7 @@ function Navbar() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/Navbar.tsx",
-                                lineNumber: 73,
+                                lineNumber: 74,
                                 columnNumber: 21
                             }, this),
                             session ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -228,7 +237,7 @@ function Navbar() {
                                         children: "Admin Dashboard"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Navbar.tsx",
-                                        lineNumber: 78,
+                                        lineNumber: 79,
                                         columnNumber: 33
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -246,13 +255,13 @@ function Navbar() {
                                         children: "Sign Out"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Navbar.tsx",
-                                        lineNumber: 82,
+                                        lineNumber: 83,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/layout/Navbar.tsx",
-                                lineNumber: 76,
+                                lineNumber: 77,
                                 columnNumber: 25
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                 href: "/login",
@@ -260,7 +269,7 @@ function Navbar() {
                                 children: "Sign In"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/Navbar.tsx",
-                                lineNumber: 97,
+                                lineNumber: 98,
                                 columnNumber: 25
                             }, this)
                         ]
@@ -275,7 +284,7 @@ function Navbar() {
                         children: isMobileMenuOpen ? '✕' : '☰'
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/Navbar.tsx",
-                        lineNumber: 100,
+                        lineNumber: 101,
                         columnNumber: 17
                     }, this)
                 ]
@@ -298,7 +307,7 @@ function Navbar() {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/Navbar.tsx",
-                        lineNumber: 107,
+                        lineNumber: 108,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -308,7 +317,17 @@ function Navbar() {
                         children: "All Deals"
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/Navbar.tsx",
-                        lineNumber: 113,
+                        lineNumber: 114,
+                        columnNumber: 21
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                        href: "/coupons",
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$Navbar$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].link,
+                        onClick: ()=>setIsMobileMenuOpen(false),
+                        children: "Coupons"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/layout/Navbar.tsx",
+                        lineNumber: 115,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -318,7 +337,7 @@ function Navbar() {
                         children: "Categories"
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/Navbar.tsx",
-                        lineNumber: 114,
+                        lineNumber: 116,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -328,7 +347,7 @@ function Navbar() {
                         children: "Popular Merchants"
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/Navbar.tsx",
-                        lineNumber: 115,
+                        lineNumber: 117,
                         columnNumber: 21
                     }, this),
                     session ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -343,7 +362,7 @@ function Navbar() {
                                 children: "Admin Dashboard"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/Navbar.tsx",
-                                lineNumber: 120,
+                                lineNumber: 122,
                                 columnNumber: 33
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -366,7 +385,7 @@ function Navbar() {
                                 children: "Sign Out"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/Navbar.tsx",
-                                lineNumber: 124,
+                                lineNumber: 126,
                                 columnNumber: 29
                             }, this)
                         ]
@@ -377,13 +396,13 @@ function Navbar() {
                         children: "Sign In"
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/Navbar.tsx",
-                        lineNumber: 141,
+                        lineNumber: 143,
                         columnNumber: 25
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/layout/Navbar.tsx",
-                lineNumber: 106,
+                lineNumber: 107,
                 columnNumber: 17
             }, this)
         ]
