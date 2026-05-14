@@ -130,7 +130,7 @@ export default function ContactPage() {
         <div className={styles.infoItem}>
           <div className={styles.infoIcon}>📍</div>
           <div className={styles.infoTitle}>Headquarters</div>
-          <div className={styles.infoText}>San Francisco, CA</div>
+          <div className={styles.infoText}>Cumming, GA</div>
         </div>
       </div>
     </div>
