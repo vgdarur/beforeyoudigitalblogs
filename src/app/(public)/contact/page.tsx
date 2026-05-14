@@ -120,7 +120,7 @@ export default function ContactPage() {
         <div className={styles.infoItem}>
           <div className={styles.infoIcon}>📧</div>
           <div className={styles.infoTitle}>Email Support</div>
-          <div className={styles.infoText}>support@dealsagent.com</div>
+          <div className={styles.infoText}>dealsagentai@gmail.com</div>
         </div>
         <div className={styles.infoItem}>
           <div className={styles.infoIcon}>⏱️</div>
