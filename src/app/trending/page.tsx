@@ -73,7 +73,7 @@ export default async function TrendingPage() {
                     {newsAlert?.aiReport ? (
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem' }}>
                             {parseAIReport(newsAlert.aiReport).map((deal: any, idx: number) => (
-                                <AIDealCard key={idx} deal={deal} />
+                                <AIDealCard key={idx} deal={deal} index={idx} />
                             ))}
                         </div>
                     ) : (

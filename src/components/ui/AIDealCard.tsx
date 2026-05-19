@@ -9,9 +9,10 @@ interface AIDealCardProps {
         heat_level?: string;
         estimated_price?: string;
     };
+    index?: number;
 }
 
-export default function AIDealCard({ deal }: AIDealCardProps) {
+export default function AIDealCard({ deal, index = 0 }: AIDealCardProps) {
     // Determine category styling based on text
     const catLower = deal.category?.toLowerCase() || '';
     let catBg = '#f1f8f1';
@@ -29,9 +30,20 @@ export default function AIDealCard({ deal }: AIDealCardProps) {
     
     const heatText = heatLower.includes('high') ? '🔥 High' : heatLower.includes('medium') ? 'Medium' : heatLower.includes('low') ? 'Low' : '🔥 High';
 
+    // Pastel background colors for each card based on index
+    const pastelColors = [
+        '#f8faff', // very light blue
+        '#fffaf5', // very light orange/peach
+        '#f8fff8', // very light green
+        '#fff5fb', // very light pink
+        '#fbf5ff', // very light purple
+        '#f5ffff'  // very light cyan
+    ];
+    const cardBgColor = pastelColors[index % pastelColors.length];
+
     return (
         <div style={{ 
-            background: '#ffffff', 
+            background: cardBgColor, 
             border: '1px solid #e2e8f0', 
             borderRadius: '12px', 
             padding: '1.25rem',
