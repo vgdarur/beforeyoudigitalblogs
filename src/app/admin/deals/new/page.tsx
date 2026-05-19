@@ -54,6 +54,11 @@ export default async function NewDealPage() {
                     </div>
 
                     <div className={styles.formGroup}>
+                        <label className={styles.label}>YouTube Video URL</label>
+                        <input type="url" name="youtubeUrl" placeholder="https://youtube.com/watch?v=..." className={styles.input} />
+                    </div>
+
+                    <div className={styles.formGroup}>
                         <label className={styles.label}>Coupon Code</label>
                         <input type="text" name="couponCode" placeholder="e.g. SAVE50" className={styles.input} />
                     </div>

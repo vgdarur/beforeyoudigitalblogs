@@ -9,13 +9,13 @@ export default function Footer() {
                 <div className={styles.brandSection}>
                     <div className={styles.logo}>
                         <span className={styles.logoIcon}>🔥</span>
-                        <span>Dealsagent</span>
+                        <span>AI Deals of America</span>
                     </div>
                     <p className={styles.description}>
                         Your ultimate destination for the best tech, fashion, and lifestyle discounts. We curate deals so you don't have to.
                     </p>
                     <div className={styles.disclosure}>
-                        <strong>Affiliate Disclosure:</strong> Dealsagent may earn a commission from purchases made through links on our site, at no extra cost to you. This helps support our platform.
+                        <strong>Affiliate Disclosure:</strong> AI Deals of America may earn a commission from purchases made through links on our site, at no extra cost to you. This helps support our platform.
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@ export default function Footer() {
             </div>
             <div className={styles.copyright}>
                 <div className="container">
-                    <p>&copy; {new Date().getFullYear()} Dealsagent. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} AI Deals of America. All rights reserved.</p>
                 </div>
             </div>
         </footer>

@@ -6,6 +6,13 @@ import styles from './page.module.css';
 import DealCard from '@/components/ui/DealCard';
 
 // Dynamically fetch deal by slug
+function extractYouTubeId(url: string) {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
 async function getDealBySlug(slug: string) {
     const deal = await prisma.deal.findUnique({
         where: { slug },
@@ -96,6 +103,20 @@ export default async function DealDetailPage({ params }: { params: Promise<{ slu
                             <div className={styles.noImage}>No Image Available</div>
                         )}
                     </div>
+                    
+                    {deal.youtubeUrl && extractYouTubeId(deal.youtubeUrl) && (
+                        <div style={{ marginTop: '1.5rem', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: '8px' }}>
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                src={`https://www.youtube.com/embed/${extractYouTubeId(deal.youtubeUrl)}`} 
+                                title="YouTube video player" 
+                                frameBorder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowFullScreen>
+                            </iframe>
+                        </div>
+                    )}
                 </div>
 
                 {/* Deal Info Area */}

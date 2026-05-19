@@ -17,6 +17,7 @@
   "/admin/import/page": "/admin/import",
   "/admin/merchants/page": "/admin/merchants",
   "/admin/networks/page": "/admin/networks",
+  "/admin/news/page": "/admin/news",
   "/admin/playbook/page": "/admin/playbook",
   "/admin/requirements/page": "/admin/requirements",
   "/admin/users/new/page": "/admin/users/new",
@@ -45,5 +46,6 @@
   "/api/requirements/route": "/api/requirements",
   "/api/setup/route": "/api/setup",
   "/login/page": "/login",
-  "/page": "/"
+  "/page": "/",
+  "/trending/page": "/trending"
 }

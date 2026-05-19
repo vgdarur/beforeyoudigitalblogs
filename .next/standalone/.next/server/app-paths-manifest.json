@@ -17,6 +17,7 @@
   "/admin/import/page": "app/admin/import/page.js",
   "/admin/merchants/page": "app/admin/merchants/page.js",
   "/admin/networks/page": "app/admin/networks/page.js",
+  "/admin/news/page": "app/admin/news/page.js",
   "/admin/playbook/page": "app/admin/playbook/page.js",
   "/admin/requirements/page": "app/admin/requirements/page.js",
   "/admin/users/new/page": "app/admin/users/new/page.js",
@@ -45,5 +46,6 @@
   "/api/requirements/route": "app/api/requirements/route.js",
   "/api/setup/route": "app/api/setup/route.js",
   "/login/page": "app/login/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/trending/page": "app/trending/page.js"
 }

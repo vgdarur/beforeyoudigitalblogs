@@ -49,9 +49,19 @@ async function getCoupons() {
         const coupons = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$prisma$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["prisma"].deal.findMany({
             where: {
                 isActive: true,
-                couponCode: {
-                    not: null
-                }
+                OR: [
+                    {
+                        couponCode: {
+                            not: null
+                        }
+                    },
+                    {
+                        imageUrl: null
+                    },
+                    {
+                        imageUrl: ''
+                    }
+                ]
             },
             include: {
                 merchant: true
@@ -61,8 +71,8 @@ async function getCoupons() {
             },
             take: 100
         });
-        // Strict filter
-        return coupons.filter((c)=>c.couponCode && c.couponCode.trim() !== '');
+        // Strict filter: Must have either a valid code OR explicitly no image
+        return coupons.filter((c)=>c.couponCode && c.couponCode.trim() !== '' || !c.imageUrl || c.imageUrl.trim() === '');
     } catch (err) {
         console.error("Failed fetching coupons", err);
         return [];
@@ -92,7 +102,7 @@ async function CouponsPage() {
                     children: "Verified Promo Codes"
                 }, void 0, false, {
                     fileName: "[project]/src/app/(public)/coupons/page.tsx",
-                    lineNumber: 43,
+                    lineNumber: 45,
                     columnNumber: 17
                 }, this),
                 coupons.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -126,31 +136,40 @@ async function CouponsPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(public)/coupons/page.tsx",
-                                    lineNumber: 51,
+                                    lineNumber: 53,
                                     columnNumber: 33
                                 }, this),
-                                ' ',
-                                " - [Use Code: ",
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                    style: {
-                                        color: '#0f172a'
-                                    },
-                                    children: coupon.couponCode
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/(public)/coupons/page.tsx",
-                                    lineNumber: 59,
-                                    columnNumber: 52
-                                }, this),
-                                "]"
+                                coupon.couponCode && coupon.couponCode.trim() !== '' ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Fragment"], {
+                                    children: [
+                                        ' ',
+                                        " - [Use Code: ",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                            style: {
+                                                color: '#0f172a'
+                                            },
+                                            children: coupon.couponCode
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(public)/coupons/page.tsx",
+                                            lineNumber: 63,
+                                            columnNumber: 60
+                                        }, this),
+                                        "]"
+                                    ]
+                                }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Fragment"], {
+                                    children: [
+                                        ' ',
+                                        " - [Shop Deal]"
+                                    ]
+                                }, void 0, true)
                             ]
                         }, coupon.id, true, {
                             fileName: "[project]/src/app/(public)/coupons/page.tsx",
-                            lineNumber: 50,
+                            lineNumber: 52,
                             columnNumber: 29
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/app/(public)/coupons/page.tsx",
-                    lineNumber: 48,
+                    lineNumber: 50,
                     columnNumber: 21
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                     style: {
@@ -159,18 +178,18 @@ async function CouponsPage() {
                     children: "No promo codes available right now."
                 }, void 0, false, {
                     fileName: "[project]/src/app/(public)/coupons/page.tsx",
-                    lineNumber: 64,
+                    lineNumber: 74,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(public)/coupons/page.tsx",
-            lineNumber: 42,
+            lineNumber: 44,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(public)/coupons/page.tsx",
-        lineNumber: 41,
+        lineNumber: 43,
         columnNumber: 9
     }, this);
 }

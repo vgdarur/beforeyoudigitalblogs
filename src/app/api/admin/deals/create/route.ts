@@ -21,6 +21,7 @@ export async function POST(request: Request) {
         const rawPrice = formData.get('price') as string;
         const rawOriginalPrice = formData.get('originalPrice') as string;
         const imageUrl = (formData.get('imageUrl') as string) || null;
+        const youtubeUrl = (formData.get('youtubeUrl') as string) || null;
         const couponCode = (formData.get('couponCode') as string) || null;
         const rawExpirationDate = formData.get('expirationDate') as string;
 
@@ -68,6 +69,7 @@ export async function POST(request: Request) {
                 slug: dealSlug,
                 description: description.slice(0, 1000),
                 imageUrl: imageUrl,
+                youtubeUrl: youtubeUrl,
                 price: price,
                 originalPrice: originalPrice,
                 discountRatio: discountRatio,

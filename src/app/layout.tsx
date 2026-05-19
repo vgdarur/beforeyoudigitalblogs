@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
+import NewsTicker from '@/components/layout/NewsTicker';
 import Footer from '@/components/layout/Footer';
 import Providers from '@/components/Providers';
 import Script from 'next/script';
@@ -8,8 +9,8 @@ import Script from 'next/script';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-    title: 'Dealsagent - Discover the Best Discounts & Offers',
-    description: 'Aggregating the best tech, fashion and general deals from across the web. Save more with curated discounts.',
+    title: 'AI Deals of America - Discover the Best Discounts & Offers',
+    description: 'Find the latest and greatest deals, discounts, and coupons from top merchants, curated by AI.',
 };
 
 export default function RootLayout({
@@ -22,6 +23,7 @@ export default function RootLayout({
             <body>
                 <Providers>
                     <div className="app-wrapper">
+                        <NewsTicker />
                         <Navbar />
                         <main className="main-content">
                             {children}

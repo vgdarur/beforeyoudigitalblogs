@@ -25,7 +25,7 @@ export default function AdminLayout({
             <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
                 <div className={styles.sidebarHeader}>
                     <Link href="/admin" className={styles.logo} onClick={() => setIsSidebarOpen(false)}>
-                        🔥 Dealsagent Admin
+                        🔥 AI Deals of America Admin
                     </Link>
                 </div>
 
@@ -38,6 +38,9 @@ export default function AdminLayout({
                     </Link>
                     <Link href="/admin/import" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Bulk Import
+                    </Link>
+                    <Link href="/admin/news" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        News Ticker (iOS)
                     </Link>
                     <Link href="/admin/requirements" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Requirements
@@ -60,6 +63,9 @@ export default function AdminLayout({
                     </Link>
                     <Link href="/admin/users" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Users & Roles
+                    </Link>
+                    <Link href="/admin/messages" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Support Messages
                     </Link>
                 </nav>
 

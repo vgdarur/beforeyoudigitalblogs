@@ -1,0 +1,74 @@
+.markdownContainer {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #334155;
+    line-height: 1.7;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.markdownContainer h1, 
+.markdownContainer h2, 
+.markdownContainer h3, 
+.markdownContainer h4 {
+    color: #0f172a;
+    font-weight: 600; /* Modern, sleek, not too bold */
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.markdownContainer h2 {
+    font-size: 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 0.5rem;
+}
+
+.markdownContainer h3 {
+    font-size: 1.25rem;
+}
+
+.markdownContainer p {
+    margin-bottom: 1.25rem;
+}
+
+.markdownContainer strong, 
+.markdownContainer b {
+    font-weight: 600; /* Avoid extremely thick bolding */
+    color: #1e293b;
+}
+
+.markdownContainer ul {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+    list-style-type: none; /* Modern bullet styling */
+}
+
+.markdownContainer li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.markdownContainer li::before {
+    content: "•";
+    color: #3b82f6; /* Blue bullets */
+    font-weight: bold;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+}
+
+.markdownContainer li > p {
+    margin-bottom: 0;
+    display: inline;
+}
+
+.markdownContainer a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.markdownContainer a:hover {
+    text-decoration: underline;
+}

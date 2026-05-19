@@ -170,6 +170,12 @@
       "namedRegex": "^/admin/networks(?:/)?$"
     },
     {
+      "page": "/admin/news",
+      "regex": "^/admin/news(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/news(?:/)?$"
+    },
+    {
       "page": "/admin/playbook",
       "regex": "^/admin/playbook(?:/)?$",
       "routeKeys": {},
@@ -324,6 +330,12 @@
       "regex": "^/stores(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/stores(?:/)?$"
+    },
+    {
+      "page": "/trending",
+      "regex": "^/trending(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/trending(?:/)?$"
     }
   ],
   "dataRoutes": [],

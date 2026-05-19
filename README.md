@@ -1,4 +1,4 @@
-# Dealsagent: Affiliate Deals Aggregator
+# AI Deals of America - Affiliate Marketing Platform
 
 A modern, responsive Next.js application designed to aggregate and display affiliate deals from networks like CJ Affiliate, Amazon Associates, Rakuten, and more. It features a robust public-facing deals browser, a powerful click tracking engine, and a comprehensive secure Admin Dashboard.
 

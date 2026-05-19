@@ -62,6 +62,11 @@ export default async function EditDealPage({ params }: { params: Promise<{ id: s
                     </div>
 
                     <div className={styles.formGroup}>
+                        <label className={styles.label}>YouTube Video URL</label>
+                        <input type="url" name="youtubeUrl" defaultValue={deal.youtubeUrl || ''} className={styles.input} />
+                    </div>
+
+                    <div className={styles.formGroup}>
                         <label className={styles.label}>Coupon Code</label>
                         <input type="text" name="couponCode" defaultValue={deal.couponCode || ''} className={styles.input} />
                     </div>
