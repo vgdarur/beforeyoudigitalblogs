@@ -92,7 +92,7 @@ export default function AIDealCard({ deal, index = 0 }: AIDealCardProps) {
             {/* Bottom Bar: Price and Link */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #f1f5f9', paddingTop: '1rem' }}>
                 <span style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a' }}>
-                    {deal.estimated_price || '$19.99'}
+                    {deal.estimated_price ? deal.estimated_price : ''}
                 </span>
                 <Link href={deal.url} target="_blank" rel="noopener noreferrer" style={{ 
                     color: '#2563eb', 
