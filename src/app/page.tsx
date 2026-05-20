@@ -24,7 +24,15 @@ async function getFeaturedDeals() {
         const deals = await prisma.deal.findMany({
             where: {
                 isActive: true,
-                imageUrl: { contains: 'http' }
+                imageUrl: { contains: 'http' },
+                NOT: {
+                    category: {
+                        name: {
+                            contains: 'Smartphone',
+                            mode: 'insensitive'
+                        }
+                    }
+                }
             },
             include: {
                 merchant: true,
