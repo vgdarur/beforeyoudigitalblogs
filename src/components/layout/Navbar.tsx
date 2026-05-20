@@ -34,11 +34,11 @@ export default function Navbar() {
             <div className={`container ${styles.navContainer}`}>
                 <Link href="/" className={styles.logo}>
                     <Image 
-                        src="/logo-v6.jpg" 
+                        src="/logo-v8.png" 
                         alt="AI Deals of America Logo" 
                         width={300} 
                         height={300} 
-                        style={{ width: 'auto', height: '60px', objectFit: 'contain', borderRadius: '8px' }} 
+                        style={{ width: 'auto', height: '80px', objectFit: 'contain' }} 
                         priority
                     />
                 </Link>
