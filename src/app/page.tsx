@@ -42,7 +42,7 @@ async function getFeaturedDeals() {
             orderBy: {
                 createdAt: 'desc',
             },
-            take: 8,
+            take: 24,
         });
 
         return deals as unknown as DealWithRelations[];
