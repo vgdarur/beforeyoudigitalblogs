@@ -34,7 +34,7 @@ export default function Navbar() {
             <div className={`container ${styles.navContainer}`}>
                 <Link href="/" className={styles.logo}>
                     <Image 
-                        src="/logo-v4.png" 
+                        src="/logo-v5.png" 
                         alt="AI Deals of America Logo" 
                         width={300} 
                         height={300} 
