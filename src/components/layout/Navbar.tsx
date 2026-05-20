@@ -68,6 +68,7 @@ export default function Navbar() {
 
                 <nav className={styles.navLinks}>
                     <Link href="/deals" className={styles.link}>All Deals</Link>
+                    <Link href="/smartphones" className={styles.link}>Phones</Link>
                     <Link href="/coupons" className={styles.link}>Coupons</Link>
                     <Link href="/categories" className={styles.link}>Categories</Link>
 
@@ -112,6 +113,7 @@ export default function Navbar() {
                         style={{ backgroundColor: 'var(--surface-hover)', width: '100%', border: '1px solid var(--border)' }}
                     />
                     <Link href="/deals" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>All Deals</Link>
+                    <Link href="/smartphones" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Phones</Link>
                     <Link href="/coupons" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Coupons</Link>
                     <Link href="/categories" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Categories</Link>
                     <Link href="/merchants" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Popular Merchants</Link>
