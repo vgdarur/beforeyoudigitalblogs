@@ -146,7 +146,7 @@ model Click {
   device     String?
   
   dealId     String
-  deal       Deal     @relation(fields: [dealId], references: [id])
+  deal       Deal     @relation(fields: [dealId], references: [id], onDelete: Cascade)
   
   merchantId String
   merchant   Merchant @relation(fields: [merchantId], references: [id])

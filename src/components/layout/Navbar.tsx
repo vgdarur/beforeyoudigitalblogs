@@ -5,9 +5,15 @@ import Image from 'next/image';
 import styles from './Navbar.module.css';
 import { useSession, signOut } from 'next-auth/react';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
     const { data: session } = useSession();
+    const pathname = usePathname();
+
+    if (pathname?.startsWith('/admin')) {
+        return null;
+    }
     const [zipcode, setZipcode] = useState('');
     const [zipStatus, setZipStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

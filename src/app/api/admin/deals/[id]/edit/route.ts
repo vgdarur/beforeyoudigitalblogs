@@ -22,8 +22,9 @@ export async function POST(
         const merchantName = formData.get('merchantName') as string;
         const categoryId = formData.get('categoryId') as string;
         const networkId = formData.get('networkId') as string;
+        const parsedNetworkId = networkId === '' ? null : networkId;
 
-        if (!dealId || !title || !affiliateUrl || !merchantName || !categoryId || !networkId) {
+        if (!dealId || !title || !affiliateUrl || !merchantName || !categoryId) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
 
@@ -82,7 +83,7 @@ export async function POST(
                 couponCode: couponCode,
                 affiliateUrl: affiliateUrl,
                 merchantId: merchant.id,
-                networkId: networkId,
+                networkId: parsedNetworkId,
                 categoryId: categoryId,
                 expirationDate: expirationDate,
             }

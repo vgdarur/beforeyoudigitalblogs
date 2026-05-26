@@ -94,21 +94,23 @@ export default function AIDealCard({ deal, index = 0 }: AIDealCardProps) {
                 <span style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a' }}>
                     {deal.exact_price ? deal.exact_price : ''}
                 </span>
-                <Link href={deal.url} target="_blank" rel="noopener noreferrer" style={{ 
-                    color: '#2563eb', 
-                    fontSize: '0.9rem', 
-                    fontWeight: 600, 
-                    textDecoration: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px'
-                }}>
-                    Get Deal
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                    </svg>
-                </Link>
+                {(deal.url && deal.url.toLowerCase().includes('amazon')) ? (
+                    <Link href={deal.url} target="_blank" rel="noopener noreferrer" style={{ 
+                        color: '#2563eb', 
+                        fontSize: '0.9rem', 
+                        fontWeight: 600, 
+                        textDecoration: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px'
+                    }}>
+                        Check out this deal in Amazon
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </Link>
+                ) : null}
             </div>
         </div>
     );

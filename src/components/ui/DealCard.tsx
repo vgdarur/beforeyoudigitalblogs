@@ -85,13 +85,15 @@ export default function DealCard({ deal }: DealCardProps) {
                 )}
 
                 <div className={styles.actions}>
-                    <Link href={`/api/go/${deal.slug}`} className={styles.goBtn} target="_blank" rel="noopener noreferrer">
-                        Get Deal
-                        <svg xmlns="http://www.w3.org/Form/1999/xlink" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.btnIcon}>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </Link>
+                    {deal.merchant.name.toLowerCase().includes('amazon') && deal.imageUrl ? (
+                        <Link href={`/api/go/${deal.slug}`} className={styles.goBtn} target="_blank" rel="noopener noreferrer">
+                            Check out this deal in {deal.merchant.name}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.btnIcon}>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </Link>
+                    ) : null}
                 </div>
             </div>
         </div>
