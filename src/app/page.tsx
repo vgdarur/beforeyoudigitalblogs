@@ -1,30 +1,7 @@
 import DealCard from '@/components/ui/DealCard';
-import AIDealCard from '@/components/ui/AIDealCard';
 import styles from './page.module.css';
 import { prisma } from '@/lib/prisma';
-
-function parseAIReport(report: string) {
-    try {
-        const parsed = JSON.parse(report);
-        return parsed.deals || [];
-    } catch (e) {
-        console.error("Failed to parse AI JSON report", e);
-        return [];
-    }
-}
-
-async function getAiReport() {
-    try {
-        const res = await fetch('https://api.aidealsofamerica.com/api/news/active', { cache: 'no-store' });
-        if (res.ok) {
-            const data = await res.json();
-            return data && data.length > 0 ? data[0] : null;
-        }
-    } catch (e) {
-        console.error(e);
-    }
-    return null;
-}
+import Link from 'next/link';
 
 // Type matching what the Prisma query returns
 type DealWithRelations = {
@@ -38,90 +15,98 @@ type DealWithRelations = {
     discountRatio: number | null;
     couponCode: string | null;
     affiliateUrl: string;
-    merchant: { name: string; slug: string; logoUrl: string | null };
+    priorityScore: number | null;
+    category?: { name: string; slug: string; } | null;
+    merchant?: { name: string; slug: string; logoUrl: string | null } | null;
 };
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
-async function getFeaturedDeals() {
+async function getDeals() {
     try {
-        const deals = await prisma.deal.findMany({
+        const manualDeals = await prisma.deal.findMany({
             where: {
                 isActive: true,
-                imageUrl: { contains: 'http' },
-                NOT: {
-                    category: {
-                        name: {
-                            contains: 'Smartphone',
-                            mode: 'insensitive'
-                        }
-                    }
-                }
+                priorityScore: { not: 1 },
+                NOT: { category: { name: { contains: 'Smartphone', mode: 'insensitive' } } }
             },
-            include: {
-                merchant: true,
-                network: true,
-                category: true,
-            },
-            orderBy: {
-                createdAt: 'desc',
-            },
+            include: { merchant: true, network: true, category: true },
+            orderBy: { createdAt: 'desc' },
             take: 5,
         });
 
-        return deals as unknown as DealWithRelations[];
+        return {
+            manualDeals: manualDeals as unknown as DealWithRelations[]
+        };
     } catch (err) {
         console.error("Failed fetching deals", err);
-        return [];
+        return { manualDeals: [] };
     }
 }
+
 export default async function Home() {
-    const deals = await getFeaturedDeals();
-    const newsAlert = await getAiReport();
+    const { manualDeals } = await getDeals();
 
     return (
         <div style={{ minHeight: '100vh', paddingBottom: '4rem' }}>
             {/* Header Padding */}
             <div style={{ paddingTop: '2rem' }}></div>
 
-            <section className={styles.featuredSection}>
-                <div className="container">
-                    <div className={styles.sectionHeader} style={{ marginBottom: '2rem' }}>
-                        <h2 className="section-title">Today's Deals</h2>
-                        <a href="/deals" className={styles.viewAllBtn}>View All →</a>
+            {/* Premium Call to Action Banner / Ribbon for AI Suggested Deals */}
+            <div className="container" style={{ margin: '1.5rem auto' }}>
+                <Link href="/trending" style={{ textDecoration: 'none' }}>
+                    <div style={{
+                        background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%)',
+                        color: 'white',
+                        padding: '1.25rem 2rem',
+                        borderRadius: '12px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        boxShadow: '0 10px 25px -5px rgba(79, 70, 229, 0.3)',
+                        cursor: 'pointer',
+                        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                    }}
+                    className="hover-scale"
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                            <span style={{ fontSize: '2rem' }}>🤖</span>
+                            <div style={{ textAlign: 'left' }}>
+                                <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '700', letterSpacing: '-0.01em' }}>
+                                    AI Mode is Active: Today's Top Google Searches
+                                </h3>
+                                <p style={{ margin: '2px 0 0 0', fontSize: '0.875rem', opacity: 0.9 }}>
+                                    Discover 15 hot, trending deals automatically scraped across major US retailers right now!
+                                </p>
+                            </div>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '700' }}>
+                            View AI Deals
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </div>
                     </div>
-
-                    {deals.length > 0 ? (
-                        <div className={styles.dealGrid}>
-                            {deals.map(deal => (
-                                <DealCard key={deal.id} deal={deal} />
-                            ))}
-                        </div>
-                    ) : (
-                        <div className={styles.emptyState}>
-                            <p>No active deals available right now. Check back later!</p>
-                        </div>
-                    )}
-                </div>
-            </section>
-
-            <div className="container" style={{ marginTop: '3rem' }}>
-                <div style={{ backgroundColor: '#ffffff', padding: '2.5rem', borderRadius: '16px', boxShadow: '0 4px 20px -2px rgba(0, 0, 0, 0.05)', marginBottom: '3rem' }}>
-                    <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '1.25rem', marginBottom: '2rem', color: '#0f172a', fontSize: '1.75rem', fontWeight: '700', letterSpacing: '-0.02em' }}>
-                        <span style={{ fontSize: '1.75rem' }}>✨</span> AI Curated Top 15 Deals
-                    </h2>
-                    
-                    {newsAlert?.aiReport ? (
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem' }}>
-                            {parseAIReport(newsAlert.aiReport).map((deal: any, idx: number) => (
-                                <AIDealCard key={idx} deal={deal} index={idx} />
-                            ))}
-                        </div>
-                    ) : (
-                        <p style={{ color: '#64748b' }}>No AI report generated yet. The AI scheduler runs every few hours.</p>
-                    )}
-                </div>
+                </Link>
             </div>
+
+            {manualDeals.length > 0 && (
+                <section className={styles.featuredSection} style={{ padding: '2rem 0' }}>
+                    <div className="container">
+                        <div className={styles.sectionHeader} style={{ marginBottom: '2rem' }}>
+                            <h2 className="section-title">Today's Deals</h2>
+                            <a href="/deals" className={styles.viewAllBtn}>View All →</a>
+                        </div>
+
+                        <div className={styles.dealGrid}>
+                            {manualDeals.map(deal => (
+                                <DealCard key={deal.id} deal={deal as any} />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
         </div>
     );
 }

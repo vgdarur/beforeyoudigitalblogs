@@ -308,3 +308,26 @@
         padding: 1.25rem;
     }
 }
+
+.carouselContainer {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding: 0.5rem 0.25rem 1.5rem;
+    scrollbar-width: thin;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.carouselContainer::-webkit-scrollbar {
+    height: 6px;
+}
+
+.carouselContainer::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.carouselContainer::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border-radius: 10px;
+}

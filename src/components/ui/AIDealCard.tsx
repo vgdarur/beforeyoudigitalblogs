@@ -4,7 +4,7 @@ interface AIDealCardProps {
     deal: {
         title: string;
         reason: string;
-        category: string;
+        merchant: string;
         url: string;
         heat_level?: string;
         exact_price?: string;
@@ -13,14 +13,16 @@ interface AIDealCardProps {
 }
 
 export default function AIDealCard({ deal, index = 0 }: AIDealCardProps) {
-    // Determine category styling based on text
-    const catLower = deal.category?.toLowerCase() || '';
-    let catBg = '#f1f8f1';
-    let catColor = '#166534';
-    if (catLower.includes('beauty')) { catBg = '#f1f8f1'; catColor = '#166534'; }
-    else if (catLower.includes('beach') || catLower.includes('summer')) { catBg = '#fdf2f8'; catColor = '#831843'; }
-    else if (catLower.includes('pet') || catLower.includes('home')) { catBg = '#f0fdf4'; catColor = '#14532d'; }
-    else if (catLower.includes('health')) { catBg = '#f3e8ff'; catColor = '#4c1d95'; }
+    // Determine merchant styling based on text
+    const merchantLower = deal.merchant?.toLowerCase() || '';
+    let catBg = '#f8fafc';
+    let catColor = '#334155';
+    if (merchantLower.includes('amazon')) { catBg = '#fff7ed'; catColor = '#c2410c'; }
+    else if (merchantLower.includes('target')) { catBg = '#fdf2f8'; catColor = '#be123c'; }
+    else if (merchantLower.includes('best buy')) { catBg = '#eff6ff'; catColor = '#1d4ed8'; }
+    else if (merchantLower.includes('home depot')) { catBg = '#fff7ed'; catColor = '#c2410c'; }
+    else if (merchantLower.includes('tiktok')) { catBg = '#f1f5f9'; catColor = '#0f172a'; }
+    else if (merchantLower.includes('walmart')) { catBg = '#eff6ff'; catColor = '#1d4ed8'; }
     
     // Heat level styling
     const heatLower = deal.heat_level?.toLowerCase() || '';
@@ -64,7 +66,7 @@ export default function AIDealCard({ deal, index = 0 }: AIDealCardProps) {
                         fontSize: '0.8rem', 
                         fontWeight: 600 
                     }}>
-                        {deal.category}
+                        {deal.merchant}
                     </span>
                     <span style={{ 
                         background: heatBg, 
@@ -94,23 +96,21 @@ export default function AIDealCard({ deal, index = 0 }: AIDealCardProps) {
                 <span style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a' }}>
                     {deal.exact_price ? deal.exact_price : ''}
                 </span>
-                {(deal.url && deal.url.toLowerCase().includes('amazon')) ? (
-                    <Link href={deal.url} target="_blank" rel="noopener noreferrer" style={{ 
-                        color: '#2563eb', 
-                        fontSize: '0.9rem', 
-                        fontWeight: 600, 
-                        textDecoration: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px'
-                    }}>
-                        Check out this deal in Amazon
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </Link>
-                ) : null}
+                <Link href={deal.url || '#'} target="_blank" rel="noopener noreferrer" style={{ 
+                    color: '#2563eb', 
+                    fontSize: '0.9rem', 
+                    fontWeight: 600, 
+                    textDecoration: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                }}>
+                    Click here to purchase this deal on {deal.merchant}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                </Link>
             </div>
         </div>
     );
