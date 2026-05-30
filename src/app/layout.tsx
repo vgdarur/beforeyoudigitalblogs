@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import NewsTicker from '@/components/layout/NewsTicker';
+import AppBanner from '@/components/layout/AppBanner';
 import Footer from '@/components/layout/Footer';
 import Providers from '@/components/Providers';
 import Script from 'next/script';
@@ -23,6 +24,7 @@ export default function RootLayout({
             <body>
                 <Providers>
                     <div className="app-wrapper">
+                        <AppBanner />
                         <NewsTicker />
                         <Navbar />
                         <main className="main-content">
