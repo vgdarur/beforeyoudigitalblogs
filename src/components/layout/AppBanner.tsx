@@ -27,9 +27,10 @@ export default function AppBanner() {
         
         if (isIOS || isMacTouch) {
             setIsApple(true);
+            setIsVisible(true);
+        } else {
+            setIsVisible(false);
         }
-
-        setIsVisible(true);
     }, []);
 
     const handleDismiss = () => {

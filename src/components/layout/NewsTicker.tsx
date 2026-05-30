@@ -15,13 +15,14 @@ export default function NewsTicker() {
                     const data = await res.json();
                     if (data && data.length > 0) {
                         setNews(data[0].message); // Only display the most recent AI banner
-                    } else {
-                        setNews('🚨 Trending in USA Today: Check out our top deals below!');
+                        return;
                     }
                 }
             } catch (error) {
                 console.error("Failed to fetch news ticker", error);
             }
+            // Fallback banner message if API fails or returns empty
+            setNews('🚨 Trending in USA Today: Check out our top deals below!');
         };
         fetchNews();
     }, []);

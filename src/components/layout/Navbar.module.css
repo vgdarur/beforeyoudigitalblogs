@@ -135,3 +135,59 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     z-index: 40;
 }
+
+/* App Store Button in Mobile Menu */
+.appStoreBtn {
+    background-color: #000000;
+    color: #ffffff !important;
+    border: 1px solid #1e293b;
+    border-radius: 7px;
+    padding: 8px 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+    width: fit-content;
+    margin: 0.5rem 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.appStoreBtn:hover {
+    background-color: #111827;
+    border-color: #4b5563;
+    transform: translateY(-1px);
+}
+
+.appStoreBtn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.appleLogo {
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.btnText {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    align-items: flex-start;
+}
+
+.downloadText {
+    font-size: 7px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #94a3b8;
+}
+
+.storeName {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.1px;
+    color: #ffffff;
+}
