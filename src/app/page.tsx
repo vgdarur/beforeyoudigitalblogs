@@ -54,7 +54,7 @@ export default async function Home() {
 
             {/* Premium Call to Action Banner / Ribbon for AI Suggested Deals */}
             <div className="container" style={{ margin: '1.5rem auto' }}>
-                <Link href="/trending" style={{ textDecoration: 'none' }}>
+                <Link href="/trending" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                     <div style={{
                         background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%)',
                         color: 'white',
