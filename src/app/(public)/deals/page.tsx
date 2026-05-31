@@ -78,9 +78,38 @@ export default async function DealsPage({
     const sp = await searchParams;
     const { deals, meta } = await getDeals(sp);
 
-    // Fetch filter options (Categories, Merchants) for the sidebar
-    const categories = await prisma.category.findMany();
-    const merchants = await prisma.merchant.findMany();
+    // Fetch filter options (Categories, Merchants) for the sidebar, only if they have active deals
+    const categories = await prisma.category.findMany({
+        where: {
+            deals: {
+                some: {
+                    isActive: true,
+                    imageUrl: { contains: 'http' },
+                    OR: [
+                        { expirationDate: null },
+                        { expirationDate: { gt: new Date() } }
+                    ]
+                }
+            }
+        },
+        orderBy: { name: 'asc' }
+    });
+
+    const merchants = await prisma.merchant.findMany({
+        where: {
+            deals: {
+                some: {
+                    isActive: true,
+                    imageUrl: { contains: 'http' },
+                    OR: [
+                        { expirationDate: null },
+                        { expirationDate: { gt: new Date() } }
+                    ]
+                }
+            }
+        },
+        orderBy: { name: 'asc' }
+    });
 
     return (
         <div className={`container ${styles.dealsContainer}`}>

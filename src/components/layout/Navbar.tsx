@@ -4,12 +4,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Navbar.module.css';
 import { useSession, signOut } from 'next-auth/react';
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function Navbar() {
     const { data: session } = useSession();
     const pathname = usePathname();
+    const router = useRouter();
     const appStoreUrl = process.env.NEXT_PUBLIC_APP_STORE_URL || 'https://apps.apple.com/us/app/aidealsofamerica/id6470000000';
 
     if (pathname?.startsWith('/admin')) {
@@ -18,6 +19,36 @@ export default function Navbar() {
     const [zipcode, setZipcode] = useState('');
     const [zipStatus, setZipStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    
+    // Search and filter states
+    const [searchQuery, setSearchQuery] = useState('');
+    const [categories, setCategories] = useState<{ id: string; name: string; slug: string; }[]>([]);
+    const [merchants, setMerchants] = useState<{ id: string; name: string; slug: string; }[]>([]);
+
+    useEffect(() => {
+        if (!isMobileMenuOpen) return;
+        
+        const fetchFilters = async () => {
+            try {
+                const res = await fetch('/api/filters');
+                if (res.ok) {
+                    const data = await res.json();
+                    setCategories(data.categories || []);
+                    setMerchants(data.merchants || []);
+                }
+            } catch (err) {
+                console.error("Failed to load active filters", err);
+            }
+        };
+        fetchFilters();
+    }, [isMobileMenuOpen]);
+
+    const handleSearchSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!searchQuery.trim()) return;
+        setIsMobileMenuOpen(false);
+        router.push(`/deals?q=${encodeURIComponent(searchQuery.trim())}`);
+    };
 
     const handleZipSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -50,14 +81,16 @@ export default function Navbar() {
                     />
                 </Link>
 
-                <div className={styles.searchBar}>
+                <form onSubmit={handleSearchSubmit} className={styles.searchBar}>
                     <input
                         type="text"
-                        placeholder="Search deals, stores, categories..."
+                        placeholder="Search deals, stores..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                         className={styles.searchInput}
                     />
-                    <button className={styles.searchBtn}>Search</button>
-                </div>
+                    <button type="submit" className={styles.searchBtn}>Search</button>
+                </form>
 
                 <form onSubmit={handleZipSubmit} style={{ display: 'flex', alignItems: 'center', backgroundColor: 'var(--surface-hover)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', overflow: 'hidden' }}>
                     <input 
@@ -113,19 +146,68 @@ export default function Navbar() {
 
             {isMobileMenuOpen && (
                 <div className={styles.mobileMenu}>
-                    <input
-                        type="text"
-                        placeholder="Search deals, stores, categories..."
-                        className={styles.searchInput}
-                        style={{ backgroundColor: 'var(--surface-hover)', width: '100%', border: '1px solid var(--border)' }}
-                    />
+                    <form onSubmit={handleSearchSubmit} className={styles.searchFormMobile}>
+                        <input
+                            type="text"
+                            placeholder="Search deals, stores..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className={styles.searchInputMobile}
+                        />
+                        <button type="submit" className={styles.searchBtnMobile}>Search</button>
+                    </form>
+                    
                     <Link href="/deals" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>All Deals</Link>
                     <Link href="/smartphones" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Phones</Link>
                     <Link href="/coupons" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Coupons</Link>
                     <Link href="/categories" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Categories</Link>
                     <Link href="/merchants" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Popular Merchants</Link>
 
-                    <div style={{ height: '1px', backgroundColor: 'var(--border)', margin: '0.5rem 0' }}></div>
+                    {/* Collapsible Active Categories List */}
+                    {categories.length > 0 && (
+                        <>
+                            <div className={styles.menuDivider}></div>
+                            <div className={styles.menuSection}>
+                                <span className={styles.sectionHeader}>Categories</span>
+                                <div className={styles.filterListMobile}>
+                                    {categories.map(cat => (
+                                        <Link 
+                                            key={cat.id} 
+                                            href={`/deals?category=${cat.id}`} 
+                                            className={styles.filterLinkMobile} 
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                        >
+                                            {cat.name}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        </>
+                    )}
+
+                    {/* Collapsible Active Stores List */}
+                    {merchants.length > 0 && (
+                        <>
+                            <div className={styles.menuDivider}></div>
+                            <div className={styles.menuSection}>
+                                <span className={styles.sectionHeader}>Stores</span>
+                                <div className={styles.filterListMobile}>
+                                    {merchants.map(m => (
+                                        <Link 
+                                            key={m.id} 
+                                            href={`/deals?merchant=${m.id}`} 
+                                            className={styles.filterLinkMobile} 
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                        >
+                                            {m.name}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        </>
+                    )}
+
+                    <div className={styles.menuDivider}></div>
 
                     {/* App Store Download Badge */}
                     <a 
