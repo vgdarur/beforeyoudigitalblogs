@@ -32,7 +32,7 @@ async function getDeals() {
             },
             include: { merchant: true, network: true, category: true },
             orderBy: { createdAt: 'desc' },
-            take: 5,
+            take: 30,
         });
 
         return {
