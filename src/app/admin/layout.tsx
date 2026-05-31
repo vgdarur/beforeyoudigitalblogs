@@ -54,6 +54,12 @@ export default function AdminLayout({
                     <Link href="/admin/scraper-rules" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Scraper Rules
                     </Link>
+                    <Link href="/admin/reseller-blog" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Reseller Blog
+                    </Link>
+                    <Link href="/admin/import-export-guide" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Import Export Guide
+                    </Link>
                     <div className={styles.divider}></div>
                     <Link href="/admin/merchants" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Merchants

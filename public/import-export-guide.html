@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Import & Export License Guide — India & USA</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --blue: #1a3a6e;
+    --accent: #c8922a;
+    --gold: #e8b84b;
+    --cream: #f5f0e8;
+    --light: #faf8f4;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --india: #e8390e;
+    --usa: #1a3a6e;
+    --border: rgba(10,22,40,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .nav-brand {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .nav-links a:hover { color: var(--gold); background: rgba(255,255,255,0.05); }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    color: white;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 60px,
+      rgba(200,146,42,0.03) 60px,
+      rgba(200,146,42,0.03) 61px
+    );
+  }
+  .hero-flags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .flag-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .flag-badge .flag { font-size: 1.4rem; }
+  .hero-divider {
+    color: var(--gold);
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 580px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    position: relative;
+  }
+  .hero-stat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .hero-stat-label {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* CONTAINER */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  /* QUICK STEPS */
+  .quick-steps {
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem;
+  }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .step-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.25rem;
+    flex-shrink: 0;
+  }
+  .step-card h4 { font-size: 0.9rem; font-weight: 600; color: var(--navy); }
+  .step-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  /* SECTION LAYOUT */
+  .section {
+    padding: 4rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:nth-child(odd) { background: white; }
+  .section:nth-child(even) { background: var(--light); }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .section-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .icon-india { background: rgba(232,57,14,0.1); }
+  .icon-usa { background: rgba(26,58,110,0.1); }
+  .icon-both { background: rgba(200,146,42,0.12); }
+
+  .section-title-wrap h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+  .section-title-wrap p {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .country-badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .badge-india { background: rgba(232,57,14,0.1); color: var(--india); }
+  .badge-usa { background: rgba(26,58,110,0.1); color: var(--usa); }
+  .badge-both { background: rgba(200,146,42,0.12); color: #8B6914; }
+
+  /* INFO BOXES */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .info-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    border-left: 3px solid var(--accent);
+  }
+  .info-card .label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+  .info-card .value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .info-card .value a { color: var(--blue); text-decoration: none; }
+  .info-card .value a:hover { text-decoration: underline; }
+
+  /* STEPS LIST */
+  .steps-list {
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+  .step-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    transition: box-shadow 0.2s;
+  }
+  .step-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .step-item::before {
+    counter-increment: step;
+    content: counter(step);
+    min-width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-item p { font-size: 0.9rem; color: var(--text); }
+  .step-item strong { color: var(--navy); }
+
+  /* BULLET LIST */
+  .bullet-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  .bullet-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    font-size: 0.9rem;
+  }
+  .bullet-item::before {
+    content: '▸';
+    color: var(--accent);
+    font-size: 0.8rem;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* TABLES */
+  .table-wrap { overflow-x: auto; margin: 1.5rem 0; border-radius: 10px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  thead tr { background: var(--navy); color: white; }
+  thead th {
+    padding: 0.85rem 1.1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  tbody tr:nth-child(even) { background: var(--cream); }
+  tbody tr:hover { background: rgba(200,146,42,0.06); }
+  tbody td { padding: 0.75rem 1.1rem; color: var(--text); border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody td:first-child { font-weight: 500; color: var(--navy); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* TWO-COLUMN SPLIT */
+  .split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  @media (max-width: 700px) { .split-grid { grid-template-columns: 1fr; } }
+
+  .split-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .split-card-header {
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .split-card-header.india { background: rgba(232,57,14,0.06); }
+  .split-card-header.usa { background: rgba(26,58,110,0.06); }
+  .split-card-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .split-card-body { padding: 1.25rem; }
+  .split-card-body .bullet-item { font-size: 0.85rem; }
+
+  /* LINKS SECTION */
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .link-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .link-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 16px rgba(200,146,42,0.15);
+    transform: translateY(-2px);
+  }
+  .link-card .link-name { font-size: 0.9rem; font-weight: 600; color: var(--navy); }
+  .link-card .link-url { font-size: 0.75rem; color: var(--blue); font-weight: 400; }
+  .link-card .link-desc { font-size: 0.8rem; color: var(--muted); }
+  .link-card .link-arrow { margin-left: auto; color: var(--accent); font-size: 1rem; margin-top: auto; }
+
+  /* COSTS */
+  .cost-highlight {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .cost-highlight .amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .cost-highlight p { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+  .cost-highlight strong { color: white; font-size: 1rem; display: block; margin-bottom: 0.25rem; }
+
+  /* MISTAKES */
+  .mistake-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .mistake-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 3px solid #dc2626;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+  }
+  .mistake-card h4 { font-size: 0.85rem; font-weight: 600; color: #dc2626; margin-bottom: 0.3rem; }
+  .mistake-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 2.5rem 2rem;
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+  footer strong { color: var(--gold); }
+
+  /* SUBHEADING */
+  h3.sub { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--navy); margin: 2rem 0 1rem; }
+  p.body-text { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin: 0.75rem 0; }
+
+  /* ANIMATE IN */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * { animation: fadeUp 0.6s ease both; }
+  .hero-flags { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero p { animation-delay: 0.3s; }
+  .hero-stats { animation-delay: 0.4s; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    .hero { padding: 3rem 1.25rem 2.5rem; }
+    .hero-stats { gap: 1.5rem; }
+    .section { padding: 2.5rem 1.25rem; }
+    .cost-highlight { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Import · Export Guide</div>
+  <ul class="nav-links">
+    <li><a href="#india">🇮🇳 India IEC</a></li>
+    <li><a href="#india-extra">India Extras</a></li>
+    <li><a href="#usa">🇺🇸 USA</a></li>
+    <li><a href="#both">Both Countries</a></li>
+    <li><a href="#links">Resources</a></li>
+    <li><a href="#costs">Costs</a></li>
+    <li><a href="#mistakes">Mistakes</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-flags">
+    <div class="flag-badge"><span class="flag">🇮🇳</span> India</div>
+    <div class="hero-divider">⟷</div>
+    <div class="flag-badge"><span class="flag">🇺🇸</span> United States</div>
+  </div>
+  <h1>Import & Export<br><span>License Guide</span></h1>
+  <p>Complete step-by-step registration, documentation, and compliance guide for trading between India and the USA. Updated 2026.</p>
+  <div class="hero-stats">
+    <div>
+      <span class="hero-stat-val">$435B</span>
+      <span class="hero-stat-label">India Exports 2025</span>
+    </div>
+    <div>
+      <span class="hero-stat-val">20.8%</span>
+      <span class="hero-stat-label">Goes to USA</span>
+    </div>
+    <div>
+      <span class="hero-stat-val">180+</span>
+      <span class="hero-stat-label">Export Partners</span>
+    </div>
+    <div>
+      <span class="hero-stat-val">1–7 days</span>
+      <span class="hero-stat-label">IEC Processing</span>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK STEPS OVERVIEW -->
+<div class="quick-steps">
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <h4>Get IEC (India)</h4>
+      <p>Register at DGFT portal. Rs. 500 fee. 1–7 days processing.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <h4>Get EIN (USA)</h4>
+      <p>Apply at IRS.gov. Free. Issued instantly online.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <h4>Register with CBP</h4>
+      <p>Create ACE Portal account. File CBP Form 5106.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <h4>Get GST & RCMC</h4>
+      <p>GST for Indian tax compliance. RCMC for export incentives.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">5</div>
+      <h4>Find a Customs Broker</h4>
+      <p>Hire a licensed CHA (India) or CBP broker (USA) for clearances.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION: INDIA IEC -->
+<section class="section" id="india">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-india">🇮🇳</div>
+      <div class="section-title-wrap">
+        <div class="country-badge badge-india">India</div>
+        <h2>Import Export Code (IEC)</h2>
+        <p>The mandatory 10-digit license for all Indian international trade, issued by DGFT</p>
+      </div>
+    </div>
+
+    <p class="body-text">The IEC is the single most important license for any Indian business engaged in cross-border trade. Without it, you cannot legally export or import goods. It is issued by the <strong>Directorate General of Foreign Trade (DGFT)</strong> under the Ministry of Commerce and Industry.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="label">Authority</div>
+        <div class="value">DGFT — Ministry of Commerce</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Application Fee</div>
+        <div class="value">Rs. 500 (online)</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Validity</div>
+        <div class="value">Lifetime (annual profile update needed Apr–Jun)</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Processing Time</div>
+        <div class="value">1 to 7 working days</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Official Portal</div>
+        <div class="value"><a href="https://www.dgft.gov.in" target="_blank">www.dgft.gov.in ↗</a></div>
+      </div>
+      <div class="info-card">
+        <div class="label">Code Format</div>
+        <div class="value">10-digit alphanumeric number</div>
+      </div>
+    </div>
+
+    <h3 class="sub">Who Needs IEC?</h3>
+    <div class="bullet-list">
+      <div class="bullet-item">Any individual or business entity importing or exporting goods from India</div>
+      <div class="bullet-item">E-commerce sellers exporting through Amazon Global, Flipkart, or similar platforms</div>
+      <div class="bullet-item">Manufacturers looking to sell products internationally</div>
+      <div class="bullet-item">Merchant exporters and trading companies</div>
+      <div class="bullet-item">Service exporters receiving foreign remittances above threshold</div>
+    </div>
+    <p class="body-text"><strong>Exemption:</strong> Persons importing/exporting goods for personal use not connected with trade or manufacturing are exempt.</p>
+
+    <h3 class="sub">Documents Required</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Document</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>PAN Card</td><td>Permanent Account Number of proprietor or company</td></tr>
+          <tr><td>Aadhaar Card</td><td>For individual identity verification</td></tr>
+          <tr><td>Address Proof</td><td>Utility bill, rent agreement, or property document</td></tr>
+          <tr><td>Business Registration</td><td>GST certificate, partnership deed, or incorporation certificate</td></tr>
+          <tr><td>Bank Account Details</td><td>Account number, IFSC code, cancelled cheque</td></tr>
+          <tr><td>Digital Signature</td><td>Required for online application submission</td></tr>
+          <tr><td>Passport Size Photo</td><td>Recent photograph of applicant</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Step-by-Step IEC Registration</h3>
+    <div class="steps-list">
+      <div class="step-item"><p>Go to the official DGFT portal: <strong>www.dgft.gov.in</strong></p></div>
+      <div class="step-item"><p>Click on <strong>'Services'</strong> tab → select <strong>'IEC Profile Management'</strong></p></div>
+      <div class="step-item"><p>Click <strong>'Apply for IEC'</strong> and create a new account with email and mobile</p></div>
+      <div class="step-item"><p>Verify your email and mobile number via OTP</p></div>
+      <div class="step-item"><p>Log in and fill the IEC application form — business name, PAN, address, incorporation date</p></div>
+      <div class="step-item"><p>Enter bank account number, IFSC code, and account holder name</p></div>
+      <div class="step-item"><p>Upload all required documents in PDF or JPEG format (must be clear and legible)</p></div>
+      <div class="step-item"><p>Pay the <strong>Rs. 500 application fee</strong> online via net banking, UPI, or credit/debit card</p></div>
+      <div class="step-item"><p>Submit the application — you will receive an acknowledgement number</p></div>
+      <div class="step-item"><p>IEC certificate is issued digitally within <strong>1–7 working days</strong></p></div>
+      <div class="step-item"><p>Download your IEC certificate (contains QR code for online verification) from 'IEC Profile Management'</p></div>
+    </div>
+
+    <h3 class="sub">AD Code — Also Required</h3>
+    <p class="body-text">In addition to IEC, you need an <strong>Authorized Dealer (AD) Code</strong> from your bank. This enables customs clearance and foreign exchange transactions. It must be registered at each port you export from.</p>
+    <div class="bullet-list">
+      <div class="bullet-item">Visit your bank branch and request AD Code registration</div>
+      <div class="bullet-item">Submit IEC certificate, bank account details, and business documents</div>
+      <div class="bullet-item">Bank registers your AD Code with the customs department</div>
+      <div class="bullet-item">AD Code has lifetime validity unless you change your bank or branch</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: INDIA EXTRA -->
+<section class="section" id="india-extra">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-india">📋</div>
+      <div class="section-title-wrap">
+        <div class="country-badge badge-india">India</div>
+        <h2>Additional Licenses & Registrations</h2>
+        <p>Beyond IEC — GST, RCMC, export promotion schemes, and product-specific permits</p>
+      </div>
+    </div>
+
+    <h3 class="sub">GST Registration</h3>
+    <p class="body-text">Mandatory for exporters with annual turnover above Rs. 20 lakhs (Rs. 10 lakhs for special category states). Exports are <strong>zero-rated under GST</strong>, allowing you to claim full refunds on input taxes.</p>
+    <div class="info-grid">
+      <div class="info-card"><div class="label">Portal</div><div class="value"><a href="https://www.gst.gov.in" target="_blank">www.gst.gov.in ↗</a></div></div>
+      <div class="info-card"><div class="label">Fee</div><div class="value">Free (government portal)</div></div>
+      <div class="info-card"><div class="label">Processing</div><div class="value">3–7 working days</div></div>
+    </div>
+
+    <h3 class="sub">RCMC (Registration Cum Membership Certificate)</h3>
+    <p class="body-text">Required to access India's export incentive schemes. Issued by Export Promotion Councils (EPCs) specific to your product category.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Product Category</th><th>Relevant Export Promotion Council</th></tr></thead>
+        <tbody>
+          <tr><td>General Exports</td><td>FIEO — Federation of Indian Export Organisations</td></tr>
+          <tr><td>Spices</td><td>Spices Board of India</td></tr>
+          <tr><td>Apparel & Textiles</td><td>AEPC — Apparel Export Promotion Council</td></tr>
+          <tr><td>Agricultural Products</td><td>APEDA — Agricultural & Processed Food Products</td></tr>
+          <tr><td>Gems & Jewellery</td><td>GJEPC — Gem & Jewellery Export Promotion Council</td></tr>
+          <tr><td>Pharmaceuticals</td><td>Pharmexcil — Pharmaceuticals Export Council</td></tr>
+          <tr><td>Engineering Goods</td><td>EEPC India — Engineering Export Promotion Council</td></tr>
+          <tr><td>Leather Products</td><td>CLE — Council for Leather Exports</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Export Promotion Schemes</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Scheme</th><th>Benefit</th></tr></thead>
+        <tbody>
+          <tr><td>RoDTEP</td><td>Refund of duties and taxes embedded in exported products</td></tr>
+          <tr><td>EPCG</td><td>Import capital goods at zero/reduced duty for export production</td></tr>
+          <tr><td>Advance Authorization</td><td>Import inputs duty-free for export production</td></tr>
+          <tr><td>SEZ</td><td>Tax exemptions for units in Special Economic Zones</td></tr>
+          <tr><td>ECGC Insurance</td><td>Protection against non-payment by foreign buyers (0.3%–1.5% of invoice)</td></tr>
+          <tr><td>Duty Drawback</td><td>Refund of customs duties paid on imported inputs used in exports</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Product-Specific Licenses in India</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Product Category</th><th>Required License / Authority</th></tr></thead>
+        <tbody>
+          <tr><td>Pharmaceuticals & Drugs</td><td>DCGI (Drug Controller General of India) approval</td></tr>
+          <tr><td>Food Products</td><td>FSSAI License — Food Safety & Standards Authority of India</td></tr>
+          <tr><td>Agricultural Products</td><td>APEDA Registration + Phytosanitary Certificate</td></tr>
+          <tr><td>Chemicals</td><td>Ministry of Chemicals and Petrochemicals clearance</td></tr>
+          <tr><td>Wildlife / Natural Products</td><td>CITES permit — Ministry of Environment, Forest & Climate Change</td></tr>
+          <tr><td>Gems & Jewellery</td><td>GJEPC Membership + Bureau of Indian Standards (BIS)</td></tr>
+          <tr><td>Textiles</td><td>AEPC RCMC + Textile Committee Quality Certification</td></tr>
+          <tr><td>Electronics</td><td>BIS (Bureau of Indian Standards) certification for regulated electronics</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: USA -->
+<section class="section" id="usa">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-usa">🇺🇸</div>
+      <div class="section-title-wrap">
+        <div class="country-badge badge-usa">United States</div>
+        <h2>USA Import & Export Licensing</h2>
+        <p>No single universal license — requirements depend on your product and the agencies that regulate it</p>
+      </div>
+    </div>
+
+    <p class="body-text">Unlike India, the USA does not have one universal import/export license. Most goods do not require a license. However, specific product categories require licenses or permits from relevant federal agencies. <strong>US Customs and Border Protection (CBP)</strong> enforces all trade regulations at US ports of entry.</p>
+
+    <h3 class="sub">Key US Agencies</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Agency</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>CBP — Customs & Border Protection</td><td>Primary enforcement of all import/export regulations at US ports</td></tr>
+          <tr><td>BIS — Bureau of Industry & Security</td><td>Export licenses for dual-use goods, technology, and software</td></tr>
+          <tr><td>DDTC — State Dept Defense Trade Controls</td><td>Export of defense articles under ITAR (International Traffic in Arms)</td></tr>
+          <tr><td>FDA — Food & Drug Administration</td><td>Food, drugs, cosmetics, medical devices, biologics</td></tr>
+          <tr><td>USDA APHIS</td><td>Agricultural products, meat, plants, and animal products</td></tr>
+          <tr><td>EPA — Environmental Protection Agency</td><td>Chemicals, engines, refrigerants, certain equipment</td></tr>
+          <tr><td>FCC — Federal Communications Commission</td><td>Telecommunications and radio frequency equipment</td></tr>
+          <tr><td>DEA — Drug Enforcement Agency</td><td>Controlled substances and precursor chemicals</td></tr>
+          <tr><td>DOE — Department of Energy</td><td>Energy efficiency appliances, nuclear materials</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Step 1 — Get Your EIN (Employer Identification Number)</h3>
+    <p class="body-text">The EIN is your business's federal tax ID issued by the IRS. It is required for all commercial import/export activities in the USA and must appear on all CBP entry forms.</p>
+    <div class="steps-list">
+      <div class="step-item"><p>Go to: <strong>www.irs.gov</strong> → search "Apply for EIN online"</p></div>
+      <div class="step-item"><p>Select your entity type (LLC, Corporation, Sole Proprietor, etc.)</p></div>
+      <div class="step-item"><p>Complete the online application — takes 10–15 minutes, completely free</p></div>
+      <div class="step-item"><p>EIN is issued immediately upon completion — save your confirmation letter</p></div>
+      <div class="step-item"><p>Use EIN on all CBP forms, invoices, and export filings</p></div>
+    </div>
+    <div class="info-grid">
+      <div class="info-card"><div class="label">Cost</div><div class="value">Free</div></div>
+      <div class="info-card"><div class="label">Processing</div><div class="value">Instant (online)</div></div>
+      <div class="info-card"><div class="label">Portal</div><div class="value"><a href="https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number" target="_blank">IRS.gov ↗</a></div></div>
+    </div>
+
+    <h3 class="sub">Step 2 — Register with CBP (ACE Portal)</h3>
+    <p class="body-text">The Automated Commercial Environment (ACE) is the US government's trade portal. All importers and exporters must register here.</p>
+    <div class="steps-list">
+      <div class="step-item"><p>Go to: <strong>www.cbp.gov/trade/automated</strong></p></div>
+      <div class="step-item"><p>Create an ACE account as Importer or Exporter using your EIN</p></div>
+      <div class="step-item"><p>Complete <strong>CBP Form 5106</strong> (Importer Identity Form) if needed</p></div>
+      <div class="step-item"><p>For exports: submit Certification of Authority (COA) on company letterhead to exportreports@census.gov</p></div>
+      <div class="step-item"><p>For export report access by EIN: log into ACE → Accounts tab → Exporter → submit COA</p></div>
+    </div>
+
+    <h3 class="sub">US Import Process</h3>
+    <div class="steps-list">
+      <div class="step-item"><p>Verify your product's <strong>HS (Harmonized Tariff Schedule) code</strong> via CBP's database</p></div>
+      <div class="step-item"><p>Check duty rates using the US Harmonized Tariff Schedule</p></div>
+      <div class="step-item"><p>For food: file <strong>FDA Prior Notice</strong> at least 8 hours before vessel/air arrival</p></div>
+      <div class="step-item"><p>Arrange <strong>USDA inspection</strong> for meat, plants, and animal products</p></div>
+      <div class="step-item"><p>Submit <strong>Customs Entry Summary (CBP Form 7501)</strong> within 15 calendar days of arrival</p></div>
+      <div class="step-item"><p>For sea shipments: file <strong>10+2 Importer Security Filing (ISF)</strong> at least 24 hours before foreign loading</p></div>
+      <div class="step-item"><p>Goods released within 24–48 hours if no issues; exams or lab tests may delay</p></div>
+      <div class="step-item"><p>Keep all import records for <strong>5+ years</strong> as required by CBP</p></div>
+    </div>
+
+    <h3 class="sub">US Export Process</h3>
+    <div class="steps-list">
+      <div class="step-item"><p>Determine if your product is on the <strong>Commerce Control List (CCL)</strong> at BIS</p></div>
+      <div class="step-item"><p>If controlled: apply for export license through <strong>BIS (www.bis.doc.gov)</strong></p></div>
+      <div class="step-item"><p>If not controlled: most goods qualify for <strong>NLR (No License Required)</strong> designation</p></div>
+      <div class="step-item"><p>File <strong>Electronic Export Information (EEI)</strong> through AES for shipments over $2,500</p></div>
+      <div class="step-item"><p>Obtain any product-specific permits (FDA, USDA, EPA, FCC as applicable)</p></div>
+      <div class="step-item"><p>Prepare commercial invoice, packing list, and bill of lading</p></div>
+      <div class="step-item"><p>Submit all documents to your freight forwarder or customs broker</p></div>
+    </div>
+
+    <h3 class="sub">Key US Import Documentation</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Document</th><th>Purpose & Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Commercial Invoice</td><td>Describes goods, value, buyer/seller details — most critical document</td></tr>
+          <tr><td>Packing List</td><td>Lists quantity, weight, and dimensions of each package</td></tr>
+          <tr><td>Bill of Lading / Airway Bill</td><td>Transport contract between shipper and carrier</td></tr>
+          <tr><td>CBP Form 7501</td><td>Entry summary — filed within 15 days of shipment arrival</td></tr>
+          <tr><td>ISF (10+2 Filing)</td><td>Sea imports: filed 24 hours before vessel loading at foreign port</td></tr>
+          <tr><td>Certificate of Origin</td><td>Verifies country of manufacture for duty rate purposes</td></tr>
+          <tr><td>FDA Prior Notice</td><td>Required for all food shipments — 8+ hours before arrival</td></tr>
+          <tr><td>Customs Bond</td><td>Financial guarantee required for all commercial imports</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: BOTH COUNTRIES -->
+<section class="section" id="both">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-both">🌐</div>
+      <div class="section-title-wrap">
+        <div class="country-badge badge-both">India ↔ USA</div>
+        <h2>Trading Between India and the USA</h2>
+        <p>Checklists and payment methods for cross-border trade in both directions</p>
+      </div>
+    </div>
+
+    <div class="split-grid">
+      <div class="split-card">
+        <div class="split-card-header india">
+          <span>🇮🇳</span>
+          <h3>India → USA Export Checklist</h3>
+        </div>
+        <div class="split-card-body">
+          <div class="bullet-list">
+            <div class="bullet-item">Obtain IEC from DGFT portal</div>
+            <div class="bullet-item">Register for GST and obtain RCMC</div>
+            <div class="bullet-item">Identify HS code and check US import duty rates</div>
+            <div class="bullet-item">Ensure product meets US standards (FDA, CPSC, FCC, EPA)</div>
+            <div class="bullet-item">Obtain US import permits required for your product</div>
+            <div class="bullet-item">Register with a US customs broker or freight forwarder</div>
+            <div class="bullet-item">Prepare commercial invoice, COO, and packing list</div>
+            <div class="bullet-item">File EEI in AES for shipments over $2,500</div>
+            <div class="bullet-item">Your US buyer files CBP Form 7501 and ISF</div>
+            <div class="bullet-item">Get ECGC insurance to protect against buyer default</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-card">
+        <div class="split-card-header usa">
+          <span>🇺🇸</span>
+          <h3>USA → India Import Checklist</h3>
+        </div>
+        <div class="split-card-body">
+          <div class="bullet-list">
+            <div class="bullet-item">Obtain IEC from DGFT (India) for importing entity</div>
+            <div class="bullet-item">Register with US CBP and obtain EIN</div>
+            <div class="bullet-item">Check India's import policy (Free / Restricted / Prohibited)</div>
+            <div class="bullet-item">Verify India customs duty rates on Customs Tariff Schedule</div>
+            <div class="bullet-item">File Shipping Bill in India's ICEGATE system before export</div>
+            <div class="bullet-item">Ensure BIS certification for electronics entering India</div>
+            <div class="bullet-item">Prepare all shipping docs: invoice, packing list, BOL, COO</div>
+            <div class="bullet-item">Pay applicable customs duties upon arrival in India</div>
+            <div class="bullet-item">Comply with India's FSSAI for food products</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub">Payment Methods for International Trade</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Payment Method</th><th>Risk Level</th><th>Best For</th></tr></thead>
+        <tbody>
+          <tr><td>Letter of Credit (LC)</td><td>Low — bank guarantees payment</td><td>New trading relationships, large shipments</td></tr>
+          <tr><td>Advance Payment (Wire Transfer)</td><td>Low for exporter, high for buyer</td><td>Trusted exporters, small orders</td></tr>
+          <tr><td>Documents Against Payment (DP)</td><td>Medium — payment on document presentation</td><td>Established relationships</td></tr>
+          <tr><td>Documents Against Acceptance (DA)</td><td>Higher — buyer pays after receiving goods</td><td>Long-term trusted buyers only</td></tr>
+          <tr><td>Open Account</td><td>High for exporter</td><td>Only with well-known, long-term buyers</td></tr>
+          <tr><td>PayPal / Online Platforms</td><td>Low to Medium</td><td>Small B2C transactions under $5,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: LINKS -->
+<section class="section" id="links">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-both">🔗</div>
+      <div class="section-title-wrap">
+        <div class="country-badge badge-both">Resources</div>
+        <h2>Official Links & Resources</h2>
+        <p>All the government portals and helpful platforms you need to get started</p>
+      </div>
+    </div>
+
+    <h3 class="sub">🇮🇳 India — Government Portals</h3>
+    <div class="links-grid">
+      <a class="link-card" href="https://www.dgft.gov.in" target="_blank">
+        <div class="link-name">DGFT Portal</div>
+        <div class="link-url">www.dgft.gov.in</div>
+        <div class="link-desc">Apply for IEC, RCMC, and manage all DGFT registrations</div>
+      </a>
+      <a class="link-card" href="https://www.gst.gov.in" target="_blank">
+        <div class="link-name">GST Registration</div>
+        <div class="link-url">www.gst.gov.in</div>
+        <div class="link-desc">Register for Goods and Services Tax — mandatory for exporters</div>
+      </a>
+      <a class="link-card" href="https://www.icegate.gov.in" target="_blank">
+        <div class="link-name">ICEGATE — India Customs</div>
+        <div class="link-url">www.icegate.gov.in</div>
+        <div class="link-desc">File shipping bills, import/export declarations, customs documents</div>
+      </a>
+      <a class="link-card" href="https://www.apeda.gov.in" target="_blank">
+        <div class="link-name">APEDA</div>
+        <div class="link-url">www.apeda.gov.in</div>
+        <div class="link-desc">Agricultural & Processed Food Products Export Development Authority</div>
+      </a>
+      <a class="link-card" href="https://www.ecgc.in" target="_blank">
+        <div class="link-name">ECGC — Export Insurance</div>
+        <div class="link-url">www.ecgc.in</div>
+        <div class="link-desc">Insure your exports against buyer default and payment risk</div>
+      </a>
+      <a class="link-card" href="https://www.investindia.gov.in" target="_blank">
+        <div class="link-name">Invest India</div>
+        <div class="link-url">www.investindia.gov.in</div>
+        <div class="link-desc">Government trade support, business setup assistance and resources</div>
+      </a>
+      <a class="link-card" href="https://commerce.gov.in" target="_blank">
+        <div class="link-name">Ministry of Commerce</div>
+        <div class="link-url">commerce.gov.in</div>
+        <div class="link-desc">Trade policies, Foreign Trade Policy, and industry notifications</div>
+      </a>
+      <a class="link-card" href="https://www.fieo.org" target="_blank">
+        <div class="link-name">FIEO</div>
+        <div class="link-url">www.fieo.org</div>
+        <div class="link-desc">Federation of Indian Export Organisations — general RCMC and buyer matchmaking</div>
+      </a>
+    </div>
+
+    <h3 class="sub">🇺🇸 USA — Government Portals</h3>
+    <div class="links-grid">
+      <a class="link-card" href="https://www.cbp.gov/trade/basic-import-export" target="_blank">
+        <div class="link-name">CBP — Importer/Exporter Tips</div>
+        <div class="link-url">www.cbp.gov</div>
+        <div class="link-desc">Official CBP guide for new importers and exporters entering the US market</div>
+      </a>
+      <a class="link-card" href="https://www.cbp.gov/trade/automated" target="_blank">
+        <div class="link-name">ACE Portal (CBP)</div>
+        <div class="link-url">www.cbp.gov/trade/automated</div>
+        <div class="link-desc">Register as US importer/exporter and file all trade documentation</div>
+      </a>
+      <a class="link-card" href="https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number" target="_blank">
+        <div class="link-name">IRS — Apply for EIN</div>
+        <div class="link-url">www.irs.gov</div>
+        <div class="link-desc">Free, instant Employer Identification Number — required for all US trade</div>
+      </a>
+      <a class="link-card" href="https://www.bis.doc.gov" target="_blank">
+        <div class="link-name">BIS — Export Licenses</div>
+        <div class="link-url">www.bis.doc.gov</div>
+        <div class="link-desc">Bureau of Industry & Security — licenses for dual-use goods and technology</div>
+      </a>
+      <a class="link-card" href="https://www.usa.gov/import-license-permit" target="_blank">
+        <div class="link-name">USA.gov — Import License Guide</div>
+        <div class="link-url">www.usa.gov</div>
+        <div class="link-desc">Official US government guide to import licenses, permits, and requirements</div>
+      </a>
+      <a class="link-card" href="https://www.trade.gov" target="_blank">
+        <div class="link-name">ITA — Export Resources</div>
+        <div class="link-url">www.trade.gov</div>
+        <div class="link-desc">International Trade Administration — market research and export assistance</div>
+      </a>
+      <a class="link-card" href="https://www.fda.gov/industry/import-exports" target="_blank">
+        <div class="link-name">FDA — Import/Export</div>
+        <div class="link-url">www.fda.gov</div>
+        <div class="link-desc">Food, drug, cosmetic, and medical device import/export requirements</div>
+      </a>
+      <a class="link-card" href="https://www.aphis.usda.gov/import-export" target="_blank">
+        <div class="link-name">USDA APHIS</div>
+        <div class="link-url">www.aphis.usda.gov</div>
+        <div class="link-desc">Agricultural import/export rules — plants, animals, meat products</div>
+      </a>
+    </div>
+
+    <h3 class="sub">Helpful Third-Party Platforms</h3>
+    <div class="links-grid">
+      <a class="link-card" href="https://www.worldmartexport.com" target="_blank">
+        <div class="link-name">World Mart Export</div>
+        <div class="link-url">www.worldmartexport.com</div>
+        <div class="link-desc">Find verified international buyers and connect with global trade partners</div>
+      </a>
+      <a class="link-card" href="https://www.eximpedia.app" target="_blank">
+        <div class="link-name">Eximpedia</div>
+        <div class="link-url">www.eximpedia.app</div>
+        <div class="link-desc">India trade data, buyer intelligence, and HS code analytics platform</div>
+      </a>
+      <a class="link-card" href="https://www.tradologie.com" target="_blank">
+        <div class="link-name">Tradologie</div>
+        <div class="link-url">www.tradologie.com</div>
+        <div class="link-desc">Step-by-step import/export business guides and compliance resources</div>
+      </a>
+      <a class="link-card" href="https://www.shiprocket.in" target="_blank">
+        <div class="link-name">ShiprocketX</div>
+        <div class="link-url">www.shiprocket.in</div>
+        <div class="link-desc">Logistics platform for India to USA, UK, UAE, and 220+ countries</div>
+      </a>
+      <a class="link-card" href="https://afleo.com" target="_blank">
+        <div class="link-name">Afleo Export Guide</div>
+        <div class="link-url">afleo.com</div>
+        <div class="link-desc">Top Indian export products guide and international market entry resources</div>
+      </a>
+      <a class="link-card" href="https://eximpe.com" target="_blank">
+        <div class="link-name">EximPe</div>
+        <div class="link-url">eximpe.com</div>
+        <div class="link-desc">Cross-border payments, export finance, and RBI-licensed trade platform</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: COSTS -->
+<section class="section" id="costs">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-both">💰</div>
+      <div class="section-title-wrap">
+        <div class="country-badge badge-both">Costs</div>
+        <h2>Estimated Startup Costs</h2>
+        <p>What to budget for registrations, licenses, and first shipment in both countries</p>
+      </div>
+    </div>
+
+    <div class="split-grid">
+      <div>
+        <h3 class="sub">🇮🇳 India Registration Costs</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Registration / License</th><th>Estimated Cost</th></tr></thead>
+            <tbody>
+              <tr><td>IEC Registration (DGFT)</td><td><strong>Rs. 500</strong></td></tr>
+              <tr><td>GST Registration</td><td><strong>Free</strong></td></tr>
+              <tr><td>RCMC (Export Promotion Council)</td><td>Rs. 5,000 – Rs. 15,000</td></tr>
+              <tr><td>Company Registration (Proprietorship)</td><td>Rs. 1,500 – Rs. 5,000</td></tr>
+              <tr><td>FSSAI License (Food Products)</td><td>Rs. 2,000 – Rs. 7,500/year</td></tr>
+              <tr><td>Customs Broker / CHA charges</td><td>Rs. 5,000 – Rs. 25,000/shipment</td></tr>
+              <tr><td>ECGC Export Insurance</td><td>0.3% – 1.5% of invoice value</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cost-highlight">
+          <div class="amount">₹2L+</div>
+          <div>
+            <strong>Minimum startup capital</strong>
+            <p>Rs. 2 lakh for small-scale exports. Rs. 10 lakh for bulk container shipments with full inventory and marketing.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="sub">🇺🇸 USA Registration Costs</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Registration / License</th><th>Estimated Cost</th></tr></thead>
+            <tbody>
+              <tr><td>EIN (IRS)</td><td><strong>Free</strong></td></tr>
+              <tr><td>ACE Portal Registration (CBP)</td><td><strong>Free</strong></td></tr>
+              <tr><td>CBP Form 5106</td><td><strong>Free</strong></td></tr>
+              <tr><td>Customs Bond (single entry)</td><td>$50 – $300</td></tr>
+              <tr><td>Customs Bond (annual/continuous)</td><td>$300 – $600+/year</td></tr>
+              <tr><td>Licensed Customs Broker fees</td><td>$100 – $500+/shipment</td></tr>
+              <tr><td>FDA Prior Notice Filing</td><td>Free (self-filed)</td></tr>
+              <tr><td>BIS Export License (if required)</td><td>Free application</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cost-highlight">
+          <div class="amount">$500+</div>
+          <div>
+            <strong>Minimum US setup cost</strong>
+            <p>Most US registrations are free. Main costs are customs bonds and broker fees per shipment. Budget $500–$1,500 for your first import.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: MISTAKES -->
+<section class="section" id="mistakes">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(220,38,38,0.1)">⚠️</div>
+      <div class="section-title-wrap">
+        <div class="country-badge" style="background:rgba(220,38,38,0.1);color:#dc2626;">Warning</div>
+        <h2>Common Mistakes to Avoid</h2>
+        <p>These errors can result in shipment seizures, heavy fines, or criminal prosecution</p>
+      </div>
+    </div>
+
+    <div class="mistake-grid">
+      <div class="mistake-card">
+        <h4>Shipping Without IEC</h4>
+        <p>Illegal in India. Goods will be seized at customs and the business can face penalties and blacklisting from DGFT.</p>
+      </div>
+      <div class="mistake-card">
+        <h4>Wrong HS Code</h4>
+        <p>Using the incorrect Harmonized System code leads to wrong duty calculations, customs delays, and potential fraud investigation.</p>
+      </div>
+      <div class="mistake-card">
+        <h4>Missing ISF Filing (USA)</h4>
+        <p>CBP imposes fines of $5,000 or more per late or missing Importer Security Filing. Must be filed 24 hours before foreign loading.</p>
+      </div>
+      <div class="mistake-card">
+        <h4>No Certificate of Origin</h4>
+        <p>Without COO, you cannot claim preferential duty rates under trade agreements. Adds unnecessary import costs.</p>
+      </div>
+      <div class="mistake-card">
+        <h4>Skipping ECGC Insurance</h4>
+        <p>Leaves you fully exposed if a foreign buyer defaults on payment. ECGC covers 60–90% of losses from buyer insolvency.</p>
+      </div>
+      <div class="mistake-card">
+        <h4>Outdated IEC Profile</h4>
+        <p>Annual profile update (April–June) is mandatory. Failing to update leads to IEC deactivation and inability to ship.</p>
+      </div>
+      <div class="mistake-card">
+        <h4>Exporting Controlled Goods Without BIS License</h4>
+        <p>Federal crime in the USA. Can result in $250,000+ fines per violation and up to 20 years imprisonment.</p>
+      </div>
+      <div class="mistake-card">
+        <h4>Incorrect Invoice Valuation</h4>
+        <p>Under-invoicing to reduce duties is customs fraud in both India and the USA. Carries severe penalties and shipment seizure.</p>
+      </div>
+    </div>
+
+    <h3 class="sub" style="margin-top:2.5rem;">Recommended Next Steps</h3>
+    <div class="steps-list">
+      <div class="step-item"><p><strong>Register your business entity</strong> — Proprietorship, LLP, or Pvt Ltd (India) / LLC or Corporation (USA)</p></div>
+      <div class="step-item"><p><strong>Apply for IEC</strong> on DGFT portal — www.dgft.gov.in (India) — Rs. 500, takes 1–7 days</p></div>
+      <div class="step-item"><p><strong>Apply for EIN</strong> on IRS website (USA) — free, instant, needed for all US trade</p></div>
+      <div class="step-item"><p><strong>Register on ACE Portal</strong> with CBP (USA) — needed to file import/export documentation</p></div>
+      <div class="step-item"><p><strong>Open a dedicated business current account</strong> for international transactions and foreign currency receipts</p></div>
+      <div class="step-item"><p><strong>Identify your product's HS code</strong> and research import duties in your target countries</p></div>
+      <div class="step-item"><p><strong>Join the relevant Export Promotion Council</strong> and obtain RCMC for export incentives</p></div>
+      <div class="step-item"><p><strong>Find a licensed Customs House Agent (CHA)</strong> in India or customs broker in USA for your first shipments</p></div>
+      <div class="step-item"><p><strong>Set up ECGC insurance</strong> to protect against buyer default on export payments</p></div>
+      <div class="step-item"><p><strong>List on buyer-finding platforms</strong> — World Mart Export, Eximpedia, Tradologie</p></div>
+      <div class="step-item"><p><strong>Start with a sample/trial shipment</strong> to test your logistics and documentation process before scaling</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Import & Export License Guide — India & USA</strong></p>
+  <p style="margin-top:0.5rem;">Updated 2026 &nbsp;·&nbsp; Based on DGFT, CBP, IRS, BIS, and official government sources</p>
+  <p style="margin-top:0.75rem; max-width:600px; margin-left:auto; margin-right:auto;">Disclaimer: This guide is for informational purposes only. Regulations change frequently. Always verify current requirements with official government portals and consult a licensed customs broker or trade compliance attorney before making business decisions.</p>
+</footer>
+
+<script>
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Animate sections on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('.section-header, .step-item, .link-card, .mistake-card, .info-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
