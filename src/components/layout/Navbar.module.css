@@ -311,20 +311,34 @@
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 50%;
-    background-color: #000000;
-    border: 1px solid #1e293b;
-    color: #ffffff;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: var(--surface-hover);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
 }
 
 .socialHeaderLink:hover {
-    color: #ffffff;
-    background-color: var(--primary);
-    border-color: var(--primary);
+    background-color: var(--surface);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
+}
+
+/* Brand specific hover transitions */
+.socialHeaderLink[aria-label="Facebook"]:hover {
+    color: #1877f2;
+    border-color: #1877f2;
+}
+
+.socialHeaderLink[aria-label="Twitter / X"]:hover {
+    color: #0f1419;
+    border-color: #0f1419;
+}
+
+.socialHeaderLink[aria-label="Telegram"]:hover {
+    color: #0088cc;
+    border-color: #0088cc;
 }
 
 .socialHeaderLink:active {
