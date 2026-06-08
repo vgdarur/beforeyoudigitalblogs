@@ -9,7 +9,7 @@ export default function AppBanner() {
     const [isDismissing, setIsDismissing] = useState(false);
 
     // Read App Store URL from environment variable or use a fallback
-    const appStoreUrl = process.env.NEXT_PUBLIC_APP_STORE_URL || 'https://apps.apple.com/us/app/aidealsofamerica/id6470000000';
+    const appStoreUrl = process.env.NEXT_PUBLIC_APP_STORE_URL || 'https://apps.apple.com/us/app/ai-deals-of-america/id6768350874';
 
     useEffect(() => {
         // Check if user dismissed the banner before

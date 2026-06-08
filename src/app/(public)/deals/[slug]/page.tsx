@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import styles from './page.module.css';
 import DealCard from '@/components/ui/DealCard';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
+import AdminDealActions from '@/components/ui/AdminDealActions';
 
 // Dynamically fetch deal by slug
 function extractYouTubeId(url: string) {
@@ -67,6 +70,9 @@ export default async function DealDetailPage({ params }: { params: Promise<{ slu
         notFound();
     }
 
+    const session = await getServerSession(authOptions);
+    const isAdmin = !!(session?.user && (session.user as any).role === 'ADMIN');
+
     const { deal, similarDeals } = data;
     const discountPercent = deal.discountRatio
         ? Math.round(deal.discountRatio * 100)
@@ -85,6 +91,8 @@ export default async function DealDetailPage({ params }: { params: Promise<{ slu
                 <span className={styles.separator}>/</span>
                 <span className={styles.currentCrumb}>{deal.title}</span>
             </nav>
+
+            {isAdmin && <AdminDealActions dealId={deal.id} dealSlug={deal.slug} />}
 
             <div className={styles.mainSection}>
                 {/* Gallery / Image Area */}

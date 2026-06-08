@@ -52,6 +52,10 @@ export async function GET(
         // Example: amazon.com/?tag=myid -> amazon.com/?tag=myid&subid=xyz
         let targetUrl = deal.affiliateUrl;
 
+        if (!targetUrl) {
+            targetUrl = `https://www.google.com/search?tbm=shop&q=${encodeURIComponent(deal.title)}`;
+        }
+
         // Redirect to the target affiliate URL
         // Use a 302 Found (Temporary Redirect) so browsers don't cache and we keep tracking clicks
         return NextResponse.redirect(new URL(targetUrl), 302);

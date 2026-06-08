@@ -17,7 +17,11 @@ async function getDeals(searchParams: { [key: string]: string | string[] | undef
 
     const where: Prisma.DealWhereInput = {
         isActive: true,
+        priorityScore: { not: 1 },
         imageUrl: { contains: 'http' },
+        NOT: {
+            merchant: { slug: { in: ['shopify', 'tiktok-shop', 'best-buy', 'target', 'walmart', 'home-depot'] } }
+        },
         OR: [
             { expirationDate: null },
             { expirationDate: { gt: new Date() } }
@@ -84,7 +88,11 @@ export default async function DealsPage({
             deals: {
                 some: {
                     isActive: true,
+                    priorityScore: { not: 1 },
                     imageUrl: { contains: 'http' },
+                    NOT: {
+                        merchant: { slug: { in: ['shopify', 'tiktok-shop', 'best-buy', 'target', 'walmart', 'home-depot'] } }
+                    },
                     OR: [
                         { expirationDate: null },
                         { expirationDate: { gt: new Date() } }
@@ -97,9 +105,11 @@ export default async function DealsPage({
 
     const merchants = await prisma.merchant.findMany({
         where: {
+            slug: { notIn: ['shopify', 'tiktok-shop', 'best-buy', 'target', 'walmart', 'home-depot'] },
             deals: {
                 some: {
                     isActive: true,
+                    priorityScore: { not: 1 },
                     imageUrl: { contains: 'http' },
                     OR: [
                         { expirationDate: null },

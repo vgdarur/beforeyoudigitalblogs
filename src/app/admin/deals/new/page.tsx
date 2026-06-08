@@ -2,7 +2,26 @@ import { prisma } from '@/lib/prisma';
 import styles from './page.module.css';
 
 // This needs to be a Server Component structurally so it can fetch the lists natively
-export default async function NewDealPage() {
+export default async function NewDealPage({
+    searchParams,
+}: {
+    searchParams: Promise<{
+        title?: string;
+        affiliateUrl?: string;
+        description?: string;
+        price?: string;
+        imageUrl?: string;
+        merchantName?: string;
+    }>;
+}) {
+    const params = await searchParams;
+    const defaultTitle = params.title || '';
+    const defaultUrl = params.affiliateUrl || '';
+    const defaultDescription = params.description || '';
+    const defaultPrice = params.price || '';
+    const defaultImage = params.imageUrl || '';
+    const defaultMerchant = params.merchantName || '';
+
     // Fetch dropdown options for the form natively on server
     const networks = await prisma.network.findMany({
         orderBy: { name: 'asc' }
@@ -24,23 +43,23 @@ export default async function NewDealPage() {
 
                     <div className={`${styles.formGroup} ${styles.fullWidth}`}>
                         <label className={styles.label}>Deal Title *</label>
-                        <input type="text" name="title" required placeholder="e.g. 50% Off Sony Headphones" className={styles.input} />
+                        <input type="text" name="title" required defaultValue={defaultTitle} placeholder="e.g. 50% Off Sony Headphones" className={styles.input} />
                     </div>
 
                     <div className={`${styles.formGroup} ${styles.fullWidth}`}>
                         <label className={styles.label}>Affiliate Link *</label>
-                        <input type="url" name="affiliateUrl" required placeholder="https://..." className={styles.input} />
+                        <input type="url" name="affiliateUrl" required defaultValue={defaultUrl} placeholder="https://..." className={styles.input} />
                         <span className={styles.helperText}>The raw destination or affiliate network tracking link.</span>
                     </div>
 
                     <div className={`${styles.formGroup} ${styles.fullWidth}`}>
                         <label className={styles.label}>Description</label>
-                        <textarea name="description" placeholder="Optional details about this promotion..." className={styles.textarea}></textarea>
+                        <textarea name="description" defaultValue={defaultDescription} placeholder="Optional details about this promotion..." className={styles.textarea}></textarea>
                     </div>
 
                     <div className={styles.formGroup}>
                         <label className={styles.label}>Sale Price (USD)</label>
-                        <input type="number" step="0.01" name="price" placeholder="199.99" className={styles.input} />
+                        <input type="number" step="0.01" name="price" defaultValue={defaultPrice} placeholder="199.99" className={styles.input} />
                     </div>
 
                     <div className={styles.formGroup}>
@@ -50,7 +69,7 @@ export default async function NewDealPage() {
 
                     <div className={styles.formGroup}>
                         <label className={styles.label}>Image URL</label>
-                        <input type="url" name="imageUrl" placeholder="https://.../image.jpg" className={styles.input} />
+                        <input type="url" name="imageUrl" defaultValue={defaultImage} placeholder="https://.../image.jpg" className={styles.input} />
                     </div>
 
                     <div className={styles.formGroup}>
@@ -65,7 +84,7 @@ export default async function NewDealPage() {
 
                     <div className={styles.formGroup}>
                         <label className={styles.label}>Merchant / Store *</label>
-                        <input type="text" name="merchantName" required placeholder="e.g. Amazon, Best Buy" className={styles.input} />
+                        <input type="text" name="merchantName" required defaultValue={defaultMerchant} placeholder="e.g. Amazon, Best Buy" className={styles.input} />
                         <span className={styles.helperText}>If string does not exist, system will create a new one.</span>
                     </div>
 

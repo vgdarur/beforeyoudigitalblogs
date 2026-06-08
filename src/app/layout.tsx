@@ -21,6 +21,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
+            <head>
+                <meta name="impact-site-verification" content="edfaf135-61db-4277-b25f-13548b5e9392" {...({ value: "edfaf135-61db-4277-b25f-13548b5e9392" } as any)} />
+            </head>
             <body>
                 <Providers>
                     <div className="app-wrapper">

@@ -60,6 +60,9 @@ export default function AdminLayout({
                     <Link href="/admin/import-export-guide" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Import Export Guide
                     </Link>
+                    <Link href="/admin/life-insurance-guide" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Life Insurance Guide
+                    </Link>
                     <div className={styles.divider}></div>
                     <Link href="/admin/merchants" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Merchants

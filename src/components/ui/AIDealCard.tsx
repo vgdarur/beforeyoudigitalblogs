@@ -10,9 +10,21 @@ interface AIDealCardProps {
         exact_price?: string;
     };
     index?: number;
+    isAdmin?: boolean;
 }
 
-export default function AIDealCard({ deal, index = 0 }: AIDealCardProps) {
+export default function AIDealCard({ deal, index = 0, isAdmin = false }: AIDealCardProps) {
+    const queryTitle = deal.title.toLowerCase();
+    let placeholderImage = 'https://placehold.co/600x400/f8fafc/0f172a?text=Trending+Deal';
+    if (queryTitle.includes("iphone")) {
+        placeholderImage = 'https://placehold.co/600x400/f8fafc/0f172a?text=iPhone+Deal';
+    } else if (queryTitle.includes("samsung") || queryTitle.includes("galaxy")) {
+        placeholderImage = 'https://placehold.co/600x400/f8fafc/0f172a?text=Samsung+Deal';
+    } else if (queryTitle.includes("pixel")) {
+        placeholderImage = 'https://placehold.co/600x400/f8fafc/0f172a?text=Google+Pixel+Deal';
+    }
+    
+    const priceValue = deal.exact_price ? deal.exact_price.replace(/[^0-9.]/g, '') : '';
     // Determine merchant styling based on text
     const merchantLower = deal.merchant?.toLowerCase() || '';
     let catBg = '#f8fafc';
@@ -23,6 +35,8 @@ export default function AIDealCard({ deal, index = 0 }: AIDealCardProps) {
     else if (merchantLower.includes('home depot')) { catBg = '#fff7ed'; catColor = '#c2410c'; }
     else if (merchantLower.includes('tiktok')) { catBg = '#f1f5f9'; catColor = '#0f172a'; }
     else if (merchantLower.includes('walmart')) { catBg = '#eff6ff'; catColor = '#1d4ed8'; }
+    else if (merchantLower.includes('slickdeals')) { catBg = '#f0fdf4'; catColor = '#16a34a'; }
+    else if (merchantLower.includes('costco')) { catBg = '#fee2e2'; catColor = '#dc2626'; }
     
     // Heat level styling
     const heatLower = deal.heat_level?.toLowerCase() || '';
@@ -112,6 +126,31 @@ export default function AIDealCard({ deal, index = 0 }: AIDealCardProps) {
                     </svg>
                 </Link>
             </div>
+
+            {isAdmin && (
+                <div style={{ borderTop: '1px dashed #fee2e2', marginTop: '1rem', paddingTop: '1rem', display: 'flex', justifyContent: 'flex-end' }}>
+                    <Link 
+                        href={`/admin/deals/new?title=${encodeURIComponent(deal.title)}&affiliateUrl=${encodeURIComponent(`https://www.amazon.com/s?k=${encodeURIComponent(deal.title)}&tag=aidealsagent-20`)}&description=${encodeURIComponent(deal.reason)}&price=${encodeURIComponent(priceValue)}&merchantName=${encodeURIComponent('Amazon')}&imageUrl=${encodeURIComponent(placeholderImage)}`}
+                        target="_blank"
+                        style={{
+                            backgroundColor: '#fee2e2',
+                            color: '#991b1b',
+                            border: '1px solid #fca5a5',
+                            padding: '6px 12px',
+                            borderRadius: '6px',
+                            fontSize: '0.85rem',
+                            fontWeight: 600,
+                            textDecoration: 'none',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            transition: 'background-color 0.2s'
+                        }}
+                    >
+                        📥 Import as Manual Deal
+                    </Link>
+                </div>
+            )}
         </div>
     );
 }

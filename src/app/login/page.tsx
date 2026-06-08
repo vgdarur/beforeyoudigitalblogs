@@ -30,8 +30,7 @@ function AdminLoginContent() {
             if (res?.error) {
                 setError('Invalid credentials');
             } else if (res?.ok) {
-                router.push(callbackUrl);
-                router.refresh();
+                window.location.href = callbackUrl;
             }
         } catch (err) {
             setError('An error occurred. Please try again.');

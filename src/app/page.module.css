@@ -331,3 +331,98 @@
     background-color: var(--border);
     border-radius: 10px;
 }
+
+/* Two-Column Desktop Layout */
+.homeLayout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 1024px) {
+    .homeLayout {
+        grid-template-columns: 3fr 1fr;
+    }
+}
+
+.mainContentColumn {
+    min-width: 0;
+}
+
+.sidebarColumn {
+    min-width: 0;
+}
+
+.sidebarWidget {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.sidebarHeader {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #f1f5f9;
+    background-color: #f8fafc;
+}
+
+.sidebarTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebarList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebarItemLink {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #f8fafc;
+    transition: background-color 0.2s ease;
+}
+
+.sidebarItemLink:last-child {
+    border-bottom: none;
+}
+
+.sidebarItemLink:hover {
+    background-color: #f8fafc;
+}
+
+.sidebarItemTitle {
+    font-size: 0.925rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sidebarItemMeta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+}
+
+.sidebarItemPrice {
+    font-weight: 700;
+    color: #0f172a;
+}

@@ -78,6 +78,33 @@
     transform: translateX(4px);
 }
 
+.socialLinks {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.socialLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.socialLink:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.divider {
+    color: var(--border);
+    user-select: none;
+}
+
 .copyright {
     border-top: 1px solid var(--border);
     padding: 2rem 0;
