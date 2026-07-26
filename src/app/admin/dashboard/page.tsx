@@ -346,6 +346,36 @@ export default async function AdminDashboard() {
                     </div>
                 </div>
 
+                <div className={styles.panel} style={{ marginTop: '1.5rem' }}>
+                    <div className={styles.panelHeader}>
+                        <h3 className={styles.panelTitle}>System Deployment Instructions</h3>
+                    </div>
+                    <div style={{ padding: '1.5rem', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <p style={{ marginBottom: '1rem', color: '#4b5563', fontSize: '0.9rem' }}>
+                            Run these commands on your live server terminal to pull the latest GitHub updates and restart the site:
+                        </p>
+                        <pre style={{ 
+                            background: '#111827', 
+                            color: '#e5e7eb', 
+                            padding: '1rem', 
+                            borderRadius: '0.5rem', 
+                            overflowX: 'auto',
+                            fontSize: '0.875rem',
+                            lineHeight: '1.5'
+                        }}>
+{`cd dealsagent
+git pull origin main
+npm install
+npx prisma generate
+npm run build
+pm2 restart ecosystem.config.js`}
+                        </pre>
+                        <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#6b7280' }}>
+                            *Only visible to Superadmins
+                        </p>
+                    </div>
+                </div>
+
                 <div style={{ marginTop: '30px', gridColumn: '1 / -1', background: '#f5f0e8', color: '#0e0d0b', fontFamily: '"DM Sans", sans-serif', padding: '40px', borderRadius: '8px', borderTop: '4px solid #c8501a' }}>
                     <h2 style={{ fontFamily: '"Playfair Display", Georgia, serif', fontSize: '2rem', fontWeight: 900, marginBottom: '20px', letterSpacing: '-0.02em' }}>
                         $25K Roadmap <em style={{ fontStyle: 'italic', color: '#d4a632' }}>Strategy</em>
