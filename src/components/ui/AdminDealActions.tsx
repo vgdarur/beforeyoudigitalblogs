@@ -6,9 +6,10 @@ import Link from 'next/link';
 interface AdminDealActionsProps {
     dealId: string;
     dealSlug: string;
+    clicks?: number;
 }
 
-export default function AdminDealActions({ dealId, dealSlug }: AdminDealActionsProps) {
+export default function AdminDealActions({ dealId, dealSlug, clicks }: AdminDealActionsProps) {
     const router = useRouter();
 
     const handleDelete = async () => {
@@ -52,7 +53,11 @@ export default function AdminDealActions({ dealId, dealSlug }: AdminDealActionsP
                         Admin Operations
                     </strong>
                     <span style={{ fontSize: '0.8rem', color: '#b91c1c', opacity: 0.9 }}>
-                        You are signed in as an administrator. You can edit or delete this deal instantly.
+                        You can edit or delete this deal instantly. {clicks !== undefined && (
+                            <span style={{ marginLeft: '8px', padding: '2px 6px', background: '#fee2e2', borderRadius: '4px', border: '1px solid #fca5a5', fontWeight: 'bold' }}>
+                                Clicks/Views: {clicks}
+                            </span>
+                        )}
                     </span>
                 </div>
             </div>

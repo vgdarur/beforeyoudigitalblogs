@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 
 export default function ImportPage() {
@@ -9,8 +9,26 @@ export default function ImportPage() {
     const [importMode, setImportMode] = useState<'DEALS' | 'CAMPAIGNS'>('DEALS');
     const [networkId, setNetworkId] = useState('');
     const [categoryId, setCategoryId] = useState('');
+    const [networks, setNetworks] = useState<{ id: string; name: string }[]>([]);
+    const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
     const [isUploading, setIsUploading] = useState(false);
     const [result, setResult] = useState<any>(null);
+
+    useEffect(() => {
+        fetch('/api/admin/networks')
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data)) setNetworks(data);
+            })
+            .catch(err => console.error('Error loading networks:', err));
+
+        fetch('/api/admin/categories')
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data)) setCategories(data);
+            })
+            .catch(err => console.error('Error loading categories:', err));
+    }, []);
 
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault();
@@ -127,7 +145,9 @@ export default function ImportPage() {
                                     required
                                 >
                                     <option value="">-- Choose Network --</option>
-                                    <option value="fake-uuid-for-demo">Global Affiliates Network</option>
+                                    {networks.map(n => (
+                                        <option key={n.id} value={n.id}>{n.name}</option>
+                                    ))}
                                 </select>
                                 <p className={styles.helpText}>Used to attribute analytics clicks.</p>
                             </div>
@@ -141,7 +161,9 @@ export default function ImportPage() {
                                     required
                                 >
                                     <option value="">-- Choose Default Category --</option>
-                                    <option value="fake-cat-uuid-for-demo">General Default</option>
+                                    {categories.map(c => (
+                                        <option key={c.id} value={c.id}>{c.name}</option>
+                                    ))}
                                 </select>
                                 <p className={styles.helpText}>Applied if the CSV parser cannot intelligently categorize the item.</p>
                             </div>

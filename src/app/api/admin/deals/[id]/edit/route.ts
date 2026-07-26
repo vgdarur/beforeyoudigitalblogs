@@ -18,15 +18,25 @@ export async function POST(
 
         // Extract required fields
         const title = formData.get('title') as string;
-        const affiliateUrl = formData.get('affiliateUrl') as string;
+        const affiliateUrlRaw = formData.get('affiliateUrl') as string;
         const merchantName = formData.get('merchantName') as string;
         const categoryId = formData.get('categoryId') as string;
         const networkId = formData.get('networkId') as string;
         const parsedNetworkId = networkId === '' ? null : networkId;
 
-        if (!dealId || !title || !affiliateUrl || !merchantName || !categoryId) {
+        if (!dealId || !title || !affiliateUrlRaw || !merchantName || !categoryId) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
+
+        const cleanAmazonUrl = (url: string): string => {
+            if (!url) return url;
+            if (url.includes('amazon.com')) {
+                return url.replace(/\/dp\/([A-Za-z0-9]{10})\/\?/, '/dp/$1?').replace(/\/gp\/product\/([A-Za-z0-9]{10})\/\?/, '/gp/product/$1?');
+            }
+            return url;
+        };
+
+        const affiliateUrl = cleanAmazonUrl(affiliateUrlRaw);
 
         // Extract optional fields
         const description = (formData.get('description') as string) || '';
@@ -69,11 +79,32 @@ export async function POST(
             create: { name: merchantName, slug: merchantSlug }
         });
 
+        // Get existing deal to check details
+        const existing = await prisma.deal.findUnique({
+            where: { id: dealId },
+            include: { merchant: true }
+        });
+
+        if (!existing) {
+            return NextResponse.json({ error: 'Deal not found' }, { status: 404 });
+        }
+
+        // Regenerate slug ONLY if title or merchant name changes (reusing the deal)
+        let dealSlug = existing.slug;
+        if (existing.title !== title || existing.merchant.name !== merchantName) {
+            const baseSlug = `${merchantSlug}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 50)}`;
+            const randomSuffix = Math.floor(Math.random() * 10000);
+            dealSlug = `${baseSlug}-${randomSuffix}`;
+        }
+
+        const priorityScoreValue = existing.priorityScore === 1 ? 0 : undefined;
+
         // Update deal
         await prisma.deal.update({
             where: { id: dealId },
             data: {
                 title: title.slice(0, 250),
+                slug: dealSlug,
                 description: description.slice(0, 1000),
                 imageUrl: imageUrl,
                 youtubeUrl: youtubeUrl,
@@ -86,6 +117,7 @@ export async function POST(
                 networkId: parsedNetworkId,
                 categoryId: categoryId,
                 expirationDate: expirationDate,
+                ...(priorityScoreValue !== undefined ? { priorityScore: priorityScoreValue } : {})
             }
         });
 

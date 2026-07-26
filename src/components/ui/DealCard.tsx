@@ -52,7 +52,7 @@ export default function DealCard({ deal }: DealCardProps) {
             </Link>
 
             <div className={styles.content}>
-                <Link href={`/restaurants/${deal.merchant.slug}`} className={styles.merchantInfo} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
+                <Link href={`/stores/${deal.merchant.slug}`} className={styles.merchantInfo} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
                     {deal.merchant.logoUrl ? (
                         <img
                             src={deal.merchant.logoUrl}

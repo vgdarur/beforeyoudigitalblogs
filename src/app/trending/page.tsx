@@ -35,7 +35,7 @@ async function getFeaturedDeals() {
                 category: true,
             },
             orderBy: {
-                createdAt: 'desc',
+                updatedAt: 'desc',
             },
             take: 5,
         });
@@ -68,13 +68,13 @@ export default async function TrendingPage() {
     const isAdmin = !!(session?.user && (session.user as any).role === 'ADMIN');
 
     return (
-        <div style={{ minHeight: '100vh', paddingBottom: '4rem', backgroundColor: '#f8fafc' }}>
+        <div style={{ minHeight: '100vh', paddingBottom: '4rem', backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
             <div style={{ paddingTop: '2rem' }}></div>
             
             <div className="container">
                 {/* AI Report Section */}
-                <div style={{ backgroundColor: '#ffffff', padding: '2.5rem', borderRadius: '16px', boxShadow: '0 4px 20px -2px rgba(0, 0, 0, 0.05)', marginBottom: '3rem' }}>
-                    <h1 style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '1.25rem', marginBottom: '2rem', color: '#0f172a', fontSize: '1.75rem', fontWeight: '700', letterSpacing: '-0.02em' }}>
+                <div style={{ backgroundColor: 'var(--surface-hover)', padding: '2.5rem', borderRadius: '16px', border: '1px solid var(--border)', boxShadow: '0 4px 20px -2px rgba(0, 0, 0, 0.05)', marginBottom: '3rem', color: 'var(--foreground)' }}>
+                    <h1 style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', borderBottom: '1px solid var(--border)', paddingBottom: '1.25rem', marginBottom: '2rem', color: 'var(--foreground)', fontSize: '1.75rem', fontWeight: '700', letterSpacing: '-0.02em' }}>
                         <span style={{ fontSize: '1.75rem' }}>✨</span> AI Mode: Today's Top Searches
                     </h1>
                     
@@ -85,7 +85,7 @@ export default async function TrendingPage() {
                             ))}
                         </div>
                     ) : (
-                        <p style={{ color: '#64748b' }}>No AI report generated yet. The AI scheduler runs every few hours.</p>
+                        <p style={{ color: 'var(--text-muted)' }}>No AI report generated yet. The AI scheduler runs every few hours.</p>
                     )}
                     
 

@@ -1,0 +1,10 @@
+var R=require("../../../../../../chunks/[turbopack]_runtime.js")("server/app/api/admin/deals/[id]/delete/route.js")
+R.c("server/chunks/[root-of-the-server]__5bd93643._.js")
+R.c("server/chunks/node_modules_next_f5199d09._.js")
+R.c("server/chunks/node_modules_bcryptjs_index_42ebb250.js")
+R.c("server/chunks/node_modules_next_f2da0d3e._.js")
+R.c("server/chunks/node_modules_db724fb3._.js")
+R.c("server/chunks/[root-of-the-server]__24f8fcd9._.js")
+R.c("server/chunks/_next-internal_server_app_api_admin_deals_[id]_delete_route_actions_e0f32149.js")
+R.m(92270)
+module.exports=R.m(92270).exports

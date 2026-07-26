@@ -15,13 +15,38 @@ interface AIDealCardProps {
 
 export default function AIDealCard({ deal, index = 0, isAdmin = false }: AIDealCardProps) {
     const queryTitle = deal.title.toLowerCase();
-    let placeholderImage = 'https://placehold.co/600x400/f8fafc/0f172a?text=Trending+Deal';
+    let placeholderImage = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80';
+    
     if (queryTitle.includes("iphone")) {
-        placeholderImage = 'https://placehold.co/600x400/f8fafc/0f172a?text=iPhone+Deal';
+        placeholderImage = 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800&auto=format&fit=crop&q=80';
     } else if (queryTitle.includes("samsung") || queryTitle.includes("galaxy")) {
-        placeholderImage = 'https://placehold.co/600x400/f8fafc/0f172a?text=Samsung+Deal';
+        placeholderImage = 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=800&auto=format&fit=crop&q=80';
     } else if (queryTitle.includes("pixel")) {
-        placeholderImage = 'https://placehold.co/600x400/f8fafc/0f172a?text=Google+Pixel+Deal';
+        placeholderImage = 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("coffee") || queryTitle.includes("espresso") || queryTitle.includes("keurig")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("vacuum") || queryTitle.includes("dyson") || queryTitle.includes("cleaner")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("doorbell") || queryTitle.includes("ring")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1558002038-1055907df827?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("mask") || queryTitle.includes("skincare") || queryTitle.includes("mucin") || queryTitle.includes("lip") || queryTitle.includes("beauty")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("wallet") || queryTitle.includes("ridge")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1627124156683-142b13ff7b0c?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("tumbler") || queryTitle.includes("cup") || queryTitle.includes("bottle") || queryTitle.includes("quencher") || queryTitle.includes("hydro flask")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("cookware") || queryTitle.includes("skillet") || queryTitle.includes("pan") || queryTitle.includes("hexclad") || queryTitle.includes("always")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("headphone") || queryTitle.includes("earbud") || queryTitle.includes("audio") || queryTitle.includes("airpods") || queryTitle.includes("sony wh")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("charger") || queryTitle.includes("cable") || queryTitle.includes("anker") || queryTitle.includes("nano")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("hoodie") || queryTitle.includes("shirt") || queryTitle.includes("apparel") || queryTitle.includes("clothing") || queryTitle.includes("crest") || queryTitle.includes("gymshark")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("speaker") || queryTitle.includes("dot") || queryTitle.includes("echo")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&auto=format&fit=crop&q=80';
+    } else if (queryTitle.includes("cleaning") || queryTitle.includes("paste") || queryTitle.includes("pink stuff")) {
+        placeholderImage = 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&auto=format&fit=crop&q=80';
     }
     
     const priceValue = deal.exact_price ? deal.exact_price.replace(/[^0-9.]/g, '') : '';
@@ -59,15 +84,16 @@ export default function AIDealCard({ deal, index = 0, isAdmin = false }: AIDealC
 
     return (
         <div style={{ 
-            background: cardBgColor, 
-            border: '1px solid #e2e8f0', 
+            background: 'var(--surface)', 
+            border: '1px solid var(--border)', 
             borderRadius: '12px', 
             padding: '1.25rem',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
             height: '100%',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+            boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+            color: 'var(--foreground)'
         }}>
             <div>
                 {/* Badges Row */}
@@ -94,24 +120,43 @@ export default function AIDealCard({ deal, index = 0, isAdmin = false }: AIDealC
                     </span>
                 </div>
 
+                {/* Product Image Thumbnail */}
+                <div style={{
+                    position: 'relative',
+                    width: '100%',
+                    height: '160px',
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    marginBottom: '1rem',
+                    backgroundColor: 'var(--surface-hover)',
+                    border: '1px solid var(--border)'
+                }}>
+                    <img 
+                        src={placeholderImage} 
+                        alt={deal.title}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        loading="lazy"
+                    />
+                </div>
+ 
                 {/* Title & Description */}
                 <Link href={deal.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <h3 style={{ fontSize: '1.15rem', fontWeight: 600, margin: '0 0 0.5rem 0', color: '#0f172a', lineHeight: 1.3 }}>
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: 600, margin: '0 0 0.5rem 0', color: 'var(--foreground)', lineHeight: 1.3 }}>
                         {deal.title}
                     </h3>
                 </Link>
-                <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.5, margin: '0 0 1.5rem 0' }}>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.5, margin: '0 0 1.5rem 0' }}>
                     {deal.reason}
                 </p>
             </div>
-
+ 
             {/* Bottom Bar: Price and Link */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #f1f5f9', paddingTop: '1rem' }}>
-                <span style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
+                <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--foreground)' }}>
                     {deal.exact_price ? deal.exact_price : ''}
                 </span>
                 <Link href={deal.url || '#'} target="_blank" rel="noopener noreferrer" style={{ 
-                    color: '#2563eb', 
+                    color: 'var(--primary)', 
                     fontSize: '0.9rem', 
                     fontWeight: 600, 
                     textDecoration: 'none',
@@ -119,7 +164,7 @@ export default function AIDealCard({ deal, index = 0, isAdmin = false }: AIDealC
                     alignItems: 'center',
                     gap: '4px'
                 }}>
-                    Click here to purchase this deal on {deal.merchant}
+                    Click here to purchase
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14"></path>
                         <path d="m12 5 7 7-7 7"></path>

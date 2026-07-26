@@ -28,12 +28,13 @@ async function getDealBySlug(slug: string) {
 
     if (!deal) return null;
 
-    // Also fetch some similar deals in the same category
+    // Also fetch some similar deals in the same category (filter out priorityScore: 1 AI deals so all are affiliate manual deals)
     const similarDeals = await prisma.deal.findMany({
         where: {
             categoryId: deal.categoryId,
             id: { not: deal.id }, // Don't include this same deal
-            isActive: true
+            isActive: true,
+            priorityScore: { not: 1 }
         },
         include: {
             merchant: true,
@@ -44,6 +45,52 @@ async function getDealBySlug(slug: string) {
     });
 
     return { deal, similarDeals };
+}
+
+async function getTrendingDeals(currentDealId: string) {
+    try {
+        const startOfToday = new Date();
+        startOfToday.setUTCHours(4, 0, 0, 0); // 12 AM EST is 4 AM UTC
+
+        const todayClicks = await prisma.click.groupBy({
+            by: ['dealId'],
+            where: {
+                timestamp: {
+                    gte: startOfToday
+                }
+            },
+            _count: { id: true },
+            orderBy: { _count: { id: 'desc' } },
+            take: 10
+        });
+
+        const dealIds = todayClicks
+            .map(c => c.dealId)
+            .filter(id => id !== currentDealId);
+
+        if (dealIds.length === 0) return [];
+
+        const deals = await prisma.deal.findMany({
+            where: {
+                id: { in: dealIds },
+                isActive: true,
+                priorityScore: { not: 1 }
+            },
+            include: {
+                merchant: true,
+                network: true,
+                category: true
+            }
+        });
+
+        return todayClicks
+            .map(c => deals.find(d => d.id === c.dealId))
+            .filter((d): d is NonNullable<typeof d> => !!d)
+            .slice(0, 5);
+    } catch (e) {
+        console.error("Failed fetching trending deals", e);
+        return [];
+    }
 }
 
 // Generate SEO Metadata
@@ -74,6 +121,14 @@ export default async function DealDetailPage({ params }: { params: Promise<{ slu
     const isAdmin = !!(session?.user && (session.user as any).role === 'ADMIN');
 
     const { deal, similarDeals } = data;
+    const trendingDeals = await getTrendingDeals(deal.id);
+
+    let clickCount = 0;
+    if (isAdmin) {
+        clickCount = await prisma.click.count({
+            where: { dealId: deal.id }
+        });
+    }
     const discountPercent = deal.discountRatio
         ? Math.round(deal.discountRatio * 100)
         : null;
@@ -92,7 +147,7 @@ export default async function DealDetailPage({ params }: { params: Promise<{ slu
                 <span className={styles.currentCrumb}>{deal.title}</span>
             </nav>
 
-            {isAdmin && <AdminDealActions dealId={deal.id} dealSlug={deal.slug} />}
+            {isAdmin && <AdminDealActions dealId={deal.id} dealSlug={deal.slug} clicks={clickCount} />}
 
             <div className={styles.mainSection}>
                 {/* Gallery / Image Area */}
@@ -129,7 +184,7 @@ export default async function DealDetailPage({ params }: { params: Promise<{ slu
 
                 {/* Deal Info Area */}
                 <div className={styles.infoSection}>
-                    <Link href={`/restaurants/${deal.merchant.slug}`} className={styles.merchantHeader} style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
+                    <Link href={`/stores/${deal.merchant.slug}`} className={styles.merchantHeader} style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
                         {deal.merchant.logoUrl ? (
                             <img src={deal.merchant.logoUrl} alt={deal.merchant.name} className={styles.merchantLogo} />
                         ) : (
@@ -188,6 +243,18 @@ export default async function DealDetailPage({ params }: { params: Promise<{ slu
                     </div>
                 </div>
             </div>
+
+            {/* Trending Deals Today */}
+            {trendingDeals.length > 0 && (
+                <div className={styles.similarSection} style={{ marginBottom: '3rem' }}>
+                    <h2 className={styles.similarTitle}>🔥 Trending Deals Today</h2>
+                    <div className={styles.dealGrid}>
+                        {trendingDeals.map(trendingDeal => (
+                            <DealCard key={trendingDeal.id} deal={trendingDeal as any} />
+                        ))}
+                    </div>
+                </div>
+            )}
 
             {/* Similar Deals */}
             {similarDeals.length > 0 && (

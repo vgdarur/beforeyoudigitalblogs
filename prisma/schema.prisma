@@ -144,6 +144,9 @@ model Click {
   timestamp  DateTime @default(now())
   referrer   String?
   device     String?
+  ipAddress  String?
+  userEmail  String?
+  country    String?
   
   dealId     String
   deal       Deal     @relation(fields: [dealId], references: [id], onDelete: Cascade)
@@ -215,5 +218,27 @@ model ContactMessage {
   updatedAt DateTime @updatedAt
 
   @@map("dl_ContactMessage")
+}
+
+model NewsAlert {
+  id        String   @id
+  message   String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  aiReport  String?
+
+  @@map("dl_NewsAlert")
+}
+
+model Blog {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("dl_Blog")
 }
 

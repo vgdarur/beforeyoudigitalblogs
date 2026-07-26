@@ -22,7 +22,7 @@ async function getSmartphoneDeals() {
                 category: true,
             },
             orderBy: {
-                createdAt: 'desc',
+                updatedAt: 'desc',
             },
             take: 20,
         });

@@ -30,7 +30,7 @@ export default function NewsTicker() {
 
 
     const handleBannerClick = () => {
-        window.open('/trending', '_blank');
+        router.push('/today-deals');
     };
 
     if (!news) return null;

@@ -22,7 +22,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
-                <meta name="impact-site-verification" content="edfaf135-61db-4277-b25f-13548b5e9392" {...({ value: "edfaf135-61db-4277-b25f-13548b5e9392" } as any)} />
+                <meta name="impact-site-verification" content="ea8b5636-d3fc-461c-9695-d08dffaf2720" {...({ value: "ea8b5636-d3fc-461c-9695-d08dffaf2720" } as any)} />
             </head>
             <body>
                 <Providers>
@@ -45,6 +45,15 @@ export default function RootLayout({
                         function gtag(){dataLayer.push(arguments);}
                         gtag('js', new Date());
                         gtag('config', 'G-DY42XJQS7B');
+                    `}
+                </Script>
+
+                {/* Impact.com UTT Tracking */}
+                <Script id="impact-tracking" strategy="afterInteractive">
+                    {`
+                        (function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7176062-4957-4b7d-8ed5-69ad192b43f61.js','script','impactStat',document,window);
+                        impactStat('transformLinks');
+                        impactStat('trackImpression');
                     `}
                 </Script>
             </body>

@@ -2,6 +2,18 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 
+export async function GET() {
+    try {
+        const networks = await prisma.network.findMany({
+            orderBy: { name: 'asc' }
+        });
+        return NextResponse.json(networks);
+    } catch (error: any) {
+        console.error('Failed to fetch networks:', error);
+        return NextResponse.json({ error: 'Failed to fetch networks' }, { status: 500 });
+    }
+}
+
 export async function POST(request: Request) {
     try {
         const formData = await request.formData();

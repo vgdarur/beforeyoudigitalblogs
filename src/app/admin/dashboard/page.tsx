@@ -3,18 +3,40 @@ import styles from './page.module.css';
 import Link from 'next/link';
 
 export default async function AdminDashboard() {
+    // Calculate start of today (midnight) in US Eastern Time
+    const startOfToday = new Date();
+    const formatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/New_York',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+    const parts = formatter.formatToParts(startOfToday);
+    const year = parts.find(p => p.type === 'year')?.value || '2026';
+    const month = parts.find(p => p.type === 'month')?.value || '07';
+    const day = parts.find(p => p.type === 'day')?.value || '07';
+    const startOfTodayET = new Date(`${year}-${month}-${day}T00:00:00-04:00`);
+
     // Fetch aggregate data
     const [
         totalDeals,
         activeDeals,
         totalClicks,
         totalMerchants,
+        clicksToday,
         recentClicks
     ] = await Promise.all([
         prisma.deal.count(),
         prisma.deal.count({ where: { isActive: true } }),
         prisma.click.count(),
         prisma.merchant.count(),
+        prisma.click.count({
+            where: {
+                timestamp: {
+                    gte: startOfTodayET
+                }
+            }
+        }),
         prisma.click.findMany({
             take: 10,
             orderBy: { timestamp: 'desc' },
@@ -24,6 +46,92 @@ export default async function AdminDashboard() {
             }
         })
     ]);
+
+    // Calculate unique visitors and top visitors details
+    const clickLogs = await prisma.click.findMany({
+        select: {
+            id: true,
+            ipAddress: true,
+            userEmail: true,
+            device: true,
+            timestamp: true,
+            deal: {
+                select: {
+                    title: true,
+                    merchant: { select: { name: true } }
+                }
+            }
+        }
+    });
+
+    const visitorMap = new Map();
+    clickLogs.forEach(click => {
+        const visitorId = click.userEmail || click.ipAddress || `Guest_${click.id}`;
+        const existing = visitorMap.get(visitorId);
+        
+        if (existing) {
+            existing.count += 1;
+            if (new Date(click.timestamp) > new Date(existing.lastActive)) {
+                existing.lastActive = click.timestamp;
+                existing.device = click.device || existing.device;
+            }
+        } else {
+            visitorMap.set(visitorId, {
+                visitor: visitorId,
+                isUser: !!click.userEmail,
+                count: 1,
+                lastActive: click.timestamp,
+                device: click.device || 'Unknown'
+            });
+        }
+    });
+
+    const totalUniqueVisitors = visitorMap.size;
+    const topVisitors = Array.from(visitorMap.values())
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 10);
+
+    // Calculate popular deals by click count
+    const dealMap = new Map();
+    clickLogs.forEach(click => {
+        if (!click.deal) return;
+        const dealKey = click.deal.title;
+        const existing = dealMap.get(dealKey);
+        const visitorId = click.userEmail || click.ipAddress || click.id;
+        const isClickToday = new Date(click.timestamp) >= startOfTodayET;
+        
+        if (existing) {
+            existing.clicks += 1;
+            if (isClickToday) {
+                existing.clicksToday += 1;
+            }
+            existing.uniqueVisitors.add(visitorId);
+        } else {
+            dealMap.set(dealKey, {
+                title: click.deal.title,
+                merchant: click.deal.merchant?.name || 'Unknown',
+                clicks: 1,
+                clicksToday: isClickToday ? 1 : 0,
+                uniqueVisitors: new Set([visitorId])
+            });
+        }
+    });
+
+    const topDeals = Array.from(dealMap.values())
+        .map(d => ({
+            title: d.title,
+            merchant: d.merchant,
+            clicks: d.clicks,
+            clicksToday: d.clicksToday,
+            uniqueCount: d.uniqueVisitors.size
+        }))
+        .sort((a, b) => {
+            if (b.clicksToday !== a.clicksToday) {
+                return b.clicksToday - a.clicksToday;
+            }
+            return b.clicks - a.clicks;
+        })
+        .slice(0, 10);
 
     return (
         <div className={styles.dashboardContainer}>
@@ -42,7 +150,23 @@ export default async function AdminDashboard() {
                     <div className={styles.statTitle}>Total Outbound Clicks</div>
                     <div className={styles.statValue}>{totalClicks}</div>
                     <div className={styles.statIndicator + ' ' + styles.positive}>
-                        +12% this week
+                        All-time click tracking
+                    </div>
+                </div>
+
+                <div className={styles.statCard}>
+                    <div className={styles.statTitle}>Clicks Today</div>
+                    <div className={styles.statValue}>{clicksToday}</div>
+                    <div className={styles.statIndicator + ' ' + styles.positive}>
+                        Outbound clicks since midnight
+                    </div>
+                </div>
+
+                <div className={styles.statCard}>
+                    <div className={styles.statTitle}>Unique Visitors</div>
+                    <div className={styles.statValue}>{totalUniqueVisitors}</div>
+                    <div className={styles.statIndicator + ' ' + styles.positive}>
+                        Unique Outbound Clickers
                     </div>
                 </div>
 
@@ -64,39 +188,122 @@ export default async function AdminDashboard() {
             </div>
 
             <div className={styles.dashboardGrid}>
-                <div className={styles.panel}>
-                    <div className={styles.panelHeader}>
-                        <h3 className={styles.panelTitle}>Recent Click Activity</h3>
-                    </div>
-                    <div className={styles.tableContainer}>
-                        <table className={styles.table}>
-                            <thead>
-                                <tr>
-                                    <th>Time</th>
-                                    <th>Deal</th>
-                                    <th>Network</th>
-                                    <th>Device</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {recentClicks.length > 0 ? (
-                                    recentClicks.map(click => (
-                                        <tr key={click.id}>
-                                            <td>{new Date(click.timestamp).toLocaleString()}</td>
-                                            <td className={styles.truncate}>{click.deal.title}</td>
-                                            <td>
-                                                <span className={styles.tag}>{click.network?.name || 'Manual'}</span>
-                                            </td>
-                                            <td>{click.device || 'Unknown'}</td>
-                                        </tr>
-                                    ))
-                                ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div className={styles.panel}>
+                        <div className={styles.panelHeader}>
+                            <h3 className={styles.panelTitle}>Recent Click Activity</h3>
+                        </div>
+                        <div className={styles.tableContainer}>
+                            <table className={styles.table}>
+                                <thead>
                                     <tr>
-                                        <td colSpan={4} className={styles.emptyCell}>No click data yet.</td>
+                                        <th>Time</th>
+                                        <th>Deal</th>
+                                        <th>Visitor</th>
+                                        <th>Network</th>
+                                        <th>Device</th>
                                     </tr>
-                                )}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {recentClicks.length > 0 ? (
+                                        recentClicks.map(click => (
+                                            <tr key={click.id}>
+                                                <td>{new Date(click.timestamp).toLocaleString()}</td>
+                                                <td className={styles.truncate}>{click.deal.title}</td>
+                                                <td style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                                                    {click.userEmail || (click.ipAddress && !click.ipAddress.startsWith('Guest_') ? click.ipAddress : 'Guest')}
+                                                </td>
+                                                <td>
+                                                    <span className={styles.tag}>{click.network?.name || 'Manual'}</span>
+                                                </td>
+                                                <td>{click.device || 'Unknown'}</td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan={5} className={styles.emptyCell}>No click data yet.</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div className={styles.panel}>
+                        <div className={styles.panelHeader}>
+                            <h3 className={styles.panelTitle}>Top Visitors (by Outbound Clicks)</h3>
+                        </div>
+                        <div className={styles.tableContainer}>
+                            <table className={styles.table}>
+                                <thead>
+                                    <tr>
+                                        <th>Visitor</th>
+                                        <th>Clicks</th>
+                                        <th>Last Active</th>
+                                        <th>Device</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {topVisitors.length > 0 ? (
+                                        topVisitors.map(v => (
+                                            <tr key={v.visitor}>
+                                                <td style={{ fontSize: '0.85rem', fontWeight: 600 }}>
+                                                    {v.visitor.startsWith('Guest_') ? 'Guest' : v.visitor}
+                                                    {v.isUser && <span className={styles.tag} style={{ marginLeft: '0.5rem', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>User</span>}
+                                                </td>
+                                                <td style={{ fontWeight: 'bold' }}>{v.count}</td>
+                                                <td>{new Date(v.lastActive).toLocaleString()}</td>
+                                                <td>{v.device}</td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan={4} className={styles.emptyCell}>No visitor data yet.</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div className={styles.panel}>
+                        <div className={styles.panelHeader}>
+                            <h3 className={styles.panelTitle}>Popular Deals (by Click Count)</h3>
+                        </div>
+                        <div className={styles.tableContainer}>
+                            <table className={styles.table}>
+                                <thead>
+                                    <tr>
+                                        <th>Deal Title</th>
+                                        <th>Merchant</th>
+                                        <th>Clicks Today</th>
+                                        <th>Total Clicks</th>
+                                        <th>Unique Clickers</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {topDeals.length > 0 ? (
+                                        topDeals.map(d => (
+                                            <tr key={d.title}>
+                                                <td className={styles.truncate} style={{ fontWeight: 500 }}>{d.title}</td>
+                                                <td>
+                                                    <span className={styles.tag} style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#d97706' }}>
+                                                        {d.merchant}
+                                                    </span>
+                                                </td>
+                                                <td style={{ fontWeight: 'bold', color: 'var(--primary)' }}>{d.clicksToday}</td>
+                                                <td style={{ fontWeight: 'bold' }}>{d.clicks}</td>
+                                                <td>{d.uniqueCount}</td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan={5} className={styles.emptyCell}>No deal clicks logged yet.</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 

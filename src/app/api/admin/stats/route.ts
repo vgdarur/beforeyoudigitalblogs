@@ -27,6 +27,15 @@ export async function GET() {
             })
         ]);
 
+        // Calculate unique visitors
+        const clickLogsForUnique = await prisma.click.findMany({
+            select: { id: true, ipAddress: true }
+        });
+        const uniqueVisitorIps = new Set(
+            clickLogsForUnique.map(click => click.ipAddress || click.id)
+        );
+        const totalUniqueVisitors = uniqueVisitorIps.size;
+
         // Simple GroupBy equivalent to get clicks per merchant for a chart
         const topMerchants = await prisma.click.groupBy({
             by: ['merchantId'],
@@ -61,6 +70,7 @@ export async function GET() {
                 totalDeals,
                 activeDeals,
                 totalClicks,
+                totalUniqueVisitors,
                 totalMerchants
             },
             recentClicks,

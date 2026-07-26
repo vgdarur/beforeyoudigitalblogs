@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlipSmart — The Reseller's Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0d0b;
+    --paper: #f5f0e8;
+    --cream: #ede7d6;
+    --accent: #c8501a;
+    --accent2: #1a6b4a;
+    --gold: #d4a632;
+    --muted: #7a7062;
+    --rule: #c5bfb0;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--accent);
+  }
+  .masthead-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  nav { display: flex; gap: 2rem; }
+  nav a {
+    color: var(--rule);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--paper); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(255,255,255,0.03) 39px,
+      rgba(255,255,255,0.03) 40px
+    );
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-kicker {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-kicker::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 1.5px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: #a09880;
+    max-width: 600px;
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+  }
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .hero-meta .byline {
+    font-size: 0.8rem;
+    color: var(--rule);
+    letter-spacing: 0.05em;
+  }
+  .hero-meta .byline strong { color: var(--paper); }
+  .hero-tag {
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 4rem;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .article-body { min-width: 0; }
+
+  .drop-cap::first-letter {
+    font-family: var(--serif);
+    font-size: 5rem;
+    font-weight: 900;
+    float: left;
+    line-height: 0.75;
+    margin-right: 0.15em;
+    margin-top: 0.1em;
+    color: var(--accent);
+  }
+
+  .article-body p {
+    margin-bottom: 1.4rem;
+    font-size: 1.05rem;
+    color: #2a2820;
+  }
+
+  .article-body h2 {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin: 3rem 0 1rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .article-body h3 {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 2rem 0 0.6rem;
+    color: var(--accent2);
+  }
+
+  hr.section-rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 2.5rem 0;
+  }
+
+  /* ── PULLQUOTE ── */
+  .pullquote {
+    border-left: 4px solid var(--accent);
+    margin: 2.5rem 0;
+    padding: 1rem 1.5rem;
+    background: var(--cream);
+  }
+  .pullquote p {
+    font-family: var(--serif);
+    font-size: 1.4rem !important;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--ink) !important;
+    margin: 0 !important;
+  }
+
+  /* ── STAT CARDS ── */
+  .stat-band {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5rem;
+    margin: 2.5rem 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    border-left: 4px solid var(--gold);
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-desc {
+    font-size: 0.8rem;
+    color: #a09880;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── PHASE CARDS ── */
+  .phase {
+    border: 1px solid var(--rule);
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    position: relative;
+    background: #fff;
+  }
+  .phase::before {
+    content: attr(data-num);
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    letter-spacing: 0.05em;
+  }
+  .phase-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .phase p { font-size: 0.95rem !important; margin-bottom: 0.75rem !important; }
+  .phase-budget {
+    display: inline-block;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    margin-top: 0.5rem;
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
+  .tag {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    font-size: 0.75rem;
+    padding: 3px 9px;
+    color: var(--muted);
+  }
+
+  /* ── PRODUCT TABLE ── */
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+  .product-table th {
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .product-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .product-table tr:nth-child(even) td { background: var(--cream); }
+  .product-table tr:hover td { background: #e8e0cc; }
+  .roi-badge {
+    background: var(--accent2);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  /* ── SOURCE LIST ── */
+  .source-list { list-style: none; margin: 1rem 0; }
+  .source-list li {
+    display: flex;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+  .source-num {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--rule);
+    line-height: 1;
+    min-width: 2rem;
+  }
+  .source-info strong { display: block; font-size: 0.95rem; margin-bottom: 2px; }
+  .source-info span { font-size: 0.85rem; color: var(--muted); }
+
+  /* ── SIDEBAR ── */
+  .sidebar { min-width: 0; }
+  .sidebar-block {
+    border: 1px solid var(--rule);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    background: #fff;
+  }
+  .sidebar-block h4 {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .checklist { list-style: none; }
+  .checklist li {
+    font-size: 0.88rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--cream);
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    color: #2a2820;
+  }
+  .checklist li::before {
+    content: '□';
+    color: var(--accent);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    align-items: flex-start;
+  }
+  .tl-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .tl-content strong { font-size: 0.85rem; display: block; }
+  .tl-content span { font-size: 0.78rem; color: var(--muted); }
+
+  .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tool-item {
+    background: var(--cream);
+    padding: 8px 10px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-align: center;
+    border: 1px solid var(--rule);
+  }
+  .tool-item span { display: block; font-size: 0.7rem; font-weight: 400; color: var(--muted); margin-top: 2px; }
+
+  .cta-block {
+    background: var(--accent);
+    color: #fff;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .cta-block h4 {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  .cta-block p { font-size: 0.85rem; margin-bottom: 1rem; opacity: 0.9; }
+  .cta-btn {
+    background: #fff;
+    color: var(--accent);
+    border: none;
+    padding: 8px 18px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: background 0.2s;
+  }
+  .cta-btn:hover { background: var(--paper); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--muted);
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+    border-top: 3px solid var(--accent);
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+  }
+  footer h5 {
+    font-family: var(--serif);
+    color: var(--paper);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+  footer p, footer li { font-size: 0.82rem; line-height: 1.7; }
+  footer ul { list-style: none; }
+  footer li { padding: 2px 0; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--paper); }
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--paper);
+    margin-bottom: 0.75rem;
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-copy {
+    text-align: center;
+    font-size: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #2a2820;
+    color: #4a4840;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner > * {
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-inner > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-inner > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero-inner > *:nth-child(4) { animation-delay: 0.35s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; gap: 2rem; }
+    .stat-band { grid-template-columns: 1fr; gap: 1.5rem; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <a href="#" class="logo">Flip<span>Smart</span></a>
+    <nav>
+      <a href="#strategy">Strategy</a>
+      <a href="#products">Products</a>
+      <a href="#sourcing">Sourcing</a>
+      <a href="#tools">Tools</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-kicker">The Reseller's Playbook · Issue No. 1</div>
+    <h1>How to Start <em>Flipping</em> on Amazon &amp; TikTok with $25K</h1>
+    <p class="hero-sub">A complete beginner's roadmap to launching an FBA reseller business, finding in-demand products, sourcing profitably, and automating your way to full-time income.</p>
+    <div class="hero-meta">
+      <span class="hero-tag">Amazon FBA</span>
+      <span class="hero-tag">TikTok Shop</span>
+      <span class="hero-tag">Reselling</span>
+      <span class="byline">By <strong>FlipSmart Editorial</strong> · May 2026 · 12 min read</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="layout">
+
+  <!-- ARTICLE -->
+  <article class="article-body">
+
+    <p class="drop-cap">You have $25,000, a hunger to build something real, and a question that a lot of aspiring entrepreneurs share: where do you actually start? The good news is that Amazon FBA and TikTok Shop together form one of the most accessible, scalable, and beginner-friendly business models available today — and $25K is more than enough to do it right.</p>
+
+    <p>This guide lays out the complete roadmap: how to structure your capital, which product categories give you the highest chance of success without gambling your investment, where to source inventory cheaply and reliably, and how to build toward a fully automated operation as your profits compound.</p>
+
+    <div class="pullquote">
+      <p>"The best resellers don't work harder — they build systems earlier. Your first 90 days are about learning. After that, everything is about leverage."</p>
+    </div>
+
+    <div class="stat-band">
+      <div class="stat-item">
+        <span class="stat-num">$25K</span>
+        <span class="stat-desc">Starting capital</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3–5 mo</span>
+        <span class="stat-desc">Estimated break-even</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2–3×</span>
+        <span class="stat-desc">Target ROI year one</span>
+      </div>
+    </div>
+
+    <!-- SECTION 1 -->
+    <h2 id="strategy">The Three-Phase Strategy</h2>
+
+    <p>Don't deploy your full $25,000 on day one. Smart capital management is the difference between beginners who scale and beginners who lose everything on their first wrong bet. The plan below stages your investment across three phases, each building on the last.</p>
+
+    <div class="phase" data-num="PHASE 01">
+      <div class="phase-title">Validate &amp; Launch — Months 1–3</div>
+      <p>Your only job in phase one is to find products that sell. Test 3–5 product categories using retail arbitrage and small Alibaba orders. Learn how Amazon PPC works. Set up your TikTok Shop. Keep ad spend low and observation high.</p>
+      <div class="phase-budget">Budget: $15,000</div>
+      <div class="tag-row">
+        <span class="tag">$10K inventory</span>
+        <span class="tag">$3K Amazon PPC</span>
+        <span class="tag">$1K tools & subscriptions</span>
+        <span class="tag">$1K misc / shipping</span>
+      </div>
+    </div>
+
+    <div class="phase" data-num="PHASE 02">
+      <div class="phase-title">Scale Winners, Drop Losers — Months 4–6</div>
+      <p>By now you know what sells. Double inventory on your top 2–3 SKUs. Hire a virtual assistant ($400–600/mo) to handle customer service and listing maintenance. Start building TikTok content around your best products — organic reach here is extraordinary for early brands.</p>
+      <div class="phase-budget">Budget: Reinvest profits + $5,000 reserve</div>
+      <div class="tag-row">
+        <span class="tag">Restock best sellers</span>
+        <span class="tag">Hire a VA</span>
+        <span class="tag">TikTok creator outreach</span>
+        <span class="tag">Automate repricing</span>
+      </div>
+    </div>
+
+    <div class="phase" data-num="PHASE 03">
+      <div class="phase-title">Build Your Infrastructure — Months 7–12</div>
+      <p>Once you're generating consistent monthly profit, it's time to reduce your dependency on FBA fees. Move high-velocity products to a 3PL warehouse. Launch a Shopify store. Begin bundling products under your own brand. At this stage you're no longer a reseller — you're a brand.</p>
+      <div class="phase-budget">Budget: Profits fund growth</div>
+      <div class="tag-row">
+        <span class="tag">3PL warehouse</span>
+        <span class="tag">Shopify DTC store</span>
+        <span class="tag">Bundle & private label</span>
+        <span class="tag">Full automation</span>
+      </div>
+    </div>
+
+    <hr class="section-rule">
+
+    <!-- SECTION 2 -->
+    <h2 id="products">Best Product Categories to Start</h2>
+
+    <p>Not all products are equal. The best beginner categories share a set of traits: lightweight (keeps FBA fees low), non-seasonal (steady year-round demand), photogenic (TikTok-friendly), and price-competitive with strong margin potential. Here are the top six to consider.</p>
+
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Price Range</th>
+          <th>Est. ROI</th>
+          <th>TikTok Potential</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Kitchen gadgets</strong></td>
+          <td>$10–40</td>
+          <td><span class="roi-badge">40–80%</span></td>
+          <td>★★★★★ Viral demos</td>
+        </tr>
+        <tr>
+          <td><strong>Beauty &amp; skincare</strong></td>
+          <td>$8–35</td>
+          <td><span class="roi-badge">50–100%</span></td>
+          <td>★★★★★ Huge audience</td>
+        </tr>
+        <tr>
+          <td><strong>Home organization</strong></td>
+          <td>$12–45</td>
+          <td><span class="roi-badge">35–70%</span></td>
+          <td>★★★★☆ Before/after content</td>
+        </tr>
+        <tr>
+          <td><strong>Pet accessories</strong></td>
+          <td>$10–50</td>
+          <td><span class="roi-badge">45–90%</span></td>
+          <td>★★★★★ Always viral</td>
+        </tr>
+        <tr>
+          <td><strong>Phone accessories</strong></td>
+          <td>$5–25</td>
+          <td><span class="roi-badge">60–120%</span></td>
+          <td>★★★☆☆ High competition</td>
+        </tr>
+        <tr>
+          <td><strong>Fitness &amp; gym</strong></td>
+          <td>$15–60</td>
+          <td><span class="roi-badge">40–75%</span></td>
+          <td>★★★★☆ Jan surge every year</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>The Golden Rule: Test Before You Commit</h3>
+    <p>Never buy 500 units of a single product until you've sold 50 and watched the velocity. Order 100–150 units per SKU in phase one. The winners will tell you where to put your money. Most beginners lose capital by scaling too fast, not too slow.</p>
+
+    <div class="pullquote">
+      <p>"Your first order teaches you more than any course. It shows you the real fees, the real delivery times, and the real demand — not the numbers in a spreadsheet."</p>
+    </div>
+
+    <hr class="section-rule">
+
+    <!-- SECTION 3 -->
+    <h2 id="sourcing">Where to Source Your Inventory</h2>
+
+    <p>Sourcing is the most important skill you'll develop as a reseller. The same product sold at different margins can mean the difference between a thriving business and a money-losing hobby. Here are the six primary channels, from lowest to highest complexity.</p>
+
+    <ul class="source-list">
+      <li>
+        <span class="source-num">01</span>
+        <div class="source-info">
+          <strong>Retail Arbitrage (Walmart, Target, TJ Maxx)</strong>
+          <span>The easiest place to start. Use Jungle Scout's mobile app to scan barcodes in-store and instantly see the Amazon selling price, FBA fees, and your net profit. Clearance sections are goldmines. Low risk, lower upside, but perfect for learning.</span>
+        </div>
+      </li>
+      <li>
+        <span class="source-num">02</span>
+        <div class="source-info">
+          <strong>Alibaba / AliExpress</strong>
+          <span>The backbone of most FBA businesses. Thousands of manufacturers, negotiable MOQs, and the ability to private-label products under your brand. Expect 15–30 day shipping. Always order samples before committing to bulk.</span>
+        </div>
+      </li>
+      <li>
+        <span class="source-num">03</span>
+        <div class="source-info">
+          <strong>DHgate</strong>
+          <span>Similar to Alibaba but with smaller minimum orders and slightly faster fulfillment for many categories. Good for testing product ideas before committing to a larger Alibaba order.</span>
+        </div>
+      </li>
+      <li>
+        <span class="source-num">04</span>
+        <div class="source-info">
+          <strong>Faire (US Wholesale)</strong>
+          <span>A curated marketplace of independent brands offering wholesale pricing. Net-60 payment terms mean you can sell inventory before you pay for it — a major cash flow advantage for beginners.</span>
+        </div>
+      </li>
+      <li>
+        <span class="source-num">05</span>
+        <div class="source-info">
+          <strong>1688.com (Chinese Domestic Market)</strong>
+          <span>The Chinese domestic version of Alibaba — prices are significantly lower, but you'll need a freight forwarder and some patience navigating the Chinese-language interface. Highest upside for experienced sourcing.</span>
+        </div>
+      </li>
+      <li>
+        <span class="source-num">06</span>
+        <div class="source-info">
+          <strong>Liquidation Pallets (Liquidation.com, BULQ)</strong>
+          <span>Returned Amazon and big-box store inventory sold by the pallet. High risk, high reward. Best for experienced resellers who understand condition grading and have storage capacity.</span>
+        </div>
+      </li>
+    </ul>
+
+    <hr class="section-rule">
+
+    <!-- SECTION 4 -->
+    <h2>The Break-Even Math</h2>
+
+    <p>Let's make this concrete. On a typical FBA product priced at $25 retail with an $8 COGS (cost of goods), your economics look roughly like this:</p>
+
+    <div class="stat-band">
+      <div class="stat-item">
+        <span class="stat-num">$8</span>
+        <span class="stat-desc">Cost of goods (COGS)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">$6</span>
+        <span class="stat-desc">FBA fees (avg)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">$7–9</span>
+        <span class="stat-desc">Net profit per unit</span>
+      </div>
+    </div>
+
+    <p>To break even on a $15,000 inventory investment at $8 COGS, you need to sell roughly 1,875 units. Spread across 4–5 products at 375 units each, with good PPC and a solid TikTok presence, most beginners hit this in months 3–5.</p>
+
+    <p>The key lever is velocity — how fast your products turn over. This is why product research and ad spend optimization in months 1–3 are so critical. You're not just selling; you're building the data that tells you which bets to double.</p>
+
+    <hr class="section-rule">
+
+    <h2 id="tools">Tools You'll Need From Day One</h2>
+
+    <p>Keep your tool stack lean in phase one. You need exactly three things to start: Seller Central (your Amazon account), Jungle Scout or Helium 10 for product research, and TikTok Shop Seller Center. Everything else can wait until you're generating revenue.</p>
+
+    <p>Resist the urge to buy every automation tool, course, and software subscription you encounter. The #1 mistake beginners make is spending $500/month on tools before they've made their first sale. Master the basics first, then automate what's already working.</p>
+
+    <p>As you scale into phase two and three, you'll add a VA (virtual assistant), a repricing tool like Seller Snap, and eventually inventory management software like Skubana or Linnworks to manage multi-channel fulfillment from a single dashboard.</p>
+
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="cta-block">
+      <h4>Ready to launch your store?</h4>
+      <p>Get the full starter checklist, supplier spreadsheet, and PPC templates — free for new subscribers.</p>
+      <button class="cta-btn">Download Free Kit</button>
+    </div>
+
+    <div class="sidebar-block">
+      <h4>30-Day Launch Checklist</h4>
+      <ul class="checklist">
+        <li>Register Amazon Seller Central account</li>
+        <li>Set up TikTok Shop Seller Center</li>
+        <li>Install Jungle Scout or Helium 10</li>
+        <li>Research 10 potential product ideas</li>
+        <li>Contact 5 suppliers on Alibaba</li>
+        <li>Order samples for top 3 products</li>
+        <li>Open a dedicated business bank account</li>
+        <li>Register your LLC (use Stripe Atlas)</li>
+        <li>Place first inventory order</li>
+        <li>Create your first 3 TikTok videos</li>
+        <li>Set up Amazon PPC campaign</li>
+        <li>Track weekly sales in a spreadsheet</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-block">
+      <h4>Key Milestones</h4>
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <strong>Week 1–2</strong>
+          <span>Accounts set up, first product researched</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <strong>Week 3–4</strong>
+          <span>Samples ordered, first TikTok posted</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <strong>Month 2</strong>
+          <span>First FBA shipment live, first sale</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <strong>Month 3</strong>
+          <span>Identify top 2 SKUs, cut losers</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <strong>Month 5</strong>
+          <span>Break-even, hire first VA</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot" style="background:var(--gold)"></div>
+        <div class="tl-content">
+          <strong>Month 12</strong>
+          <span>Profitable, automated, scaling</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-block" id="tools">
+      <h4>Essential Tool Stack</h4>
+      <div class="tools-grid">
+        <div class="tool-item">Jungle Scout<span>Product research</span></div>
+        <div class="tool-item">Helium 10<span>Keyword research</span></div>
+        <div class="tool-item">Seller Central<span>Amazon HQ</span></div>
+        <div class="tool-item">TikTok Shop<span>Social commerce</span></div>
+        <div class="tool-item">Canva Pro<span>Listing images</span></div>
+        <div class="tool-item">Seller Snap<span>Repricing</span></div>
+        <div class="tool-item">Shopify<span>Phase 3 DTC</span></div>
+        <div class="tool-item">Linnworks<span>Multichannel</span></div>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <h4>Capital Allocation</h4>
+      <div style="margin-top:0.5rem">
+        <div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:4px">
+            <span>Inventory</span><strong>$10,000</strong>
+          </div>
+          <div style="background:var(--cream);height:6px;border-radius:2px">
+            <div style="background:var(--accent);height:6px;width:67%;border-radius:2px"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:4px">
+            <span>Amazon PPC ads</span><strong>$3,000</strong>
+          </div>
+          <div style="background:var(--cream);height:6px;border-radius:2px">
+            <div style="background:var(--accent2);height:6px;width:20%;border-radius:2px"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:4px">
+            <span>Tools &amp; software</span><strong>$1,000</strong>
+          </div>
+          <div style="background:var(--cream);height:6px;border-radius:2px">
+            <div style="background:var(--gold);height:6px;width:7%;border-radius:2px"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:4px">
+            <span>Shipping &amp; misc</span><strong>$1,000</strong>
+          </div>
+          <div style="background:var(--cream);height:6px;border-radius:2px">
+            <div style="background:var(--muted);height:6px;width:7%;border-radius:2px"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:4px">
+            <span>Reserve (keep liquid)</span><strong>$10,000</strong>
+          </div>
+          <div style="background:var(--cream);height:6px;border-radius:2px">
+            <div style="background:#c5bfb0;height:6px;width:67%;border-radius:2px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Flip<span>Smart</span></div>
+      <p>The independent publication for Amazon sellers, resellers, and ecommerce entrepreneurs building real businesses on their own terms.</p>
+    </div>
+    <div>
+      <h5>Topics</h5>
+      <ul>
+        <li><a href="#">Amazon FBA</a></li>
+        <li><a href="#">TikTok Shop</a></li>
+        <li><a href="#">Product Sourcing</a></li>
+        <li><a href="#">PPC &amp; Ads</a></li>
+        <li><a href="#">Automation</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Resources</h5>
+      <ul>
+        <li><a href="#">Free Starter Kit</a></li>
+        <li><a href="#">Supplier Directory</a></li>
+        <li><a href="#">Profit Calculator</a></li>
+        <li><a href="#">Newsletter</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 FlipSmart. Editorial content only. Not financial advice. Results vary.</p>
+</footer>
+
+</body>
+</html>

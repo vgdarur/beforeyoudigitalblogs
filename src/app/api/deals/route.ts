@@ -19,7 +19,7 @@ export async function GET(request: Request) {
         const skip = (page - 1) * limit;
 
         // Sorting
-        const sortBy = searchParams.get('sortBy') || 'createdAt';
+        const sortBy = searchParams.get('sortBy') || 'updatedAt';
         const sortOrder = searchParams.get('sortOrder') || 'desc';
 
         // Build the Prisma where clause
@@ -67,8 +67,19 @@ export async function GET(request: Request) {
             prisma.deal.count({ where }),
         ]);
 
+        const mappedDeals = deals.map(deal => {
+            // For manual deals (priorityScore !== 1), provide a separate detailUrl field and keep original affiliateUrl intact
+            if (deal.priorityScore !== 1 && deal.slug) {
+                return {
+                    ...deal,
+                    detailUrl: `https://aidealsofamerica.com/deals/${deal.slug}`
+                };
+            }
+            return deal;
+        });
+
         return NextResponse.json({
-            deals,
+            deals: mappedDeals,
             meta: {
                 total: totalCount,
                 page,

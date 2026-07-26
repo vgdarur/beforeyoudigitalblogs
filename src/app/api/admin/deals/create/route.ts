@@ -1,19 +1,37 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
 
 export async function POST(request: Request) {
     try {
+        // Authenticate user
+        const session = await getServerSession(authOptions);
+        if (!session || (session.user as any).role !== 'ADMIN') {
+            return NextResponse.json({ error: 'Unauthorized. Admin access required.' }, { status: 401 });
+        }
+
         const formData = await request.formData();
 
         // Extract required fields
         const title = formData.get('title') as string;
-        const affiliateUrl = formData.get('affiliateUrl') as string;
+        const affiliateUrlRaw = formData.get('affiliateUrl') as string;
         const merchantName = formData.get('merchantName') as string;
         const categoryId = formData.get('categoryId') as string;
 
-        if (!title || !affiliateUrl || !merchantName || !categoryId) {
+        if (!title || !affiliateUrlRaw || !merchantName || !categoryId) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
+
+        const cleanAmazonUrl = (url: string): string => {
+            if (!url) return url;
+            if (url.includes('amazon.com')) {
+                return url.replace(/\/dp\/([A-Za-z0-9]{10})\/\?/, '/dp/$1?').replace(/\/gp\/product\/([A-Za-z0-9]{10})\/\?/, '/gp/product/$1?');
+            }
+            return url;
+        };
+
+        const affiliateUrl = cleanAmazonUrl(affiliateUrlRaw);
 
         // Extract optional fields
         const networkId = (formData.get('networkId') as string) || null;

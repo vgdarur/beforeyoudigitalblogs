@@ -61,19 +61,19 @@ export async function POST(request: Request) {
         for (let index = 0; index < rows.length; index++) {
             const row = rows[index];
             try {
-                // Map common column names
-                const title = row['title'] || row['name'] || row['product name'];
-                const description = row['description'] || row['desc'] || title;
-                const url = row['url'] || row['link'] || row['affiliate link'];
-                const merchantName = row['merchant'] || row['advertiser'] || row['store'] || 'Unknown Merchant';
+                // Map common column names (CJ, Rakuten, Impact, ShareASale)
+                const title = row['title'] || row['name'] || row['product name'] || row['productname'];
+                const description = row['description'] || row['desc'] || row['product description'] || row['short product description'] || title;
+                const url = row['url'] || row['link'] || row['affiliate link'] || row['tracking url'] || row['buyurl'] || row['linkurl'] || row['product url'];
+                const merchantName = row['merchant'] || row['advertiser'] || row['store'] || row['program names'] || row['program name'] || row['manufacturer name'] || row['advertisername'] || row['advertiser name'] || 'Unknown Merchant';
 
                 if (!title || !url) {
                     errors.push(`Row ${index + 1}: Missing required title or URL`);
                     continue;
                 }
 
-                const price = parsePrice(row['price'] || row['sale price']);
-                const originalPrice = parsePrice(row['retail price'] || row['original price']);
+                const price = parsePrice(row['price'] || row['sale price'] || row['current price'] || row['saleprice']);
+                const originalPrice = parsePrice(row['original price'] || row['retail price'] || row['retailprice'] || row['price']);
 
                 let discountRatio = null;
                 if (price && originalPrice && originalPrice > price) {

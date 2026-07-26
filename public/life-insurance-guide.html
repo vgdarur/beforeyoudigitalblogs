@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Insurance Policy Types - Study Summary</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      background: #f4f7fb;
+      color: #1f2937;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f3c78, #2563eb);
+      color: white;
+      padding: 45px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      border-left: 6px solid #2563eb;
+    }
+
+    .card h2 {
+      color: #0f3c78;
+      margin-bottom: 12px;
+      font-size: 1.5rem;
+    }
+
+    .card h3 {
+      margin-top: 16px;
+      margin-bottom: 8px;
+      color: #374151;
+    }
+
+    ul {
+      margin-left: 22px;
+      margin-top: 8px;
+    }
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .badge {
+      background: #e0ecff;
+      color: #0f3c78;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: white;
+    }
+
+    th, td {
+      padding: 14px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+    }
+
+    th {
+      background: #0f3c78;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    .exam-tip {
+      background: #fff7ed;
+      border-left-color: #f97316;
+    }
+
+    .memory {
+      background: #ecfdf5;
+      border-left-color: #10b981;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 25px;
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 700px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        margin-bottom: 15px;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 10px;
+        background: white;
+      }
+
+      td {
+        border: none;
+        padding: 8px 5px;
+      }
+
+      td::before {
+        content: attr(data-label) ": ";
+        font-weight: bold;
+        color: #0f3c78;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Life Insurance Policy Types</h1>
+    <p>Simple study summary for exam preparation</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>General Concept</h2>
+      <p>Life insurance transfers the financial risk of premature death from the insured person to the insurance company. It creates an immediate estate for beneficiaries.</p>
+      <div class="badge-row">
+        <span class="badge">Risk Transfer</span>
+        <span class="badge">Immediate Estate</span>
+        <span class="badge">Death Benefit</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>1. Term Life Insurance</h2>
+      <p>Term life insurance provides temporary protection for a specific period. It is the simplest and usually the cheapest form of life insurance.</p>
+      <h3>Key Features</h3>
+      <ul>
+        <li>Temporary coverage only</li>
+        <li>No cash value or equity</li>
+        <li>Lowest initial premium</li>
+        <li>Provides maximum protection for the lowest cost</li>
+      </ul>
+      <h3>Common Types</h3>
+      <ul>
+        <li><strong>Level Term:</strong> Death benefit stays the same.</li>
+        <li><strong>Increasing Term:</strong> Death benefit increases over time.</li>
+        <li><strong>Decreasing Term:</strong> Death benefit decreases over time.</li>
+        <li><strong>Mortgage Redemption:</strong> A type of decreasing term policy.</li>
+        <li><strong>Credit Life:</strong> Pays off a loan if the debtor dies.</li>
+        <li><strong>Annual Renewable Term:</strong> Renewable each year without proof of insurability.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>2. Whole Life Insurance</h2>
+      <p>Whole life insurance is permanent insurance that provides lifetime protection with fixed premiums, fixed death benefit, and tax-deferred cash value.</p>
+      <h3>Key Features</h3>
+      <ul>
+        <li>Permanent lifetime coverage</li>
+        <li>Fixed death benefit</li>
+        <li>Fixed premium</li>
+        <li>Builds cash value</li>
+        <li>Designed to mature at age 100</li>
+      </ul>
+      <h3>Types</h3>
+      <ul>
+        <li>Ordinary Whole Life / Straight Life</li>
+        <li>Limited Payment Whole Life</li>
+        <li>Single Premium Whole Life</li>
+        <li>Modified Whole Life</li>
+        <li>Graded Premium Whole Life</li>
+        <li>Indexed Whole Life</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>3. Universal Life Insurance</h2>
+      <p>Universal Life is permanent insurance with flexible premiums, adjustable death benefit, and tax-deferred cash value.</p>
+      <ul>
+        <li>Flexible premium payments</li>
+        <li>Adjustable death benefit</li>
+        <li>Cash value earns interest</li>
+        <li>Policy may stay active as long as cost of insurance is paid</li>
+        <li>Can be surrendered for cash value</li>
+      </ul>
+      <h3>Death Benefit Options</h3>
+      <ul>
+        <li><strong>Option A:</strong> Level death benefit.</li>
+        <li><strong>Option B:</strong> Face amount plus cash value.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>4. Variable Life Insurance</h2>
+      <p>Variable Life combines life insurance with investment choices. Cash value and death benefit may change based on investment performance.</p>
+      <ul>
+        <li>Permanent insurance</li>
+        <li>Fixed premium</li>
+        <li>Cash value invested in securities</li>
+        <li>Policy owner controls investments</li>
+        <li>Regulated by the SEC</li>
+        <li>Higher risk than traditional life insurance</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>5. Variable Universal Life Insurance</h2>
+      <p>Variable Universal Life combines Universal Life flexibility with Variable Life investment control.</p>
+      <ul>
+        <li>Flexible premiums</li>
+        <li>Adjustable death benefit</li>
+        <li>Investment-based cash value</li>
+        <li>Cash value can increase or decrease</li>
+        <li>Combines insurance and securities features</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>6. Special Use Policies</h2>
+      <ul>
+        <li><strong>Family Plan:</strong> Covers all family members under one policy.</li>
+        <li><strong>Family Maintenance:</strong> Combines whole life and level term insurance.</li>
+        <li><strong>Joint Life:</strong> Covers two or more people and pays at the first death.</li>
+        <li><strong>Last-to-Die / Survivorship:</strong> Pays after the last insured person dies.</li>
+        <li><strong>Juvenile Life:</strong> Life insurance on a minor.</li>
+        <li><strong>Endowment:</strong> Pays if the insured dies or survives to a specified date.</li>
+        <li><strong>Industrial Life:</strong> Small coverage amount with weekly or monthly premiums.</li>
+      </ul>
+    </section>
+
+    <section class="card exam-tip">
+      <h2>Comparison Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Policy Type</th>
+            <th>Cash Value</th>
+            <th>Premium</th>
+            <th>Death Benefit</th>
+            <th>Main Idea</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Policy Type">Term Life</td>
+            <td data-label="Cash Value">No</td>
+            <td data-label="Premium">Low initially</td>
+            <td data-label="Death Benefit">Temporary</td>
+            <td data-label="Main Idea">Protection only</td>
+          </tr>
+          <tr>
+            <td data-label="Policy Type">Whole Life</td>
+            <td data-label="Cash Value">Yes</td>
+            <td data-label="Premium">Fixed</td>
+            <td data-label="Death Benefit">Fixed</td>
+            <td data-label="Main Idea">Lifetime coverage</td>
+          </tr>
+          <tr>
+            <td data-label="Policy Type">Universal Life</td>
+            <td data-label="Cash Value">Yes</td>
+            <td data-label="Premium">Flexible</td>
+            <td data-label="Death Benefit">Adjustable</td>
+            <td data-label="Main Idea">Flexible permanent policy</td>
+          </tr>
+          <tr>
+            <td data-label="Policy Type">Variable Life</td>
+            <td data-label="Cash Value">Yes</td>
+            <td data-label="Premium">Fixed</td>
+            <td data-label="Death Benefit">Investment-based</td>
+            <td data-label="Main Idea">Investment control</td>
+          </tr>
+          <tr>
+            <td data-label="Policy Type">Variable Universal Life</td>
+            <td data-label="Cash Value">Yes</td>
+            <td data-label="Premium">Flexible</td>
+            <td data-label="Death Benefit">Investment-based</td>
+            <td data-label="Main Idea">Flexible + investments</td>
+          </tr>
+          <tr>
+            <td data-label="Policy Type">Endowment</td>
+            <td data-label="Cash Value">Yes</td>
+            <td data-label="Premium">High</td>
+            <td data-label="Death Benefit">Death or maturity</td>
+            <td data-label="Main Idea">Pays if you live or die</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card memory">
+      <h2>Easy Memory Trick</h2>
+      <ul>
+        <li><strong>Term</strong> = Temporary</li>
+        <li><strong>Whole Life</strong> = Whole Lifetime</li>
+        <li><strong>Universal Life</strong> = Flexible</li>
+        <li><strong>Variable Life</strong> = Investments</li>
+        <li><strong>VUL</strong> = Flexible + Investments</li>
+        <li><strong>Endowment</strong> = Pays if you live or die</li>
+      </ul>
+    </section>
+
+    <section class="card exam-tip">
+      <h2>Exam Focus</h2>
+      <p>For the exam, focus mainly on the differences between <strong>Term Life, Whole Life, Universal Life, Variable Life, and Variable Universal Life</strong>. Pay special attention to cash value, premium structure, death benefit, and whether the policy is temporary or permanent.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Life Insurance Policy Types Study Page</p>
+  </footer>
+</body>
+</html>

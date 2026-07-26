@@ -39,6 +39,9 @@ export default function AdminLayout({
                     <Link href="/admin/import" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Bulk Import
                     </Link>
+                    <Link href="/admin/import-url" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Import from URL
+                    </Link>
                     <Link href="/admin/news" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         News Ticker (iOS)
                     </Link>
@@ -54,8 +57,17 @@ export default function AdminLayout({
                     <Link href="/admin/scraper-rules" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Scraper Rules
                     </Link>
+                    <Link href="/admin/blogs" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Blogs
+                    </Link>
                     <Link href="/admin/reseller-blog" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Reseller Blog
+                    </Link>
+                    <Link href="/admin/marketing" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Marketing Center
+                    </Link>
+                    <Link href="/admin/supplier-outreach" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Supplier Outreach
                     </Link>
                     <Link href="/admin/import-export-guide" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Import Export Guide

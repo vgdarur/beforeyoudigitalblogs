@@ -133,9 +133,11 @@ export default function Navbar() {
 
                 <nav className={styles.navLinks}>
                     <Link href="/deals" className={styles.link}>All Deals</Link>
+                    <Link href="/today-deals" className={styles.link} style={{ color: '#ea580c', fontWeight: 'bold' }}>Today's Deals</Link>
                     <Link href="/smartphones" className={styles.link}>Phones</Link>
                     <Link href="/coupons" className={styles.link}>Coupons</Link>
                     <Link href="/categories" className={styles.link}>Categories</Link>
+                    <Link href="/blog" className={styles.link}>Blog</Link>
 
                     <div style={{ width: '1px', height: '20px', backgroundColor: 'var(--border)', margin: '0 0.5rem' }}></div>
 
@@ -183,10 +185,12 @@ export default function Navbar() {
                     </form>
                     
                     <Link href="/deals" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>All Deals</Link>
+                    <Link href="/today-deals" className={styles.link} style={{ color: '#ea580c', fontWeight: 'bold' }} onClick={() => setIsMobileMenuOpen(false)}>Today's Deals</Link>
                     <Link href="/smartphones" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Phones</Link>
                     <Link href="/coupons" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Coupons</Link>
                     <Link href="/categories" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Categories</Link>
                     <Link href="/merchants" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Popular Merchants</Link>
+                    <Link href="/blog" className={styles.link} onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
 
                     {/* Collapsible Active Categories List */}
                     {categories.length > 0 && (

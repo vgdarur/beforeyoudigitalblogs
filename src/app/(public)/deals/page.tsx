@@ -10,7 +10,7 @@ async function getDeals(searchParams: { [key: string]: string | string[] | undef
     const q = searchParams.q as string || '';
     const category = searchParams.category as string || '';
     const merchant = searchParams.merchant as string || '';
-    const sortBy = searchParams.sortBy as string || 'createdAt';
+    const sortBy = searchParams.sortBy as string || 'updatedAt';
     const page = 1;
     const limit = 20;
     const skip = (page - 1) * limit;
@@ -212,9 +212,10 @@ export default async function DealsPage({
                                 <div className={styles.sortGroup}>
                                     <select
                                         name="sortBy"
-                                        defaultValue={sp.sortBy as string || 'createdAt'}
+                                        defaultValue={sp.sortBy as string || 'updatedAt'}
                                         className={styles.sortSelect}
                                     >
+                                        <option value="updatedAt">Recently Updated</option>
                                         <option value="createdAt">Newest First</option>
                                         <option value="priorityScore">Hottest Deals</option>
                                         <option value="price">Lowest Price</option>
