@@ -1,0 +1,2 @@
+ALTER TABLE "dl_Blog" ADD COLUMN "authorId" TEXT;
+ALTER TABLE "dl_Blog" ADD CONSTRAINT "dl_Blog_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "dl_User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -1,8 +1,17 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
 
 export async function POST(req: Request) {
     try {
+        const session = await getServerSession(authOptions);
+        if (!session || (session.user as any).role !== 'ADMIN') {
+            return NextResponse.json({ error: 'Unauthorized. Admin access required.' }, { status: 401 });
+        }
+        
+        const userId = (session.user as any).id;
+
         const formData = await req.formData();
         const id = formData.get('id') as string | null;
         const title = formData.get('title') as string | null;
@@ -22,7 +31,8 @@ export async function POST(req: Request) {
                     title,
                     slug,
                     content,
-                    published
+                    published,
+                    authorId: userId
                 }
             });
         } else {
@@ -32,7 +42,8 @@ export async function POST(req: Request) {
                     title,
                     slug,
                     content,
-                    published
+                    published,
+                    authorId: userId
                 }
             });
         }

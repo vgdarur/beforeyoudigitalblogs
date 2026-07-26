@@ -6,6 +6,7 @@ export const dynamic = 'force-dynamic';
 export default async function BlogListPage() {
     const blogs = await prisma.blog.findMany({
         where: { published: true },
+        include: { author: true },
         orderBy: { createdAt: 'desc' }
     });
 
@@ -31,6 +32,7 @@ export default async function BlogListPage() {
                                 </Link>
                             </h2>
                             <p style={{ color: '#6b7280', fontSize: '0.875rem', marginBottom: '1rem' }}>
+                                {blog.author?.name ? `By ${blog.author.name} • ` : ''}
                                 {new Date(blog.createdAt).toLocaleDateString('en-US', {
                                     year: 'numeric',
                                     month: 'long',
