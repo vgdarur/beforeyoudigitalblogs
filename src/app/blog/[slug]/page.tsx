@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import TrendingDealsBottom from '@/components/ui/TrendingDealsBottom';
 
@@ -39,6 +39,20 @@ export default async function SingleBlogPage({ params }: { params: Promise<{ slu
         blog = await prisma.blog.findUnique({
             where: { slug: decodedSlug, published: true }
         });
+    }
+
+    // Fallback for old links with spaces or uppercase characters (e.g. from social media)
+    if (!blog) {
+        const sanitizedSlug = decodedSlug.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        if (sanitizedSlug !== decodedSlug && sanitizedSlug !== slug) {
+            const fallbackBlog = await prisma.blog.findUnique({
+                where: { slug: sanitizedSlug, published: true }
+            });
+            if (fallbackBlog) {
+                // Permanent redirect to the new clean URL
+                redirect(`/blog/${sanitizedSlug}`);
+            }
+        }
     }
 
     if (!blog) {
