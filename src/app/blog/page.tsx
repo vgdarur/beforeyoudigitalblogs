@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
+import TrendingDealsBottom from '@/components/ui/TrendingDealsBottom';
 
 export const dynamic = 'force-dynamic';
 
@@ -56,6 +57,8 @@ export default async function BlogListPage() {
                     <p style={{ textAlign: 'center', color: '#6b7280' }}>No articles published yet. Check back soon!</p>
                 )}
             </div>
+
+            <TrendingDealsBottom />
         </div>
     );
 }

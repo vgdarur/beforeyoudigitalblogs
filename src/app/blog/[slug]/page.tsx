@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import TrendingDealsBottom from '@/components/ui/TrendingDealsBottom';
 
 export const dynamic = 'force-dynamic';
 
@@ -47,8 +48,10 @@ export default async function SingleBlogPage({ params }: { params: Promise<{ slu
     // By wrapping in a full width div, we let the HTML content style itself.
     // If the content brings its own <style> tags and .container, it will render exactly as authored.
     return (
-        <div style={{ padding: '2rem 1rem' }}>
+        <div style={{ padding: '2rem 1rem', maxWidth: '800px', margin: '0 auto' }}>
             <article dangerouslySetInnerHTML={{ __html: blog.content }} />
+            
+            <TrendingDealsBottom />
         </div>
     );
 }
