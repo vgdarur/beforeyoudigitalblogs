@@ -15,7 +15,7 @@ export async function POST(req: Request) {
         const formData = await req.formData();
         const id = formData.get('id') as string | null;
         const title = formData.get('title') as string | null;
-        const slug = formData.get('slug') as string | null;
+        let slug = formData.get('slug') as string | null;
         const content = formData.get('content') as string | null;
         const published = formData.get('published') === 'true';
 
@@ -24,6 +24,9 @@ export async function POST(req: Request) {
         if (!title || !slug || !content) {
             return NextResponse.redirect(new URL('/admin/blogs?error=MissingFields', baseUrl));
         }
+
+        // Clean up the slug to prevent URL routing issues
+        slug = slug.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
         if (id) {
             // Update

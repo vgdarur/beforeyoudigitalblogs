@@ -6,9 +6,17 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
-    const blog = await prisma.blog.findUnique({
+    const decodedSlug = decodeURIComponent(slug);
+    
+    let blog = await prisma.blog.findUnique({
         where: { slug }
     });
+
+    if (!blog && slug !== decodedSlug) {
+        blog = await prisma.blog.findUnique({
+            where: { slug: decodedSlug }
+        });
+    }
 
     if (!blog) return {};
 
@@ -20,9 +28,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function SingleBlogPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const blog = await prisma.blog.findUnique({
+    const decodedSlug = decodeURIComponent(slug);
+    
+    let blog = await prisma.blog.findUnique({
         where: { slug, published: true }
     });
+
+    if (!blog && slug !== decodedSlug) {
+        blog = await prisma.blog.findUnique({
+            where: { slug: decodedSlug, published: true }
+        });
+    }
 
     if (!blog) {
         notFound();
