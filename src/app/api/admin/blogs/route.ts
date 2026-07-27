@@ -19,8 +19,10 @@ export async function POST(req: Request) {
         const content = formData.get('content') as string | null;
         const published = formData.get('published') === 'true';
 
+        const baseUrl = `${req.headers.get('x-forwarded-proto') || (process.env.NODE_ENV === 'production' ? 'https' : 'http')}://${req.headers.get('x-forwarded-host') || req.headers.get('host') || 'localhost:3000'}`;
+
         if (!title || !slug || !content) {
-            return NextResponse.redirect(new URL('/admin/blogs?error=MissingFields', req.url));
+            return NextResponse.redirect(new URL('/admin/blogs?error=MissingFields', baseUrl));
         }
 
         if (id) {
@@ -48,9 +50,11 @@ export async function POST(req: Request) {
             });
         }
 
-        return NextResponse.redirect(new URL('/admin/blogs', req.url));
+        return NextResponse.redirect(new URL('/admin/blogs', baseUrl));
     } catch (error) {
         console.error('Error saving blog:', error);
-        return NextResponse.redirect(new URL('/admin/blogs?error=FailedToSave', req.url));
+        
+        const baseUrl = `${req.headers.get('x-forwarded-proto') || (process.env.NODE_ENV === 'production' ? 'https' : 'http')}://${req.headers.get('x-forwarded-host') || req.headers.get('host') || 'localhost:3000'}`;
+        return NextResponse.redirect(new URL('/admin/blogs?error=FailedToSave', baseUrl));
     }
 }
