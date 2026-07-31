@@ -75,6 +75,9 @@ export default function AdminLayout({
                     <Link href="/admin/life-insurance-guide" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Life Insurance Guide
                     </Link>
+                    <Link href="/admin/telegram-agent-guide" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Telegram Agent Guide
+                    </Link>
                     <div className={styles.divider}></div>
                     <Link href="/admin/merchants" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Merchants
