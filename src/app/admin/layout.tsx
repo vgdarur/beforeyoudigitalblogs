@@ -42,6 +42,9 @@ export default function AdminLayout({
                     <Link href="/admin/import-url" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Import from URL
                     </Link>
+                    <Link href="/admin/import-asin" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
+                        Bulk ASIN Import
+                    </Link>
                     <Link href="/admin/news" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         News Ticker (iOS)
                     </Link>
