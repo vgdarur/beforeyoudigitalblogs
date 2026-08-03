@@ -1,0 +1,116 @@
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 1rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #111;
+    margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+    color: #666;
+    margin: 0;
+}
+
+.listWrapper {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.dealRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.15s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.dealRow:last-child {
+    border-bottom: none;
+}
+
+.dealRow:hover {
+    background-color: #f9f9f9;
+}
+
+.dealInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.merchantBadge {
+    background: #e2e8f0;
+    color: #475569;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.dealTitle {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.dealRow:hover .dealTitle {
+    color: #0066cc;
+    text-decoration: underline;
+}
+
+.dealPricing {
+    text-align: right;
+    min-width: 120px;
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #059669; /* emerald-600 */
+    display: block;
+}
+
+.originalPrice {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    text-decoration: line-through;
+}
+
+@media (max-width: 600px) {
+    .dealRow {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    .dealPricing {
+        text-align: left;
+    }
+    .dealInfo {
+        align-items: flex-start;
+    }
+}
