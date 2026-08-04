@@ -1,7 +1,10 @@
 import { prisma } from '@/lib/prisma';
 import { notFound, redirect } from 'next/navigation';
 import type { Metadata } from 'next';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
 import TrendingDealsBottom from '@/components/ui/TrendingDealsBottom';
+import BlogAdminControls from '@/components/ui/BlogAdminControls';
 
 export const dynamic = 'force-dynamic';
 
@@ -59,10 +62,16 @@ export default async function SingleBlogPage({ params }: { params: Promise<{ slu
         notFound();
     }
 
+    // Check if the current user is an admin
+    const session = await getServerSession(authOptions);
+    const isAdmin = session?.user && (session.user as any).role === 'ADMIN';
+
     // By wrapping in a full width div, we let the HTML content style itself.
     // If the content brings its own <style> tags and .container, it will render exactly as authored.
     return (
         <div style={{ padding: '2rem 1rem', maxWidth: '800px', margin: '0 auto' }}>
+            {isAdmin && <BlogAdminControls blogId={blog.id} />}
+            
             <article dangerouslySetInnerHTML={{ __html: blog.content }} />
             
             <TrendingDealsBottom />

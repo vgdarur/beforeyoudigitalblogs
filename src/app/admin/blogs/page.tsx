@@ -50,6 +50,9 @@ export default async function BlogsAdminPage({
                                         <span className={styles.categorySlug}>{blog.slug} &bull; {blog.published ? 'Published' : 'Draft'}</span>
                                     </div>
                                     <div className={styles.categoryActions}>
+                                        <a href={`/blog/${blog.slug}`} target="_blank" rel="noopener noreferrer" className={styles.editBtn} style={{ backgroundColor: '#10b981', color: 'white' }}>
+                                            View
+                                        </a>
                                         <Link href={`/admin/blogs?edit=${blog.id}`} className={styles.editBtn}>
                                             Edit
                                         </Link>
