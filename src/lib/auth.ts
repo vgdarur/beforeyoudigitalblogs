@@ -19,6 +19,7 @@ export const authOptions: NextAuthOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID || "",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+            allowDangerousEmailAccountLinking: true,
         }),
         FacebookProvider({
             clientId: process.env.FACEBOOK_CLIENT_ID || "",
@@ -73,7 +74,14 @@ export const authOptions: NextAuthOptions = {
                 token.role = (user as any).role || 'USER';
                 token.id = user.id;
                 
-                if (user.email === 'vgdarur@gmail.com') {
+                const adminEmails = [
+                    'vgdarur@gmail.com',
+                    'anirudh.enigma@gmail.com',
+                    'pruthvi.ks49@gmail.com',
+                    'Pruthvi.ks49@gmail.com'
+                ];
+                
+                if (user.email && adminEmails.includes(user.email)) {
                     token.role = 'ADMIN';
                     // Synchronize with database asynchronously
                     if (user.id) {
