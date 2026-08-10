@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import styles from '../dashboard/page.module.css'; // Reusing dashboard styles for consistency
 import Link from 'next/link';
-
+import BroadcastButton from './BroadcastButton';
 export default async function AdminDealsPage() {
     // Fetch all deals
     const deals = await prisma.deal.findMany({
@@ -77,6 +77,7 @@ export default async function AdminDealsPage() {
                                                 }}>
                                                     Edit
                                                 </Link>
+                                                <BroadcastButton dealId={deal.id} />
                                                 <form action={`/api/admin/deals/${deal.id}/delete`} method="POST">
                                                     <button type="submit" style={{
                                                         padding: '0.25rem 0.5rem',

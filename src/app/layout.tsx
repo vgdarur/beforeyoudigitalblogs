@@ -12,6 +12,10 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
     title: 'AI Deals of America - Discover the Best Discounts & Offers',
     description: 'Find the latest and greatest deals, discounts, and coupons from top merchants, curated by AI.',
+    other: {
+        'impact-site-verification': 'ea8b5636-d3fc-461c-9695-d08dffaf2720',
+        'fo-verify': '19e98c9f-3531-47c1-9bea-ea9bd67553c7'
+    }
 };
 
 export default function RootLayout({
@@ -22,7 +26,6 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
-                <meta name="impact-site-verification" content="ea8b5636-d3fc-461c-9695-d08dffaf2720" {...({ value: "ea8b5636-d3fc-461c-9695-d08dffaf2720" } as any)} />
             </head>
             <body>
                 <Providers>

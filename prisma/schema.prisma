@@ -245,3 +245,13 @@ model Blog {
   @@map("dl_Blog")
 }
 
+model WhatsAppGroup {
+  id        String   @id @default(cuid())
+  groupId   String   @unique // The WhatsApp internal group ID (e.g., 1234567890@g.us)
+  name      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("dl_WhatsAppGroup")
+}

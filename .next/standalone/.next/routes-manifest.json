@@ -180,6 +180,12 @@
       "namedRegex": "^/admin/import(?:/)?$"
     },
     {
+      "page": "/admin/import-asin",
+      "regex": "^/admin/import\\-asin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/import\\-asin(?:/)?$"
+    },
+    {
       "page": "/admin/import-export-guide",
       "regex": "^/admin/import\\-export\\-guide(?:/)?$",
       "routeKeys": {},
@@ -258,6 +264,12 @@
       "namedRegex": "^/admin/supplier\\-outreach(?:/)?$"
     },
     {
+      "page": "/admin/telegram-agent-guide",
+      "regex": "^/admin/telegram\\-agent\\-guide(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/telegram\\-agent\\-guide(?:/)?$"
+    },
+    {
       "page": "/admin/users",
       "regex": "^/admin/users(?:/)?$",
       "routeKeys": {},
@@ -334,6 +346,12 @@
       "regex": "^/api/admin/import/save(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/admin/import/save(?:/)?$"
+    },
+    {
+      "page": "/api/admin/import-asin",
+      "regex": "^/api/admin/import\\-asin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/import\\-asin(?:/)?$"
     },
     {
       "page": "/api/admin/import-campaigns",
@@ -438,6 +456,18 @@
       "namedRegex": "^/api/setup(?:/)?$"
     },
     {
+      "page": "/api/whatsapp/broadcast",
+      "regex": "^/api/whatsapp/broadcast(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/whatsapp/broadcast(?:/)?$"
+    },
+    {
+      "page": "/api/whatsapp/groups",
+      "regex": "^/api/whatsapp/groups(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/whatsapp/groups(?:/)?$"
+    },
+    {
       "page": "/blog",
       "regex": "^/blog(?:/)?$",
       "routeKeys": {},
@@ -472,6 +502,12 @@
       "regex": "^/life\\-insurance\\-guide(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/life\\-insurance\\-guide(?:/)?$"
+    },
+    {
+      "page": "/list",
+      "regex": "^/list(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/list(?:/)?$"
     },
     {
       "page": "/login",
