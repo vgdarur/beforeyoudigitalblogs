@@ -1,3 +1,0 @@
-module.exports=[93695,(a,b,c)=>{b.exports=a.x("next/dist/shared/lib/no-fallback-error.external.js",()=>require("next/dist/shared/lib/no-fallback-error.external.js"))},50645,a=>{a.n(a.i(27572))},17537,a=>{a.n(a.i(3363))},13718,a=>{a.n(a.i(85523))},18198,a=>{a.n(a.i(45518))},62212,a=>{a.n(a.i(66114))},44067,a=>{a.n(a.i(36102))},84604,a=>{"use strict";var b=a.i(7997);function c(){return(0,b.jsx)("div",{className:"flex-1 w-full h-full min-h-screen bg-white",children:(0,b.jsx)("iframe",{src:"/reseller-blog.html",className:"w-full h-full min-h-[calc(100vh-4rem)] border-none",title:"Reseller Blog"})})}a.s(["default",()=>c])}];
-
-//# sourceMappingURL=%5Broot-of-the-server%5D__019acfaa._.js.map

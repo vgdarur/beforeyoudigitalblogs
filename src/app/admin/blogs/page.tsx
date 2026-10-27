@@ -1,6 +1,9 @@
 import { prisma } from '@/lib/prisma';
-import styles from '../categories/page.module.css'; // Reusing categories styles
+import styles from '../categories/page.module.css';
 import Link from 'next/link';
+import BlogUploader from './BlogUploader';
+
+export const dynamic = 'force-dynamic';
 
 export default async function BlogsAdminPage({
     searchParams
@@ -11,9 +14,14 @@ export default async function BlogsAdminPage({
     const editId = sp.edit as string | undefined;
     const errorMsg = sp.error as string | undefined;
 
-    const blogs = await prisma.blog.findMany({
-        orderBy: { createdAt: 'desc' }
-    });
+    let blogs: any[] = [];
+    try {
+        blogs = await prisma.blog.findMany({
+            orderBy: { createdAt: 'desc' }
+        });
+    } catch (e) {
+        console.warn('Error fetching blogs in admin:', e);
+    }
 
     let editBlog = null;
     if (editId) {
@@ -21,11 +29,15 @@ export default async function BlogsAdminPage({
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
+        <div className={styles.container} style={{ maxWidth: '1400px', margin: '0 auto', padding: '1.5rem' }}>
+            <div className={styles.header} style={{ marginBottom: '2rem' }}>
                 <div>
-                    <h1 className={styles.title}>Blogs</h1>
-                    <p className={styles.subtitle}>Manage your blog posts and articles.</p>
+                    <h1 className={styles.title} style={{ fontSize: '1.85rem', fontWeight: 800, color: '#0f172a' }}>
+                        Blogger CMS & Publisher
+                    </h1>
+                    <p className={styles.subtitle} style={{ color: '#64748b', fontSize: '0.95rem' }}>
+                        Upload Claude or Antigravity generated HTML/PDF articles. Automatically monetize with Impact.com banners & AI Deals of America ads.
+                    </p>
                 </div>
             </div>
 
@@ -38,108 +50,112 @@ export default async function BlogsAdminPage({
                 </div>
             )}
 
-            <div className={styles.layout}>
-                {/* Left Side: List of Blogs */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) minmax(400px, 1.25fr)', gap: '2rem', alignItems: 'start' }}>
+                
+                {/* Left Side: Published & Draft Articles List */}
                 <div>
-                    {blogs.length > 0 ? (
-                        blogs.map(blog => (
-                            <div key={blog.id} className={styles.categoryCard}>
-                                <div className={styles.categoryHeader}>
-                                    <div>
-                                        <h3 className={styles.categoryName}>{blog.title}</h3>
-                                        <span className={styles.categorySlug}>{blog.slug} &bull; {blog.published ? 'Published' : 'Draft'}</span>
-                                    </div>
-                                    <div className={styles.categoryActions}>
-                                        <a href={`/blog/${blog.slug}`} target="_blank" rel="noopener noreferrer" className={styles.editBtn} style={{ backgroundColor: '#10b981', color: 'white' }}>
-                                            View
-                                        </a>
-                                        <Link href={`/admin/blogs?edit=${blog.id}`} className={styles.editBtn}>
-                                            Edit
-                                        </Link>
-                                        <form action="/api/admin/blogs/delete" method="POST">
-                                            <input type="hidden" name="id" value={blog.id} />
-                                            <button type="submit" className={styles.deleteBtn}>
-                                                Delete
-                                            </button>
-                                        </form>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                        <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#1e293b', margin: 0 }}>
+                            Published Articles ({blogs.length})
+                        </h2>
+                        {editBlog && (
+                            <Link href="/admin/blogs" style={{ fontSize: '0.82rem', color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}>
+                                + New Article
+                            </Link>
+                        )}
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        {blogs.length > 0 ? (
+                            blogs.map(blog => (
+                                <div key={blog.id} style={{
+                                    background: '#ffffff',
+                                    border: '1px solid #e2e8f0',
+                                    borderRadius: '10px',
+                                    padding: '16px',
+                                    boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
+                                }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+                                        <div style={{ flex: 1 }}>
+                                            <h3 style={{ fontSize: '1.05rem', fontWeight: 600, color: '#0f172a', margin: '0 0 4px 0', lineHeight: 1.3 }}>
+                                                {blog.title}
+                                            </h3>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: '#64748b' }}>
+                                                <span>/{blog.slug}</span>
+                                                <span>&bull;</span>
+                                                <span style={{
+                                                    color: blog.published ? '#16a34a' : '#ea580c',
+                                                    fontWeight: 600
+                                                }}>
+                                                    {blog.published ? 'Live (Public)' : 'Draft'}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div style={{ display: 'flex', gap: '6px' }}>
+                                            <a
+                                                href={`/blog/${blog.slug}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                style={{
+                                                    background: '#10b981',
+                                                    color: 'white',
+                                                    padding: '4px 10px',
+                                                    borderRadius: '6px',
+                                                    fontSize: '0.78rem',
+                                                    fontWeight: 600,
+                                                    textDecoration: 'none'
+                                                }}
+                                            >
+                                                View Live
+                                            </a>
+                                            <Link
+                                                href={`/admin/blogs?edit=${blog.id}`}
+                                                style={{
+                                                    background: '#f1f5f9',
+                                                    color: '#334155',
+                                                    padding: '4px 10px',
+                                                    borderRadius: '6px',
+                                                    fontSize: '0.78rem',
+                                                    fontWeight: 600,
+                                                    textDecoration: 'none'
+                                                }}
+                                            >
+                                                Edit
+                                            </Link>
+                                            <form action="/api/admin/blogs/delete" method="POST">
+                                                <input type="hidden" name="id" value={blog.id} />
+                                                <button
+                                                    type="submit"
+                                                    style={{
+                                                        background: '#fee2e2',
+                                                        color: '#dc2626',
+                                                        border: 'none',
+                                                        padding: '4px 10px',
+                                                        borderRadius: '6px',
+                                                        fontSize: '0.78rem',
+                                                        fontWeight: 600,
+                                                        cursor: 'pointer'
+                                                    }}
+                                                >
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
+                            ))
+                        ) : (
+                            <div style={{ padding: '2rem', textAlign: 'center', background: '#ffffff', borderRadius: '10px', border: '1px solid #e2e8f0', color: '#64748b' }}>
+                                No articles published yet. Upload your first Claude or Antigravity HTML/PDF on the right!
                             </div>
-                        ))
-                    ) : (
-                        <p>No blogs created yet.</p>
-                    )}
+                        )}
+                    </div>
                 </div>
 
-                {/* Right Side: Form (Create or Edit) */}
+                {/* Right Side: Interactive Drag & Drop Uploader */}
                 <div>
-                    <div className={styles.formCard}>
-                        <h2 className={styles.formTitle}>
-                            {editBlog ? `Edit Blog` : 'Add New Blog'}
-                        </h2>
-
-                        <form action="/api/admin/blogs" method="POST">
-                            {editBlog && <input type="hidden" name="id" value={editBlog.id} />}
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>Title *</label>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    required
-                                    defaultValue={editBlog?.title || ''}
-                                    placeholder="e.g. How to save money"
-                                    className={styles.input}
-                                />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>Slug *</label>
-                                <input
-                                    type="text"
-                                    name="slug"
-                                    required
-                                    defaultValue={editBlog?.slug || ''}
-                                    placeholder="e.g. how-to-save-money"
-                                    className={styles.input}
-                                />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>Content (HTML) *</label>
-                                <textarea
-                                    name="content"
-                                    required
-                                    defaultValue={editBlog?.content || ''}
-                                    placeholder="<p>Write your HTML content here...</p>"
-                                    className={styles.input}
-                                    style={{ minHeight: '300px', resize: 'vertical' }}
-                                />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.label} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                    <input
-                                        type="checkbox"
-                                        name="published"
-                                        value="true"
-                                        defaultChecked={editBlog ? editBlog.published : true}
-                                    />
-                                    Published
-                                </label>
-                            </div>
-
-                            <button type="submit" className={styles.submitBtn}>
-                                {editBlog ? 'Save Changes' : 'Create Blog'}
-                            </button>
-
-                            {editBlog && (
-                                <Link href="/admin/blogs" className={styles.cancelEditBtn} style={{ display: 'block', textAlign: 'center', marginTop: '1rem', color: '#6b7280', textDecoration: 'none' }}>
-                                    Cancel Edit
-                                </Link>
-                            )}
-                        </form>
-                    </div>
+                    <BlogUploader initialBlog={editBlog} />
                 </div>
             </div>
         </div>
