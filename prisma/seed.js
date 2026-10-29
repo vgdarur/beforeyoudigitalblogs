@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
+const bcrypt = require('bcryptjs');
 
 const prisma = new PrismaClient();
 
@@ -101,11 +102,11 @@ async function main() {
 
     // Admin User
     const admin = await prisma.user.upsert({
-      where: { email: 'admin@example.com' },
+      where: { email: process.env.ADMIN_EMAIL || 'admin@example.com' },
       update: {},
       create: {
-        email: 'admin@example.com',
-        password: 'password123', // Note: In production, hash this!
+        email: process.env.ADMIN_EMAIL || 'admin@example.com',
+        password: process.env.ADMIN_PASSWORD ? await bcrypt.hash(process.env.ADMIN_PASSWORD, 10) : 'UNSET_CHANGE_ME',
         name: 'System Admin',
         role: 'SUPERADMIN'
       }

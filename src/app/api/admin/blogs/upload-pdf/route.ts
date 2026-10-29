@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
-import { writeFile } from 'fs/promises';
+import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 
 export async function POST(req: Request) {
@@ -24,6 +24,7 @@ export async function POST(req: Request) {
     // Sanitize filename
     const cleanFileName = `${Date.now()}-${file.name.toLowerCase().replace(/[^a-z0-9.-]/g, '-')}`;
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'pdfs');
+    await mkdir(uploadDir, { recursive: true });
     const filePath = path.join(uploadDir, cleanFileName);
 
     await writeFile(filePath, buffer);

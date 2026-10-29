@@ -137,16 +137,23 @@ export default function Navbar() {
                     <Link href="/smartphones" className={styles.link}>Phones</Link>
                     <Link href="/coupons" className={styles.link}>Coupons</Link>
                     <Link href="/categories" className={styles.link}>Categories</Link>
-                    <Link href="/blog" className={styles.link}>Blog</Link>
+                    <Link href="/blog" className={styles.link} style={{ fontWeight: 700, color: '#2563eb' }}>
+                        📰 Blog
+                    </Link>
 
                     <div style={{ width: '1px', height: '20px', backgroundColor: 'var(--border)', margin: '0 0.5rem' }}></div>
 
                     {session ? (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                             {session.user && (session.user as any).role === 'ADMIN' && (
-                                <Link href="/admin/dashboard" className={styles.link} style={{ color: 'var(--primary)' }}>
-                                    Admin Dashboard
-                                </Link>
+                                <>
+                                    <Link href="/admin/blogs" className={styles.link} style={{ backgroundColor: '#2563eb', color: 'white', padding: '5px 12px', borderRadius: '6px', fontWeight: 600, fontSize: '0.85rem' }}>
+                                        📝 Blogger CMS
+                                    </Link>
+                                    <Link href="/admin/dashboard" className={styles.link} style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                                        Dashboard
+                                    </Link>
+                                </>
                             )}
                             <button
                                 onClick={() => signOut({ callbackUrl: '/' })}

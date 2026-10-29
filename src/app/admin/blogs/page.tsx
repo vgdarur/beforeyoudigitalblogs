@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+import { getAllBlogs } from '@/lib/blogStore';
 import styles from '../categories/page.module.css';
 import Link from 'next/link';
 import BlogUploader from './BlogUploader';
@@ -14,14 +14,7 @@ export default async function BlogsAdminPage({
     const editId = sp.edit as string | undefined;
     const errorMsg = sp.error as string | undefined;
 
-    let blogs: any[] = [];
-    try {
-        blogs = await prisma.blog.findMany({
-            orderBy: { createdAt: 'desc' }
-        });
-    } catch (e) {
-        console.warn('Error fetching blogs in admin:', e);
-    }
+    const blogs = await getAllBlogs(false);
 
     let editBlog = null;
     if (editId) {

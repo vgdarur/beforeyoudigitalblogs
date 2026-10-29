@@ -1,5 +1,5 @@
-import { prisma } from '@/lib/prisma';
-import { notFound, redirect } from 'next/navigation';
+import { getBlogBySlug } from '@/lib/blogStore';
+import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
@@ -12,19 +12,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
-    const decodedSlug = decodeURIComponent(slug);
     
     try {
-        let blog = await prisma.blog.findUnique({
-            where: { slug }
-        });
-
-        if (!blog && slug !== decodedSlug) {
-            blog = await prisma.blog.findUnique({
-                where: { slug: decodedSlug }
-            });
-        }
-
+        const blog = await getBlogBySlug(slug, true);
         if (blog) {
             return {
                 title: `${blog.title} | AI Deals of America`,
@@ -32,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             };
         }
     } catch (e) {
-        // Fallback title on database error
+        // Fallback title on error
     }
 
     return {
@@ -42,36 +32,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function SingleBlogPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const decodedSlug = decodeURIComponent(slug);
     
-    let blog: any = null;
-
-    try {
-        blog = await prisma.blog.findUnique({
-            where: { slug, published: true }
-        });
-
-        if (!blog && slug !== decodedSlug) {
-            blog = await prisma.blog.findUnique({
-                where: { slug: decodedSlug, published: true }
-            });
-        }
-
-        // Fallback for old links with spaces or uppercase characters
-        if (!blog) {
-            const sanitizedSlug = decodedSlug.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-            if (sanitizedSlug !== decodedSlug && sanitizedSlug !== slug) {
-                const fallbackBlog = await prisma.blog.findUnique({
-                    where: { slug: sanitizedSlug, published: true }
-                });
-                if (fallbackBlog) {
-                    redirect(`/blog/${sanitizedSlug}`);
-                }
-            }
-        }
-    } catch (err) {
-        console.warn('Error fetching blog from DB:', err);
-    }
+    const blog = await getBlogBySlug(slug, true);
 
     if (!blog) {
         notFound();

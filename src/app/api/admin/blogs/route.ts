@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
+import { saveBlog } from '@/lib/blogStore';
 
 export async function POST(req: Request) {
     try {
@@ -28,30 +28,14 @@ export async function POST(req: Request) {
         // Clean up the slug to prevent URL routing issues
         slug = slug.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
-        if (id) {
-            // Update
-            await prisma.blog.update({
-                where: { id },
-                data: {
-                    title,
-                    slug,
-                    content,
-                    published,
-                    authorId: userId
-                }
-            });
-        } else {
-            // Create
-            await prisma.blog.create({
-                data: {
-                    title,
-                    slug,
-                    content,
-                    published,
-                    authorId: userId
-                }
-            });
-        }
+        await saveBlog({
+            id: id || undefined,
+            title,
+            slug,
+            content,
+            published,
+            authorId: userId
+        });
 
         return NextResponse.redirect(new URL('/admin/blogs', baseUrl));
     } catch (error) {

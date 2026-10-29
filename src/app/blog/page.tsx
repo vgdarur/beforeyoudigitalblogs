@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+import { getAllBlogs } from '@/lib/blogStore';
 import Link from 'next/link';
 import TrendingDealsBottom from '@/components/ui/TrendingDealsBottom';
 import ImpactBanner from '@/components/ads/ImpactBanner';
@@ -6,19 +6,7 @@ import ImpactBanner from '@/components/ads/ImpactBanner';
 export const dynamic = 'force-dynamic';
 
 export default async function BlogListPage() {
-    let blogs: any[] = [];
-    let dbError = false;
-
-    try {
-        blogs = await prisma.blog.findMany({
-            where: { published: true },
-            include: { author: true },
-            orderBy: { createdAt: 'desc' }
-        });
-    } catch (err) {
-        console.warn('Database query failed in BlogListPage:', err);
-        dbError = true;
-    }
+    const blogs = await getAllBlogs(true);
 
     return (
         <div className="container" style={{ padding: '2rem 1rem', maxWidth: '850px', margin: '0 auto' }}>
@@ -32,11 +20,7 @@ export default async function BlogListPage() {
             {/* Impact.com Top Featured Sponsor Banner */}
             <ImpactBanner />
 
-            {dbError && (
-                <div style={{ padding: '12px 16px', background: '#fef3c7', border: '1px solid #fde68a', borderRadius: '8px', color: '#92400e', marginBottom: '1.5rem', fontSize: '0.85rem' }}>
-                    Note: The remote database is currently throttled (Neon quota). Any articles stored locally or newly published will appear once quota resets or local DB is active.
-                </div>
-            )}
+
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '1.5rem' }}>
                 {blogs.length > 0 ? (

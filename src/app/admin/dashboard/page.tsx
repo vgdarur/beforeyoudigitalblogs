@@ -17,52 +17,69 @@ export default async function AdminDashboard() {
     const day = parts.find(p => p.type === 'day')?.value || '07';
     const startOfTodayET = new Date(`${year}-${month}-${day}T00:00:00-04:00`);
 
-    // Fetch aggregate data
-    const [
-        totalDeals,
-        activeDeals,
-        totalClicks,
-        totalMerchants,
-        clicksToday,
-        recentClicks
-    ] = await Promise.all([
-        prisma.deal.count(),
-        prisma.deal.count({ where: { isActive: true } }),
-        prisma.click.count(),
-        prisma.merchant.count(),
-        prisma.click.count({
-            where: {
-                timestamp: {
-                    gte: startOfTodayET
-                }
-            }
-        }),
-        prisma.click.findMany({
-            take: 10,
-            orderBy: { timestamp: 'desc' },
-            include: {
-                deal: { select: { title: true } },
-                network: { select: { name: true } }
-            }
-        })
-    ]);
+    // Fetch aggregate data safely
+    let totalDeals = 0;
+    let activeDeals = 0;
+    let totalClicks = 0;
+    let totalMerchants = 0;
+    let clicksToday = 0;
+    let recentClicks: any[] = [];
+    let clickLogs: any[] = [];
 
-    // Calculate unique visitors and top visitors details
-    const clickLogs = await prisma.click.findMany({
-        select: {
-            id: true,
-            ipAddress: true,
-            userEmail: true,
-            device: true,
-            timestamp: true,
-            deal: {
-                select: {
-                    title: true,
-                    merchant: { select: { name: true } }
+    try {
+        const [
+            td,
+            ad,
+            tc,
+            tm,
+            ct,
+            rc
+        ] = await Promise.all([
+            prisma.deal.count(),
+            prisma.deal.count({ where: { isActive: true } }),
+            prisma.click.count(),
+            prisma.merchant.count(),
+            prisma.click.count({
+                where: {
+                    timestamp: {
+                        gte: startOfTodayET
+                    }
+                }
+            }),
+            prisma.click.findMany({
+                take: 10,
+                orderBy: { timestamp: 'desc' },
+                include: {
+                    deal: { select: { title: true } },
+                    network: { select: { name: true } }
+                }
+            })
+        ]);
+        totalDeals = td;
+        activeDeals = ad;
+        totalClicks = tc;
+        totalMerchants = tm;
+        clicksToday = ct;
+        recentClicks = rc;
+
+        clickLogs = await prisma.click.findMany({
+            select: {
+                id: true,
+                ipAddress: true,
+                userEmail: true,
+                device: true,
+                timestamp: true,
+                deal: {
+                    select: {
+                        title: true,
+                        merchant: { select: { name: true } }
+                    }
                 }
             }
-        }
-    });
+        });
+    } catch (e) {
+        console.warn('Dashboard DB query error (quota/network):', e);
+    }
 
     const visitorMap = new Map();
     clickLogs.forEach(click => {
@@ -136,6 +153,73 @@ export default async function AdminDashboard() {
     return (
         <div className={styles.dashboardContainer}>
             <h1 className={styles.pageTitle}>Dashboard Overview</h1>
+
+            {/* Blogger CMS & Publisher Prominent Hero Card */}
+            <div style={{
+                background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+                color: 'white',
+                padding: '1.75rem 2rem',
+                borderRadius: '12px',
+                marginBottom: '2rem',
+                border: '1px solid #334155',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '1.5rem',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}>
+                <div style={{ maxWidth: '650px' }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#2563eb', color: 'white', padding: '3px 10px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                        ✨ Core Feature
+                    </div>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: 800, margin: '0 0 0.5rem 0', color: '#ffffff' }}>
+                        Blogger CMS & Publisher
+                    </h2>
+                    <p style={{ margin: 0, color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.5 }}>
+                        Upload Claude or Antigravity generated HTML & PDF files. Automatically monetizes your articles with Impact.com top banners and AI Deals of America in-content ads.
+                    </p>
+                </div>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                    <Link
+                        href="/admin/blogs"
+                        style={{
+                            background: '#2563eb',
+                            color: 'white',
+                            padding: '12px 24px',
+                            borderRadius: '8px',
+                            fontWeight: 700,
+                            textDecoration: 'none',
+                            fontSize: '0.95rem',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            boxShadow: '0 2px 8px rgba(37,99,235,0.4)'
+                        }}
+                    >
+                        📝 Open Blogger CMS & Upload →
+                    </Link>
+                    <a
+                        href="/blog"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                            background: '#334155',
+                            color: 'white',
+                            padding: '12px 20px',
+                            borderRadius: '8px',
+                            fontWeight: 600,
+                            textDecoration: 'none',
+                            fontSize: '0.95rem',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px'
+                        }}
+                    >
+                        View Public Blog ↗
+                    </a>
+                </div>
+            </div>
 
             <div className={styles.statsGrid}>
                 <div className={styles.statCard}>

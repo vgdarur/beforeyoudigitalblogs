@@ -30,6 +30,9 @@ export default function AdminLayout({
                 </div>
 
                 <nav className={styles.nav}>
+                    <Link href="/admin/blogs" className={styles.navLink} onClick={() => setIsSidebarOpen(false)} style={{ backgroundColor: '#2563eb', color: 'white', fontWeight: 700, borderRadius: '6px', marginBottom: '8px' }}>
+                        📝 Blogger CMS & Publisher
+                    </Link>
                     <Link href="/admin/dashboard" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Dashboard Overview
                     </Link>
@@ -59,9 +62,6 @@ export default function AdminLayout({
                     </Link>
                     <Link href="/admin/scraper-rules" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Scraper Rules
-                    </Link>
-                    <Link href="/admin/blogs" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
-                        Blogs
                     </Link>
                     <Link href="/admin/reseller-blog" className={styles.navLink} onClick={() => setIsSidebarOpen(false)}>
                         Reseller Blog

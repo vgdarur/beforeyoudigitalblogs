@@ -7,13 +7,13 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
 function AdminLoginContent() {
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('vgdarur@gmail.com');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams();
-    const callbackUrl = searchParams.get('callbackUrl') || '/admin/dashboard';
+    const callbackUrl = searchParams.get('callbackUrl') || '/admin/blogs';
 
     const handleCredentialsSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -49,7 +49,7 @@ function AdminLoginContent() {
         }}>
             <div style={{
                 width: '100%',
-                maxWidth: '400px',
+                maxWidth: '420px',
                 padding: '2rem',
                 backgroundColor: 'var(--surface)',
                 borderRadius: 'var(--radius-md)',
@@ -63,7 +63,7 @@ function AdminLoginContent() {
                     textAlign: 'center',
                     color: 'var(--foreground)'
                 }}>
-                    Welcome Back
+                    Administrator Sign In
                 </h1>
                 <p style={{
                     fontSize: '0.875rem',
@@ -71,7 +71,7 @@ function AdminLoginContent() {
                     textAlign: 'center',
                     marginBottom: '1.5rem'
                 }}>
-                    Sign in to your account
+                    Sign in to access Blogger CMS & Publisher
                 </p>
 
                 {error && (
@@ -87,8 +87,98 @@ function AdminLoginContent() {
                     </div>
                 )}
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                {/* Primary: Direct Admin Credentials Form */}
+                <form onSubmit={handleCredentialsSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
+                    <div>
+                        <label style={{
+                            display: 'block',
+                            marginBottom: '0.5rem',
+                            fontSize: '0.875rem',
+                            fontWeight: '500',
+                            color: 'var(--foreground)'
+                        }}>
+                            Admin Email
+                        </label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            style={{
+                                width: '100%',
+                                padding: '0.75rem',
+                                borderRadius: 'var(--radius-sm)',
+                                border: '1px solid var(--border)',
+                                backgroundColor: 'var(--background)',
+                                color: 'var(--foreground)'
+                            }}
+                        />
+                    </div>
+
+                    <div>
+                        <label style={{
+                            display: 'block',
+                            marginBottom: '0.5rem',
+                            fontSize: '0.875rem',
+                            fontWeight: '500',
+                            color: 'var(--foreground)'
+                        }}>
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Enter password"
+                            required
+                            autoFocus
+                            style={{
+                                width: '100%',
+                                padding: '0.75rem',
+                                borderRadius: 'var(--radius-sm)',
+                                border: '1px solid var(--border)',
+                                backgroundColor: 'var(--background)',
+                                color: 'var(--foreground)'
+                            }}
+                        />
+                    </div>
+
                     <button
+                        type="submit"
+                        disabled={isLoading}
+                        style={{
+                            width: '100%',
+                            padding: '0.75rem',
+                            backgroundColor: 'var(--primary)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: 'var(--radius-sm)',
+                            fontWeight: '600',
+                            cursor: isLoading ? 'not-allowed' : 'pointer',
+                            opacity: isLoading ? 0.7 : 1,
+                            marginTop: '0.5rem',
+                            fontSize: '0.95rem'
+                        }}
+                    >
+                        {isLoading ? 'Signing in...' : 'Sign in as Admin'}
+                    </button>
+                </form>
+
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginBottom: '1rem',
+                    color: '#9ca3af',
+                    fontSize: '0.875rem'
+                }}>
+                    <div style={{ flex: 1, height: '1px', backgroundColor: '#e5e7eb' }}></div>
+                    <span style={{ padding: '0 0.75rem' }}>Or sign in with Google</span>
+                    <div style={{ flex: 1, height: '1px', backgroundColor: '#e5e7eb' }}></div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <button
+                        type="button"
                         onClick={() => signIn('google', { callbackUrl })}
                         style={{
                             width: '100%',
@@ -126,93 +216,10 @@ function AdminLoginContent() {
                         </svg>
                         Sign in with Google
                     </button>
-                    
+                    <p style={{ fontSize: '0.72rem', color: '#94a3b8', textAlign: 'center', margin: 0 }}>
+                        (Requires Authorized Redirect URI configured in Google Cloud Console)
+                    </p>
                 </div>
-
-                <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginBottom: '1.5rem',
-                    color: '#9ca3af',
-                    fontSize: '0.875rem'
-                }}>
-                    <div style={{ flex: 1, height: '1px', backgroundColor: '#e5e7eb' }}></div>
-                    <span style={{ padding: '0 0.75rem' }}>Or continue with admin account</span>
-                    <div style={{ flex: 1, height: '1px', backgroundColor: '#e5e7eb' }}></div>
-                </div>
-
-                <form onSubmit={handleCredentialsSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    <div>
-                        <label style={{
-                            display: 'block',
-                            marginBottom: '0.5rem',
-                            fontSize: '0.875rem',
-                            fontWeight: '500',
-                            color: 'var(--foreground)'
-                        }}>
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            style={{
-                                width: '100%',
-                                padding: '0.75rem',
-                                borderRadius: 'var(--radius-sm)',
-                                border: '1px solid var(--border)',
-                                backgroundColor: 'var(--background)',
-                                color: 'var(--foreground)'
-                            }}
-                        />
-                    </div>
-
-                    <div>
-                        <label style={{
-                            display: 'block',
-                            marginBottom: '0.5rem',
-                            fontSize: '0.875rem',
-                            fontWeight: '500',
-                            color: 'var(--foreground)'
-                        }}>
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            style={{
-                                width: '100%',
-                                padding: '0.75rem',
-                                borderRadius: 'var(--radius-sm)',
-                                border: '1px solid var(--border)',
-                                backgroundColor: 'var(--background)',
-                                color: 'var(--foreground)'
-                            }}
-                        />
-                    </div>
-
-                    <button
-                        type="submit"
-                        disabled={isLoading}
-                        style={{
-                            width: '100%',
-                            padding: '0.75rem',
-                            backgroundColor: 'var(--primary)',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: 'var(--radius-sm)',
-                            fontWeight: '600',
-                            cursor: isLoading ? 'not-allowed' : 'pointer',
-                            opacity: isLoading ? 0.7 : 1,
-                            marginTop: '0.5rem'
-                        }}
-                    >
-                        {isLoading ? 'Signing in...' : 'Sign in as Admin'}
-                    </button>
-                </form>
             </div>
         </div>
     );
